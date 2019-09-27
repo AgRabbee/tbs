@@ -1,45 +1,57 @@
 @include('layouts._partials.admin_head')
-<body class="hold-transition skin-blue sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
     @include('layouts._partials.admin_nav')
-  <!-- =============================================== -->
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        @include('layouts._partials.admin_sidebar')
+        <!-- #END# Left Sidebar -->
 
-  <!-- Left side column. contains the sidebar -->
-  @include('layouts._partials.admin_sidebar')
-  <!-- =============================================== -->
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Blank page
-        <small>it all starts here</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
+        <!-- Right Sidebar -->
+        @include('layouts._partials.admin_side_controll')
+        <!-- #END# Right Sidebar -->
     </section>
+
 
     <!-- Main content -->
     <section class="content">
-
-      @yield('content')
-
+        <div class="container-fluid">
+            @yield('content')
+        </div>
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
-  @include('layouts._partials.admin_footer')
-
-  <!-- Control Sidebar -->
-  @include('layouts._partials.admin_side_controll')
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 @include('layouts._partials.admin_foot')

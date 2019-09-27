@@ -11,8 +11,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
+            <li><a href="{{ url('/company/register') }}">Register Your Company</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -136,7 +135,7 @@
             <li class="dropdown user user-menu">
                 <ul class="dropdown-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="">User</span>
+                        <span class="">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
                     </a>
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -148,25 +147,25 @@
                   </div>
                 </li>
               </ul>
-            
+
             </li>
             @else
             <li class="dropdown user user-menu">
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <img src="{{asset('/images/propic/no-image.png')}}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                <span class="hidden-xs">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                  <img src="{{asset('/images/propic/no-image.png')}}" class="img-circle" alt="User Image">
 
                   <p>
-                    {{ Auth::user()->name }} - Web Developer
-                    <small>Member since Nov. 2012</small>
+                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}
+                    <small>Member since {{ Auth::user()->created_at->format('d M, Y') }}</small>
                   </p>
                 </li>
                 <!-- Menu Body -->
@@ -190,7 +189,15 @@
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();" class="btn btn-default btn-flat">
+                          Sign out
+                      </a>
+
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
                   </div>
                 </li>
               </ul>
@@ -203,5 +210,3 @@
       <!-- /.container-fluid -->
     </nav>
   </header>
-  
-

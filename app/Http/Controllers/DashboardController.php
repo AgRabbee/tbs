@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -23,7 +25,17 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('layouts.admin');
-        //return view('dashboard');
+        if (Auth::user()->roles[0]->name == 'Admin') {
+            return view('layouts.admin');
+        }elseif (Auth::user()->roles[0]->name == 'Customer') {
+            return view('layouts.public');
+        }
+        //return view('layouts.admin');
+
+    }
+
+    public function test(){
+        $users = User::all();
+        return view('admin.home')->with('users', $users);
     }
 }

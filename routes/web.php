@@ -23,3 +23,11 @@ Route::post('/signin','Auth\AuthController@Signin');
 
 Route::get('/signup','Auth\AuthController@getSignup');
 Route::post('/signup','Auth\AuthController@Signup');
+
+
+//Company
+//--------------------------------------------
+Route::get('/company/register','CompanyController@create');
+Route::post('/company/register','CompanyController@store');
+
+Route::get('/test', 'DashboardController@test');

@@ -14,7 +14,7 @@
 <!-- jQuery 3 -->
 <script src="{{asset('adminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="{{asset('adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('adminLTE/bower_components/bootstrap/dist/js/bootstrap.v.4.js')}}"></script>
 <!-- SlimScroll -->
 <script src="{{asset('adminLTE/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->

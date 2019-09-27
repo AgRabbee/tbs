@@ -24,7 +24,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company/index');
     }
 
     /**
@@ -35,7 +35,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

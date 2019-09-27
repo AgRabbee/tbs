@@ -1,7 +1,8 @@
-<footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
+<div class="legal">
+    <div class="copyright">
+        &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
     </div>
-    <strong>Copyright &copy; {{date('Y')}} <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+    <div class="version">
+        <b>Version: </b> 1.0.5
+    </div>
+</div>
