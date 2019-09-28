@@ -33,7 +33,13 @@ Route::get('/bus','PagesController@bus');
 Route::group(['middleware'=>['auth']],function(){
     //Super Admin
     //--------------------------------------------
+    Route::get('/dashboard/allusers','DashboardController@allUser');
+
     Route::get('/dashboard/new/admins','CompanyController@company_admin');
+    Route::post('/dashboard/new/admins/active','CompanyController@company_admin_active');
+    Route::post('/dashboard/new/admins/pause','CompanyController@company_admin_pause');
+    Route::post('/dashboard/new/admins/deny','CompanyController@company_admin_deny');
+
 
 
 

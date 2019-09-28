@@ -9,20 +9,8 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        EXPORTABLE TABLE
+                        All Company Admins
                     </h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
                 <div class="body">
                     <div class="table-responsive">
@@ -52,44 +40,66 @@
                             <tbody>
                                 @foreach ($admin_details as $value)
                                 <tr>
-                                    <td>{{ $value->first_name }}</td>
+                                    <td>{{ $value->first_name. ' '. $value->last_name }}</td>
                                     <td>{{ $value->email }}</td>
                                     <td>{{ $value->companies[0]->company_name }}</td>
                                     <td>{{ $value->companies[0]->description }}</td>
                                     <td>{{ $value->companies[0]->address }}</td>
                                     <td>{{ $value->companies[0]->reg_no }}</td>
-                                    <td>
-                                        @if ( $value->companies[0]->pivot->status == 0)
-                                              {{ 'Pending' }}
-                                          @elseif ( $value->companies[0]->pivot->status == 1)
-                                              {{ 'Active' }}
-                                          @elseif ( $value->companies[0]->pivot->status == 2)
-                                              {{ 'Denied' }}
+                                    <td width="13%">
+                                        @if($value->companies[0]->pivot->status == '0')
+                                              <form action="{{ url('/dashboard/new/admins/active') }}" method="POST">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                                  <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
+                                                    <button type="submit" class="btn btn-success btn-sm waves-effect waves-float">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    {{-- <button type="submit" name="button" class="btn btn-sm btn-success waves-effect waves-circle waves-float">
+                                                        <i class="glyphicon glyphicon-check"></i>
+                                                    </button> --}}
+
+                                              </form>
+
+                                          @elseif( $value->companies[0]->pivot->status == '1')
+
+                                              <form action="{{ url('/dashboard/new/admins/pause') }}" method="POST" class="pull-left">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
+                                                  <button type="submit" class="btn btn-warning btn-sm waves-effect waves-float">
+                                                      <i class="material-icons">pause</i>
+                                                  </button>
+                                              </form>
+                                              <form action="{{ url('/dashboard/new/admins/deny') }}" method="POST" class="pull-right">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                                    <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
+                                                    <button type="submit" class="btn btn-danger btn-sm waves-effect waves-float">
+                                                        <i class="material-icons">not_interested</i>
+                                                    </button>
+                                              </form>
+
+                                          @elseif( $value->companies[0]->pivot->status == '2')
+                                              <form action="{{ url('/dashboard/new/admins/active') }}" method="POST"  class="pull-left">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                                  <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
+                                                    <button type="submit" class="btn btn-success btn-sm waves-effect waves-float">
+                                                        <i class="material-icons">done</i>
+                                                    </button>
+                                                    {{-- <button type="submit" name="button" class="btn btn-sm btn-success waves-effect waves-circle waves-float">
+                                                        <i class="glyphicon glyphicon-check"></i>
+                                                    </button> --}}
+
+                                              </form>
+                                              <button type="button" disabled class="btn btn-danger btn-sm waves-effect waves-float pull-right">
+                                                  <i class="material-icons">clear</i>
+                                              </button>
                                       @endif
                                     </td>
                                 </tr>
 
                                 @endforeach
-
-                                {{-- @for ($i=0; $i < count($admin_details->companies); $i++)
-                                    <tr>
-                                        <td>{{ $admin_details->first_name }}</td>
-                                        <td>{{ $admin_details->email }}</td>
-                                        <td>{{ $admin_details->companies[$i]->company_name }}</td>
-                                        <td>{{ $admin_details->companies[$i]->description }}</td>
-                                        <td>{{ $admin_details->companies[$i]->address }}</td>
-                                        <td>{{ $admin_details->companies[$i]->reg_no }}</td>
-                                        <td>
-                                            @if ($admin_details->companies[$i]->pivot->status == 0)
-                                                  {{ 'Pending' }}
-                                              @elseif ($admin_details->companies[$i]->pivot->status == 1)
-                                                  {{ 'Active' }}
-                                              @elseif ($admin_details->companies[$i]->pivot->status == 2)
-                                                  {{ 'Denied' }}
-                                          @endif
-                                        </td>
-                                    </tr>
-                                @endfor --}}
                             </tbody>
                         </table>
                     </div>
@@ -119,6 +129,5 @@
     <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
     <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/js/admin.js') }}"></script>
     <script src="{{ asset('AdminBSB/js/pages/tables/jquery-datatable.js') }}"></script>
 @endsection

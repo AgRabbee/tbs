@@ -34,8 +34,8 @@ class DashboardController extends Controller
 
     }
 
-    public function test(){
+    public function allUser(){
         $users = User::all();
-        return view('admin.home')->with('users', $users);
+        return view('admin.allUser')->with('users', $users);
     }
 }

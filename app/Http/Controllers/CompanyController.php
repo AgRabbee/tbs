@@ -130,4 +130,52 @@ class CompanyController extends Controller
         //dd($c_admins);
         return view('admin.company_admin')->with('admin_details', $c_admins);
     }
+
+    public function company_admin_active(Request $request)
+    {
+        $company_id = $request['company_id'];
+        $company = Company::where('id', $company_id)->get();
+
+        foreach ($company as $value) {
+            $value->users[0]->pivot->status = 1;
+            $value->users[0]->pivot->save();
+        }
+
+        $adminRole = Role::where('name','Admin')->first();
+        $u_id = $request['user_id'];
+        $admin = User::find($u_id);
+        $admin->roles()->attach($adminRole);
+
+        return redirect('/dashboard/new/admins');
+    }
+
+    public function company_admin_pause(Request $request)
+    {
+        $company_id = $request['company_id'];
+        $company = Company::where('id', $company_id)->get();
+
+        foreach ($company as $value) {
+            $value->users[0]->pivot->status = 0;
+            $value->users[0]->pivot->save();
+        }
+        return redirect('/dashboard/new/admins');
+    }
+
+    public function company_admin_deny(Request $request)
+    {
+        $company_id = $request['company_id'];
+        $company = Company::where('id', $company_id)->get();
+
+        foreach ($company as $value) {
+            $value->users[0]->pivot->status = 2;
+            $value->users[0]->pivot->save();
+        }
+
+        $adminRole = Role::where('name','Admin')->first();
+        $u_id = $request['user_id'];
+        $admin = User::find($u_id);
+        $admin->roles()->detach($adminRole);
+
+        return redirect('/dashboard/new/admins');
+    }
 }

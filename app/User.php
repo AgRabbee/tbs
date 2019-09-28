@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function companies()
     {
-        return $this->belongsToMany('App\Models\Company','company_user','user_id');
+        return $this->belongsToMany('App\Models\Company','company_user','user_id')->withPivot('status');
     }
 
 
