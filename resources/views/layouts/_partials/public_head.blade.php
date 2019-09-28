@@ -27,3 +27,4 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ asset('AdminBSB/css/themes/all-themes.css') }}" rel="stylesheet" />
 </head>
+<body class="theme-red">

@@ -19,6 +19,7 @@
 
     <!-- Demo Js -->
     <script src="{{ asset('AdminBSB/js/demo.js') }}"></script>
+    @yield('admin_scripts')
 </body>
 
 </html>

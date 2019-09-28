@@ -140,7 +140,7 @@ label {
     width: 100%;
     background-color: #404043;
     float: left;
-    padding: 3px;
+    padding: 10px 0px;
     margin-bottom: 0px;
     position: relative;
 }
@@ -315,7 +315,7 @@ label {
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-    width: 70%;
+    width: 100%;
     margin: auto;
 }
 .login-block.width.top {
@@ -4239,7 +4239,6 @@ input[type=checkbox].css-checkbox:checked + label.css-label {
 }
 .active {
     border: none;
-    background: #E24648;
     color: white;
     text-decoration: none;
 }

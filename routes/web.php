@@ -24,10 +24,23 @@ Route::post('/signin','Auth\AuthController@Signin');
 Route::get('/signup','Auth\AuthController@getSignup');
 Route::post('/signup','Auth\AuthController@Signup');
 
+Route::get('/bus','PagesController@bus');
+
 
 //Company
 //--------------------------------------------
-Route::get('/company/register','CompanyController@create');
-Route::post('/company/register','CompanyController@store');
 
-Route::get('/test', 'DashboardController@test');
+Route::group(['middleware'=>['auth']],function(){
+    //Super Admin
+    //--------------------------------------------
+    Route::get('/dashboard/new/admins','CompanyController@company_admin');
+
+
+
+
+    //User
+    //--------------------------------------------
+    Route::get('/company/register','CompanyController@create');
+    Route::post('/company/register','CompanyController@store');
+
+});

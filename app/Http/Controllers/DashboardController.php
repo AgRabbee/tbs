@@ -25,7 +25,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles[0]->name == 'Admin') {
+        if (Auth::user()->roles[0]->name == 'Super Admin') {
             return view('layouts.admin');
         }elseif (Auth::user()->roles[0]->name == 'Customer') {
             return view('layouts.public');

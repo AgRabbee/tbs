@@ -1,9 +1,10 @@
-@include('layouts._partials.public_head')
-<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-blue layout-top-nav">
-
-
-  @include('layouts._partials.public_nav')
-
- 
-  {{-- @include('layouts._partials.public_footer') --}}
+@include('layouts.welcome.public_head')
+@include('layouts.welcome.public_navbar')
+<!-- Main content -->
+<section class="content" style="margin:10px 0">
+    <div class="container">
+        @yield('content')
+    </div>
+</section>
+<!-- /.content -->
+@include('layouts.welcome.public_foot')
