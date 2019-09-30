@@ -6,28 +6,29 @@
         <div class="col-md-8" style="padding:0">
             <div class="tb_navbar">
                 <ul>
+
                     <li>
-                        <a href="{{ url('/') }}">Home&nbsp;<span style="color:#f0a2a3;"> |</span></a>
+                        <a href="#" >Print/SMS Ticket &nbsp;<span style="color:#f0a2a3;">|</span></a>
                     </li>
                     <li>
-                        <a href="{{ url('/company/register') }}">Register Your Company&nbsp;<span style="color:#f0a2a3;">|</span></a>
-                    </li>
-                    <li>
-                        <a href="#myModals" data-toggle="modal" data-target="#myModals">Print/SMS Ticket&nbsp;<span style="color:#f0a2a3;">|</span></a>
-                    </li>
-                    <li>
-                        <a href="#myModals" data-toggle="modal" data-target="#myModals">Easy Cancel/Refund&nbsp;<span style="color:#f0a2a3;">|</span></a>
+                        <a href="#">Easy Cancel/Refund &nbsp;<span style="color:#f0a2a3;">|</span></a>
                     </li>
                     @guest
                     <li>
-                        <a href="#myModals" data-toggle="modal" data-target="#myModals">Sign In<span style="color:#f0a2a3;">/</span></a>
+                        <a href="{{ url('/company/register') }}">Register Your Company &nbsp;<span style="color:#f0a2a3;">|</span></a>
                     </li>
                     <li>
-                        <a href="#myModal" data-toggle="modal" data-target="#myModal">Sign Up</a>
+                        <a href="{{ url('/signin') }}">Sign In<span style="color:#f0a2a3;">/</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/signup') }}">Sign Up</a>
                     </li>
                     @else
                     <li>
-                        <a href=""><i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->first_name }}&nbsp;<span style="color:#f0a2a3;">|</span></a>
+                        <a href="{{ url('/{$c_name}/dashboard') }}">Dashboard &nbsp;<span style="color:#f0a2a3;">|</span></a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->first_name . ' '. Auth::user()->last_name }}&nbsp;<span style="color:#f0a2a3;">|</span></a>
                     </li>
                     <li>
                         <a href="{{ route('logout') }}"

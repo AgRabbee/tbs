@@ -4,8 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
-
+        <title>Ticket Booking System</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css')}}">
+        <!-- Tempusdominus Bbootstrap 4 -->
+        <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -67,15 +70,8 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/dashboard') }}">Home</a>
-                    @else
-                        <a href="{{ url('/signin') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ url('/signup') }}">Register</a>
-                        @endif
-                    @endauth
+                    <a href="{{ url('/bus') }}"><i class="fas fa-bus mr-1"></i>Bus</a>
+                    <a href="#"><i class="fas fa-ship mr-1"></i>Launch</a>
                 </div>
             @endif
 

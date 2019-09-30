@@ -27,7 +27,11 @@ class DashboardController extends Controller
     {
         if (Auth::user()->roles[0]->name == 'Super Admin') {
             return view('layouts.admin');
-        }elseif (Auth::user()->roles[0]->name == 'Customer') {
+        }elseif (Auth::user()->roles[0]->name == 'Customer' || Auth::user()->roles[0]->name == 'Admin') {
+            $c_name = Auth::user()->companies[0]->company_name;
+            if ($c_name) {
+                return view('layouts.public')->with('c_name', $c_name);
+            }
             return view('layouts.public');
         }
         //return view('layouts.admin');

@@ -75,7 +75,7 @@
       </div> --}}
       <!-- /.social-auth-links -->
 
-      <div class="row m-t-15 m-b--20">
+      <div class="d-flex justify-content-between row m-1">
           <div class="col-xs-6">
               <a href="{{ url('/signup') }}">Register Now!</a>
           </div>

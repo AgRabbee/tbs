@@ -48,5 +48,6 @@ Route::group(['middleware'=>['auth']],function(){
     //--------------------------------------------
     Route::get('/company/register','CompanyController@create');
     Route::post('/company/register','CompanyController@store');
+    Route::get('/{$c_name}/dashboard','CompanyController@company_admin_panel');
 
 });

@@ -178,4 +178,9 @@ class CompanyController extends Controller
 
         return redirect('/dashboard/new/admins');
     }
+
+    public function company_admin_panel($value='')
+    {
+        return view('manager.home');
+    }
 }
