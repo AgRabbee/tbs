@@ -1,74 +1,86 @@
 @extends('layouts.admin')
 
-@section('content')
-
-<div class="container-fluid">
-    <!-- Exportable Table -->
-    <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="header">
-                    <h2>
-                        All Company Admins
-                    </h2>
-                </div>
-                <div class="body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>NID</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>NID</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                @foreach ($users as $value)
-                                <tr>
-                                    <td>{{ $value->first_name. ' '. $value->last_name }}</td>
-                                    <td>{{ $value->email }}</td>
-                                    <td>{{ $value->phone }}</td>
-                                    <td>{{ $value->nid }}</td>
-                                </tr>
-
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- #END# Exportable Table -->
-</div>
+@section('page_header')
+<h1 class="m-0 text-dark">All Users</h1>
 @endsection
 
+@section('breadcrumb_list')
+<li class="breadcrumb-item active">All users</li>
+@endsection
+
+@section('content')
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>NID</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $value)
+                <tr>
+                    <td>{{ $value->first_name. ' '. $value->last_name }}</td>
+                    <td>{{ $value->email }}</td>
+                    <td>{{ $value->phone }}</td>
+                    <td>{{ $value->nid }}</td>
+                </tr>
+
+                @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>NID</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+@endsection
+
+
+
 @section('admin_css')
-    <!-- JQuery DataTable Css -->
-    <link href="{{ asset('AdminBSB/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
 
 @endsection
 
 
 @section('admin_scripts')
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/jszip.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('AdminBSB/js/pages/tables/jquery-datatable.js') }}"></script>
+
+<!-- DataTables -->
+<script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ asset('AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
+
 @endsection

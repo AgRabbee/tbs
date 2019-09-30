@@ -1,94 +1,76 @@
 
-<aside id="leftsidebar" class="sidebar">
-    <!-- User Info -->
-    <div class="user-info">
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="{{ asset('AdminLTE/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Ticket Booking System</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="{{ asset('AdminBSB/images/user.png')}}" width="48" height="48" alt="User" />
+          <img src="{{ asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info-container">
-            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</div>
-            <div class="email">Member since {{ Auth::user()->created_at->format('d M, Y') }}</div>
-            <div class="btn-group user-helper-dropdown">
-                <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                <ul class="dropdown-menu pull-right">
-                    <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="material-icons">person</i>link</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li>
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                            <i class="material-icons">input</i>Sign Out
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
-                </ul>
-            </div>
+        <div class="info">
+          <a href="#" class="d-block">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name}}</a>
         </div>
-    </div>
-    <!-- #User Info -->
-    <!-- Menu -->
-    <div class="menu">
-        <ul class="list">
-            <li class="header"> USER</li>
-            <li>
-                <a href="{{ url('/dashboard/allusers') }}">
-                    <i class="material-icons col-light-blue">donut_large</i>
-                    <span>All Users</span>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+           <li class="nav-header">System Users</li>
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Users
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('/dashboard/allusers') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Users</p>
                 </a>
-            </li>
+              </li>
+            </ul></li>
+
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-building"></i>
+              <p>
+                Company
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registered Company</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dashboard/new/admins" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Company Admins</p>
+                </a>
+              </li>
+            </ul></li>
 
 
-            <li class="header">Company</li>
-            <li>
-                <a href="#" class="menu-toggle">
-                    <i class="material-icons col-light-blue">account_box</i>
-                    <span>Company Admins</span>
-                </a>
-                <ul class="ml-menu">
-                    <li>
-                        <a href="">All Admins</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/dashboard/new/admins') }}">New Admins</a>
-                    </li>
-                </ul>
-
-            </li>
-            <li>
-                <a href="javascript:void(0);" class="menu-toggle">
-                    <i class="material-icons">widgets</i>
-                    <span>Widgets</span>
-                </a>
-                <ul class="ml-menu">
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <span>Cards</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/widgets/cards/basic.html">Basic</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/widgets/cards/colored.html">Colored</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/widgets/cards/no-header.html">No Header</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
         </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-    <!-- #Menu -->
-
-    <!-- Footer -->
-    @include('layouts._partials.admin_footer')
-    <!-- #Footer -->
-
-</aside>
+    <!-- /.sidebar -->
+  </aside>

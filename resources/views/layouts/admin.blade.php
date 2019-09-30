@@ -1,57 +1,44 @@
 @include('layouts._partials.admin_head')
+@include('layouts._partials.admin_nav')
+@include('layouts._partials.admin_sidebar')
 
-<body class="theme-red">
-    <!-- Page Loader -->
-    <div class="page-loader-wrapper">
-        <div class="loader">
-            <div class="preloader">
-                <div class="spinner-layer pl-red">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-            </div>
-            <p>Please wait...</p>
-        </div>
-    </div>
-    <!-- #END# Page Loader -->
-    <!-- Overlay For Sidebars -->
-    <div class="overlay"></div>
-    <!-- #END# Overlay For Sidebars -->
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <div class="search-icon">
-            <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="START TYPING...">
-        <div class="close-search">
-            <i class="material-icons">close</i>
-        </div>
-    </div>
-    <!-- #END# Search Bar -->
-    <!-- Top Bar -->
-    @include('layouts._partials.admin_nav')
-    <!-- #Top Bar -->
-    <section>
-        <!-- Left Sidebar -->
-        @include('layouts._partials.admin_sidebar')
-        <!-- #END# Left Sidebar -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          @yield('page_header')
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Home</a></li>
+            @yield('breadcrumb_list')
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
 
-        <!-- Right Sidebar -->
-        @include('layouts._partials.admin_side_controll')
-        <!-- #END# Right Sidebar -->
-    </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Main row -->
+      <div class="row">
+
+        @yield('content')
+
+      </div>
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            @yield('content')
-        </div>
-    </section>
-    <!-- /.content -->
 
+@include('layouts._partials.admin_footer')
 @include('layouts._partials.admin_foot')

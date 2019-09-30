@@ -1,94 +1,98 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Sign In | Bootstrap Based Admin Template - Material Design</title>
-    <!-- Favicon-->
-    <link rel="icon" href="{{ asset('AdminBSB/favicon.ico') }}" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-
-    <!-- Bootstrap Core Css -->
-    <link href="{{ asset('AdminBSB/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-
-    <!-- Waves Effect Css -->
-    <link href="{{ asset('AdminBSB/plugins/node-waves/waves.css') }}" rel="stylesheet" />
-
-    <!-- Animation Css -->
-    <link href="{{ asset('AdminBSB/plugins/animate-css/animate.css') }}" rel="stylesheet" />
-
-    <!-- Custom Css -->
-    <link href="{{ asset('AdminBSB/css/style.css') }}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css')}}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css')}}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="{{url('/')}}">Ticket Booking System</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
 
-<body class="login-page">
-    <div class="login-box">
-        <div class="logo">
-            <a>Ticket Booking System</a>
-            <small>Book your tickets online & enjoy</small>
-        </div>
-        <div class="card">
-            <div class="body">
-                <form id="sign_in" method="POST" action="{{ url('signin') }}">
-                    {{ csrf_field() }}
-                    <div class="msg">Sign in to start your session</div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">person</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">lock</i>
-                        </span>
-                        <div class="form-line">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
-                            <label for="rememberme">Remember Me</label>
-                        </div>
-                        <div class="col-xs-4">
-                            <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
-                        </div>
-                    </div>
-                    <div class="row m-t-15 m-b--20">
-                        <div class="col-xs-6">
-                            <a href="{{ url('/signup') }}">Register Now!</a>
-                        </div>
-                        <div class="col-xs-6 align-right">
-                            <a href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                    </div>
-                </form>
+      <form id="sign_in" method="POST" action="{{ url('signin') }}">
+          {{ csrf_field() }}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
+          </div>
         </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+
+              <label for="remember">
+                Remember Me
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      {{-- <div class="social-auth-links text-center mb-3">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+        </a>
+      </div> --}}
+      <!-- /.social-auth-links -->
+
+      <div class="row m-t-15 m-b--20">
+          <div class="col-xs-6">
+              <a href="{{ url('/signup') }}">Register Now!</a>
+          </div>
+          <div class="col-xs-6">
+              <a href="forgot-password.html">Forgot Password?</a>
+          </div>
+      </div>
     </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
 
-    <!-- Jquery Core Js -->
-    <script src="{{ asset('AdminBSB/plugins/jquery/jquery.min.js') }}"></script>
+<!-- jQuery -->
+<script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <!-- Bootstrap Core Js -->
-    <script src="{{ asset('AdminBSB/plugins/bootstrap/js/bootstrap.js') }}"></script>
-
-    <!-- Waves Effect Plugin Js -->
-    <script src="{{ asset('AdminBSB/plugins/node-waves/waves.js') }}"></script>
-
-    <!-- Validation Plugin Js -->
-    <script src="{{ asset('AdminBSB/plugins/jquery-validation/jquery.validate.js') }}"></script>
-
-    <!-- Custom Js -->
-    <script src="{{ asset('AdminBSB/js/admin.js') }}"></script>
-    <script src="{{ asset('AdminBSB/js/pages/examples/sign-in.js') }}"></script>
 </body>
-
 </html>

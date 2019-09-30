@@ -1,189 +1,99 @@
-@include('layouts._partials.admin_head')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@include('layouts._partials.public_nav')
+        <title>Laravel</title>
 
-<section style="margin-top:68px;">
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-    <div class="jumbotron" style="background-image: url({{ asset('AdminBSB/images/image-gallery/6.jpg') }}); background-size: cover; height: 450px;padding-top: 10%; margin:0; color:#fff;">
-        <div class="container">
-            <h1>Hello, world!</h1>
-            <p>This is text.This is text.This is text.This is text.This is text.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-        </div>
-    </div>
-</section>
+        <!-- Styles -->
+        <style>
+            html, body {
+                background-color: #fff;
+                color: #636b6f;
+                font-family: 'Nunito', sans-serif;
+                font-weight: 200;
+                height: 100vh;
+                margin: 0;
+            }
 
+            .full-height {
+                height: 100vh;
+            }
 
- <!--operator-BAR-->
- <div class="container-fluid" style="background-color: #404043; padding:2% 8% 2% 13%; color:#fff;">
-     <div class="row">
-         <div class="col-md-4 col-sm-4 col-xs-4">
-             <img src="http://demo.truebus.co.in/assets/images/routte.png"> &nbsp;<span class="tb_operator1">67000 <small class="smalls">ROUTES</small></span>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-4">
-             <img src="http://demo.truebus.co.in/assets/images/route.png"> &nbsp;<span class="tb_operator1">67000 <small class="smalls">ROUTES</small></span>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-4">
-             <img src="http://demo.truebus.co.in/assets/images/ticket.png"> &nbsp;<span class="tb_operator1">67000 <small class="smalls">ROUTES</small></span>
-         </div>
-     </div>
- </div>
- <!--operator-BAR end-->
+            .flex-center {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
 
-         <!--offers-BAR-->
+            .position-ref {
+                position: relative;
+            }
 
- <div class="container-fluid"  style="background-color: ##fff; padding:5% 3%;">
-     <div class="row">
-         <div class="col-md-4 col-sm-4 col-xs-4" style="border-right: 1px solid #999; padding: 0 6%;">
-             <div class="media">
-                 <div class="media-left">
-                     <a href="#">
-                         <img src="http://demo.truebus.co.in/assets/images/rupees.png">
-                     </a>
-                 </div>
-                 <div class="media-body">
-                     <p>UPTO RS.100 OFF</p>
-                     <p>TRAVEL SMART</p>
-                     <p>Code:RBM120</p>
-                     <p>Book Using Pay Money</p>
-                 </div>
-             </div>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-4" style="border-right: 1px solid #999; padding:0 6%;">
-             <div class="media">
-                 <div class="media-left">
-                     <a href="#">
-                         <img src="http://demo.truebus.co.in/assets/images/bed.png">
-                     </a>
-                 </div>
-                 <div class="media-body">
-                     <p>UPTO 70% OFF</p>
-                     <p>ON HOTELS ACROSS INDIA</p>
-                     <p> Offer Code:RBRTM120</p>
-                 </div>
-             </div>
-         </div>
-         <div class="col-md-4 col-sm-4 col-xs-4" style="padding: 0 6%;">
-             <div class="media">
-                 <div class="media-left">
-                     <a href="#">
-                         <img src="http://demo.truebus.co.in/assets/images/rupees.png">
-                     </a>
-                 </div>
-                 <div class="media-body">
-                     <p>FLAT Rs.100 OFF</p>
-                     <p>Truebus APP OFFER</p>
-                     <p>book via the Truebus APP</p>
-                     <p>Code:ERHH54</p>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
- <hr style="background-color: #999; height:1px;">
-         <div class="container">
-            <div class="rb_list">
-               <div class="row">
-                  <div class="wrapper">
-                     <div class="tb_inner">
-                        <div class="col-md-3">
-                           <div class="footer_main">
-                              <h4 class="tb_head">Top Bus Routers</h4>
-                              <div class="tb_route_list">
-                                 <ul>
-                                    <li><a href="#">Hyderabad to Bangalore</a></li>
-                                    <li><a href="#">Pune to Bangalore </a></li>
-                                    <li><a href="#">Hyderabad to Chennai</a></li>
-                                    <li><a href="#">Coimbatore to Bangalore </a> </li>
-                                    <li><a href="#">Chennai to Madurai</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-3">
-                           <div class="footer_main">
-                              <h4 class="tb_head">Top Cities</h4>
-                              <div class="tb_route_list">
-                                 <ul>
-                                    <li><a href="#">Hyderabad to Bangalore</a></li>
-                                    <li><a href="#">Pune to Bangalore </a></li>
-                                    <li><a href="#">Hyderabad to Chennai</a></li>
-                                    <li><a href="#">Coimbatore to Bangalore </a> </li>
-                                    <li><a href="#">Chennai to Madurai</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-3">
-                           <div class="footer_main">
-                              <h4>&nbsp;</h4>
-                              <div class="tb_route_list">
-                                 <ul>
-                                    <li><a href="#">Hyderabad to Bangalore</a></li>
-                                    <li><a href="#">Pune to Bangalore</a></li>
-                                    <li><a href="#">Hyderabad to Chennai</a></li>
-                                    <li><a href="#">Coimbatore to Bangalore</a>  </li>
-                                    <li><a href="#">Chennai to Madurai</a></li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-3">
-                           <div class="footer_main">
-                              <h4 class="tb_head">Top Bus Operators</h4>
-                              <div class="tb_route_list">
-                                 <ul>
-                                    <li><a href="#">Hyderabad to Bangalore</a></li>
-                                    <li><a href="#">Pune to Bangalore</a></li>
-                                    <li><a href="#">Hyderabad to Chennai</a></li>
-                                    <li><a href="#">Coimbathroe to Bangalore</a></li>
-                                    <li>
-                                       <a href="#">
-                                          Chennai to Madurai
-                                    </li>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+            .top-right {
+                position: absolute;
+                right: 10px;
+                top: 18px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            .title {
+                font-size: 84px;
+            }
+
+            .links > a {
+                color: #636b6f;
+                padding: 0 25px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .m-b-md {
+                margin-bottom: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flex-center position-ref full-height">
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <a href="{{ url('/dashboard') }}">Home</a>
+                    @else
+                        <a href="{{ url('/signin') }}">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ url('/signup') }}">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+
+            <div class="content">
+                <div class="title m-b-md">
+                    Laravel
+                </div>
+
+                <div class="links">
+                    <a href="https://laravel.com/docs">Docs</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://blog.laravel.com">Blog</a>
+                    <a href="https://nova.laravel.com">Nova</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
             </div>
-            <hr class="border2">
-            </hr>
-         </div>
-         <!--list-BAR end-->
-         <!--footer-BAR-->
-         <div class="container">
-             <div class="row">
-                 <div class="tb_inner">
-                     <div class="col-md-9">
-                         <div class="tb_footer">
-                             <ul>
-                                 <li><a href="#">About TrueBus &nbsp;|</a></li>
-                                 <li><a href="#">FAQ   &nbsp;|</a></li>
-                                 <li><a href="#">Careers  &nbsp;|</a></li>
-                                 <li><a href="#">TrueBus Coupons  &nbsp; |</a></li>
-                                 <li><a href="#">Contact Us   &nbsp;|</a></li>
-                                 <li><a href="#">Terms of Use   &nbsp;|</a></li>
-                                 <li><a href="#">Privacy Policy   &nbsp;|</a></li>
-                                 <li><a href="#">TrueBus on Mobilenew .</a></li>
-                             </ul>
-                         </div>
-                         <div class="footer_con">  &#169;  2016 <a href="https://techware.co.in/" style="text-decoration:none;">Techware Solution</a></div>
-                     </div>
-                     <div class="col-md-3">
-                         <div class="tb_social">
-                             <ul>
-                                 <li>  <a href="#"><img src="http://demo.truebus.co.in/assets/images/facebook.png"></a> </li>
-                                 <li>  <a href="#"> <img src="http://demo.truebus.co.in/assets/images/twitter.png"></a></li>
-                                 <li>  <a href="#">  <img src="http://demo.truebus.co.in/assets/images/google.png"></a></li>
-                             </ul>
-                         </div>
-                		 <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
-                     </div>
-                 </div>
-             </div>
-         </div>
-
-@include('layouts._partials.admin_foot')
+        </div>
+    </body>
+</html>
