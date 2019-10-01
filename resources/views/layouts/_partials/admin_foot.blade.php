@@ -17,9 +17,9 @@
 <script src="{{ asset('AdminLTE/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('AdminLTE/plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap -->
+{{-- <!-- JQVMap -->
 <script src="{{ asset('AdminLTE/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{ asset('AdminLTE/plugins/jqvmap/maps/jquery.vmap.world.js')}}"></script>
+<script src="{{ asset('AdminLTE/plugins/jqvmap/maps/jquery.vmap.world.js')}}"></script> --}}
 <!-- jQuery Knob Chart -->
 <script src="{{ asset('AdminLTE/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->

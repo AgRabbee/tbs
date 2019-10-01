@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CompanyController extends Controller
 {
@@ -128,6 +129,12 @@ class CompanyController extends Controller
         //$c_admins = User::find('2');
         //$c_admins = User::all()->where('id','!=','1')->get()->toArray();
         //dd($c_admins);
+
+        if (session('success_message')) {
+            Alert::success('Success!!', session('success_message'));
+        }
+
+
         return view('admin.company_admin')->with('admin_details', $c_admins);
     }
 
@@ -146,7 +153,7 @@ class CompanyController extends Controller
         $admin = User::find($u_id);
         $admin->roles()->attach($adminRole);
 
-        return redirect('/dashboard/new/admins');
+        return redirect('/dashboard/new/admins')->withSuccessMessage('Successfully Activated');
     }
 
     public function company_admin_pause(Request $request)
@@ -158,7 +165,7 @@ class CompanyController extends Controller
             $value->users[0]->pivot->status = 0;
             $value->users[0]->pivot->save();
         }
-        return redirect('/dashboard/new/admins');
+        return redirect('/dashboard/new/admins')->withSuccessMessage('Successfully Paused');
     }
 
     public function company_admin_deny(Request $request)
@@ -176,7 +183,7 @@ class CompanyController extends Controller
         $admin = User::find($u_id);
         $admin->roles()->detach($adminRole);
 
-        return redirect('/dashboard/new/admins');
+        return redirect('/dashboard/new/admins')->withSuccessMessage('Successfully Denied');
     }
 
     public function company_admin_panel($value='')

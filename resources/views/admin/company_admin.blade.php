@@ -44,7 +44,7 @@
                                   {{ csrf_field() }}
                                   <input type="hidden" name="user_id" value="{{ $value->id }}">
                                   <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                    <button type="submit" class="btn btn-success btn-sm waves-effect waves-float">
+                                    <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
                                         <i class="fas fa-check-circle"></i>
                                     </button>
                               </form>
@@ -52,7 +52,7 @@
                                   {{ csrf_field() }}
                                   <input type="hidden" name="user_id" value="{{ $value->id }}">
                                     <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                    <button type="submit" class="btn btn-danger btn-sm waves-effect waves-float">
+                                    <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                         <i class="fas fa-ban"></i>
                                     </button>
                               </form>
@@ -62,7 +62,7 @@
                                   <form action="{{ url('/dashboard/new/admins/pause') }}" method="POST" class="mr-1">
                                       {{ csrf_field() }}
                                       <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                      <button type="submit" class="btn btn-warning btn-sm waves-effect waves-float">
+                                      <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning">
                                           <i class="far fa-pause-circle"></i>
                                       </button>
 
@@ -72,7 +72,7 @@
                                       {{ csrf_field() }}
                                       <input type="hidden" name="user_id" value="{{ $value->id }}">
                                         <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                        <button type="submit" class="btn btn-danger btn-sm waves-effect waves-float">
+                                        <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                             <i class="fas fa-ban"></i>
                                         </button>
                                   </form>
@@ -85,12 +85,12 @@
                                       {{ csrf_field() }}
                                       <input type="hidden" name="user_id" value="{{ $value->id }}">
                                       <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                        <button type="submit" class="btn btn-success btn-sm waves-effect waves-float">
+                                        <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
                                             <i class="fas fa-check-circle"></i>
                                         </button>
                                   </form>
 
-                                  <button type="button" disabled class="btn btn-danger btn-sm waves-effect waves-float">
+                                  <button type="button" disabled class="btn btn-danger btn-sm">
                                       <i class="fas fa-times-circle"></i>
                                   </button>
                               </div>
@@ -129,12 +129,13 @@
 
 @endsection
 
-
 @section('admin_scripts')
 
 <!-- DataTables -->
 <script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{ asset('AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+
+
 <!-- page script -->
 <script>
   $(function () {
@@ -147,6 +148,7 @@
       "info": true,
       "autoWidth": false,
     });
+
   });
 </script>
 

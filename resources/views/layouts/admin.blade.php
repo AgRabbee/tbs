@@ -2,6 +2,7 @@
 @include('layouts._partials.admin_nav')
 @include('layouts._partials.admin_sidebar')
 
+@include('sweetalert::alert')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
