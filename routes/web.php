@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('main');
+Route::get('/home', 'DashboardController@home');
 Route::get('/signin','Auth\AuthController@getSignin');
 Route::post('/signin','Auth\AuthController@Signin');
 
@@ -48,6 +49,6 @@ Route::group(['middleware'=>['auth']],function(){
     //--------------------------------------------
     Route::get('/company/register','CompanyController@create');
     Route::post('/company/register','CompanyController@store');
-    Route::get('/{$c_name}/dashboard','CompanyController@company_admin_panel');
+    Route::get('/company/dashboard','CompanyController@company_admin_panel');
 
 });

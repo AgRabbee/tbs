@@ -21,8 +21,11 @@ class AuthController extends Controller
     public function Signin(Request $request)
     {
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-            //return redirect('/dashboard');
-            return redirect()->intended('/dashboard');
+            if (Auth::user()->roles[0]->name == 'Super Admin') {
+                return redirect('/dashboard');
+            }elseif (Auth::user()->roles[0]::where('name','Customer')->first()) {
+                return redirect()->intended('/home');
+            }
         }
         return redirect()->back();
     }

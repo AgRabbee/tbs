@@ -28,7 +28,13 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company/index');
+
+        if (!Auth::user()->companies->count()) {
+            return view('company/index');
+        }else{
+            return redirect('/company/dashboard');
+        }
+
     }
 
     /**
@@ -125,16 +131,23 @@ class CompanyController extends Controller
 
     public function company_admin()
     {
-        $c_admins = User::all()->except(['id' => '1']);
-        //$c_admins = User::find('2');
-        //$c_admins = User::all()->where('id','!=','1')->get()->toArray();
-        //dd($c_admins);
+        /*
+            want to get the users who tried to register their own company except super admin..
+            if any user try to register their company on the system a row will be added on 'company_user' table.
+            there will be 4 types of users. 1. super admin, 2. company admin, 3. company driver, 4. customer
+
+            Super Admin has an UI for displaying all the new company admins.
+            company admins has also customer role.
+        */
+
+
 
         if (session('success_message')) {
             Alert::success('Success!!', session('success_message'));
         }
 
-
+        $c_admins = User::all()->except(['id' => '1']);
+        
         return view('admin.company_admin')->with('admin_details', $c_admins);
     }
 
@@ -186,8 +199,17 @@ class CompanyController extends Controller
         return redirect('/dashboard/new/admins')->withSuccessMessage('Successfully Denied');
     }
 
-    public function company_admin_panel($value='')
+    public function company_admin_panel()
     {
-        return view('manager.home');
+        if (Auth::user()->companies[0]->pivot->status == 1) {
+            return view('manager.home');
+        }elseif (Auth::user()->companies[0]->pivot->status == 0 || Auth::user()->companies[0]->pivot->status == 2) {
+            return redirect('/home')->withSuccessMessage('Your registration request is not accepted yet. Contact with System Admin.');
+        }
+
+
+
+
+
     }
 }
