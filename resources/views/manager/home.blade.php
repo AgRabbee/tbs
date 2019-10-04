@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('page_header')
 <h1 class="m-0 text-dark">page header</h1>

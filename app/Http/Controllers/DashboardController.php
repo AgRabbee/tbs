@@ -49,7 +49,7 @@ class DashboardController extends Controller
     }
 
     public function allUser(){
-        $users = User::all();
+        $users = User::all()->except(['id'=>'1']);
         return view('admin.allUser')->with('users', $users);
     }
 }

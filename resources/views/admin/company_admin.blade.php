@@ -19,7 +19,7 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th>User Name</th>
+                <th>Admin</th>
                 <th>Email</th>
                 <th>Company Name</th>
                 <th>Company Description</th>
@@ -102,7 +102,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th>User Name</th>
+                <th>Admin</th>
                 <th>Email</th>
                 <th>Company Name</th>
                 <th>Company Description</th>

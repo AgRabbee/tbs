@@ -147,7 +147,7 @@ class CompanyController extends Controller
         }
 
         $c_admins = User::all()->except(['id' => '1']);
-        
+
         return view('admin.company_admin')->with('admin_details', $c_admins);
     }
 
@@ -206,10 +206,6 @@ class CompanyController extends Controller
         }elseif (Auth::user()->companies[0]->pivot->status == 0 || Auth::user()->companies[0]->pivot->status == 2) {
             return redirect('/home')->withSuccessMessage('Your registration request is not accepted yet. Contact with System Admin.');
         }
-
-
-
-
 
     }
 }
