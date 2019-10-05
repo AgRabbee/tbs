@@ -41,6 +41,24 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/dashboard/new/admins/pause','CompanyController@company_admin_pause');
     Route::post('/dashboard/new/admins/deny','CompanyController@company_admin_deny');
 
+
+
+
+    // company admin portions
+    // -----------------------------------------------------------------------
+    Route::get('/company/dashboard/all/trips','RouteController@index');
+    Route::get('/company/dashboard/add/trip','RouteController@create');
+    Route::post('/company/dashboard/add/trip','RouteController@store');
+
+
+
+
+
+
+
+
+
+
     // insert locations sql
     Route::get('/dashboard/add_divisions','DashboardController@divisions');
     // Route::get('/dashboard/add_districts','DashboardController@districts');
@@ -52,5 +70,18 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/company/register','CompanyController@create');
     Route::post('/company/register','CompanyController@store');
     Route::get('/company/dashboard','CompanyController@company_admin_panel');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

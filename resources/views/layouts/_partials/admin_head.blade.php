@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-  {{-- <!-- JQVMap -->
-  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/jqvmap/jqvmap.min.css')}}"> --}}
+  <!-- jquery-ui -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/jquery-ui/jquery-ui.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css')}}">
   <!-- overlayScrollbars -->

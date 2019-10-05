@@ -59,7 +59,7 @@ class DashboardController extends Controller
     // insert locations sql
     public function divisions()
     {
-        return url('database/locations/divisions.sql');
+        return url('/locations/divisions.sql');
     }
     // public function districts()
     // {

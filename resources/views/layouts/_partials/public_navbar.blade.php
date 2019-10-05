@@ -10,7 +10,7 @@
                 <a class="nav-link" href="{{ url('/bus') }}"><i class="fas fa-bus"></i> Bus</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-ship"></i> Launch</a>
+                <a class="nav-link" data-toggle="modal" data-target="#modal-default" href="#"><i class="fas fa-ship"></i> Launch</a>
             </li>
 
             @guest
@@ -66,3 +66,25 @@
         </ul>
     </div>
 </nav>
+
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-success">Announcement!!!</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Coming up with the next update...</p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default mx-auto" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

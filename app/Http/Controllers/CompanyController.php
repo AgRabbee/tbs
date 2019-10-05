@@ -31,7 +31,8 @@ class CompanyController extends Controller
     {
 
         if (!Auth::user()->companies->count()) {
-            return view('company/index');
+            $companies = Company::all();
+            return view('company/index')->with('images',$companies);
         }else{
             return redirect('/company/dashboard');
         }
@@ -118,7 +119,7 @@ class CompanyController extends Controller
         $company->users()->attach($user_id, ['status' => 0]);
 
         //return redirect('/dashboard')->with('success','company created successfully');
-        return redirect('/dashboard')->withSuccessMessage('Request for Company Registration Submitted Successfully');
+        return redirect('/home')->withSuccessMessage('Request for Company Registration Submitted Successfully');
     }
 
     /**
@@ -258,7 +259,7 @@ class CompanyController extends Controller
     public function company_admin_panel()
     {
         if (Auth::user()->companies[0]->pivot->status == 1) {
-            return view('manager.home');
+            return view('company_admin.home');
         }elseif (Auth::user()->companies[0]->pivot->status == 0) {
             return redirect('/home')->withSuccessMessage('Your registration request is not accepted yet. Contact with System Admin.');
         }elseif (Auth::user()->companies[0]->pivot->status == 2) {

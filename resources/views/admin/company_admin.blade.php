@@ -42,15 +42,25 @@
                         <td>{{ $value->address }}</td>
                         <td>{{ $value->reg_no }}</td>
                         <td>{{ $value->tin_no }}</td>
-                        <td>
+                        {{-- <td>
                             <a href="{{asset('storage/company_image/'.$value->company_image)}}" target="_blank">{{ $value->company_image }}</a>
+                        </td> --}}
+                        <td>
+                            <a href="{{asset('storage/company_image/'.$value->company_image)}}" target="_blank"><img src="{{asset('storage/company_image/'.$value->company_image)}}" width="75" height="40" alt=""></a>
                         </td>
+                        <td>
+                            <a href="{{asset('storage/company_image/'.$value->trade)}}" target="_blank"><img src="{{asset('storage/company_image/'.$value->trade)}}" width="75" height="40" alt=""></a>
+                        </td>
+                        <td>
+                            <a href="{{asset('storage/company_image/'.$value->vat)}}" target="_blank"><img src="{{asset('storage/company_image/'.$value->vat)}}" width="75" height="40" alt=""></a>
+                        </td>
+                        {{--
                         <td>
                             <a href="{{asset('storage/company_image/'.$value->trade)}}" target="_blank">{{ $value->trade }}</a>
                         </td>
                         <td>
                             <a href="{{asset('storage/company_image/'.$value->vat)}}" target="_blank">{{ $value->vat }}</a>
-                        </td>
+                        </td> --}}
                         <td>
                             @if($value->status == '0')
                              <div class="d-flex justify-content-between">
@@ -112,6 +122,7 @@
                         </td>
                     </tr>
                 @endforeach
+                </tbody>
             <tfoot>
             <tr>
                 <th>Admin</th>
