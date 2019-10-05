@@ -52,4 +52,17 @@ class DashboardController extends Controller
         $users = User::all()->except(['id'=>'1']);
         return view('admin.allUser')->with('users', $users);
     }
+
+
+
+
+    // insert locations sql
+    public function divisions()
+    {
+        return url('database/locations/divisions.sql');
+    }
+    // public function districts()
+    // {
+    //
+    // }
 }

@@ -41,7 +41,9 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/dashboard/new/admins/pause','CompanyController@company_admin_pause');
     Route::post('/dashboard/new/admins/deny','CompanyController@company_admin_deny');
 
-
+    // insert locations sql
+    Route::get('/dashboard/add_divisions','DashboardController@divisions');
+    // Route::get('/dashboard/add_districts','DashboardController@districts');
 
 
 

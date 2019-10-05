@@ -25,81 +25,93 @@
                 <th>Company Description</th>
                 <th>Company Address</th>
                 <th>Company Registration No.</th>
+                <th>TIN No.</th>
+                <th>Company Image</th>
+                <th>Trade</th>
+                <th>VAT</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
                 @foreach ($admin_details as $value)
-                <tr>
-                    <td>{{ $value->first_name. ' '. $value->last_name }}</td>
-                    <td>{{ $value->email }}</td>
-                    <td>{{ $value->companies[0]->company_name }}</td>
-                    <td>{{ $value->companies[0]->description }}</td>
-                    <td>{{ $value->companies[0]->address }}</td>
-                    <td>{{ $value->companies[0]->reg_no }}</td>
-                    <td>
-                        @if($value->companies[0]->pivot->status == '0')
-                         <div class="d-flex justify-content-between">
-                              <form action="{{ url('/dashboard/new/admins/active') }}" method="POST">
-                                  {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
-                                  <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                    <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
-                                        <i class="fas fa-check-circle"></i>
-                                    </button>
-                              </form>
-                              <form action="{{ url('/dashboard/new/admins/deny') }}" method="POST">
-                                  {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
-                                    <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                    <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
-                                        <i class="fas fa-ban"></i>
-                                    </button>
-                              </form>
-                          </div>
-                          @elseif( $value->companies[0]->pivot->status == '1')
-                              <div class="d-flex justify-content-between">
-                                  <form action="{{ url('/dashboard/new/admins/pause') }}" method="POST" class="mr-1">
+                    <tr>
+                        <td>{{ $value->first_name . ' ' . $value->last_name }}</td>
+                        <td>{{ $value->email }}</td>
+                        <td>{{ $value->company_name }}</td>
+                        <td>{{ $value->description }}</td>
+                        <td>{{ $value->address }}</td>
+                        <td>{{ $value->reg_no }}</td>
+                        <td>{{ $value->tin_no }}</td>
+                        <td>
+                            <a href="{{asset('storage/company_image/'.$value->company_image)}}" target="_blank">{{ $value->company_image }}</a>
+                        </td>
+                        <td>
+                            <a href="{{asset('storage/company_image/'.$value->trade)}}" target="_blank">{{ $value->trade }}</a>
+                        </td>
+                        <td>
+                            <a href="{{asset('storage/company_image/'.$value->vat)}}" target="_blank">{{ $value->vat }}</a>
+                        </td>
+                        <td>
+                            @if($value->status == '0')
+                             <div class="d-flex justify-content-between">
+                                  <form action="{{ url('/dashboard/new/admins/active') }}" method="POST">
                                       {{ csrf_field() }}
-                                      <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                      <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning">
-                                          <i class="far fa-pause-circle"></i>
-                                      </button>
-
-
+                                      <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                      <input type="hidden" name="company_id" value="{{ $value->company_id }}">
+                                        <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
                                   </form>
                                   <form action="{{ url('/dashboard/new/admins/deny') }}" method="POST">
                                       {{ csrf_field() }}
                                       <input type="hidden" name="user_id" value="{{ $value->id }}">
-                                        <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
+                                        <input type="hidden" name="company_id" value="{{ $value->company_id }}">
                                         <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                             <i class="fas fa-ban"></i>
                                         </button>
                                   </form>
                               </div>
+                              @elseif( $value->status == '1')
+                                  <div class="d-flex justify-content-between">
+                                      <form action="{{ url('/dashboard/new/admins/pause') }}" method="POST" class="mr-1">
+                                          {{ csrf_field() }}
+                                          <input type="hidden" name="company_id" value="{{ $value->company_id }}">
+                                          <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning">
+                                              <i class="far fa-pause-circle"></i>
+                                          </button>
 
 
-                          @elseif( $value->companies[0]->pivot->status == '2')
-                              <div class="d-flex justify-content-between">
-                                  <form action="{{ url('/dashboard/new/admins/active') }}" method="POST"  class="mr-1">
-                                      {{ csrf_field() }}
-                                      <input type="hidden" name="user_id" value="{{ $value->id }}">
-                                      <input type="hidden" name="company_id" value="{{ $value->companies[0]->pivot->company_id }}">
-                                        <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
-                                            <i class="fas fa-check-circle"></i>
-                                        </button>
-                                  </form>
+                                      </form>
+                                      <form action="{{ url('/dashboard/new/admins/deny') }}" method="POST">
+                                          {{ csrf_field() }}
+                                          <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                            <input type="hidden" name="company_id" value="{{ $value->company_id }}">
+                                            <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                      </form>
+                                  </div>
 
-                                  <button type="button" disabled class="btn btn-danger btn-sm">
-                                      <i class="fas fa-times-circle"></i>
-                                  </button>
-                              </div>
-                      @endif
-                    </td>
-                </tr>
 
+                              @elseif( $value->status == '2')
+                                  <div class="d-flex justify-content-between">
+                                      <form action="{{ url('/dashboard/new/admins/active') }}" method="POST"  class="mr-1">
+                                          {{ csrf_field() }}
+                                          <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                          <input type="hidden" name="company_id" value="{{ $value->company_id }}">
+                                            <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
+                                                <i class="fas fa-check-circle"></i>
+                                            </button>
+                                      </form>
+
+                                      <button type="button" disabled class="btn btn-danger btn-sm">
+                                          <i class="fas fa-times-circle"></i>
+                                      </button>
+                                  </div>
+                          @endif
+                        </td>
+                    </tr>
                 @endforeach
-            </tbody>
             <tfoot>
             <tr>
                 <th>Admin</th>
@@ -108,6 +120,10 @@
                 <th>Company Description</th>
                 <th>Company Address</th>
                 <th>Company Registration No.</th>
+                <th>TIN No.</th>
+                <th>Company Image</th>
+                <th>Trade</th>
+                <th>VAT</th>
                 <th>Action</th>
             </tr>
             </tfoot>

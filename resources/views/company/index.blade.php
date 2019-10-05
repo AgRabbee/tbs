@@ -1,8 +1,8 @@
 @extends('layouts.public')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row mt-5">
+        <div class="col-md-6 mr-5">
             <div class="well">
                 <h3>Register your company</h3>
                 <hr>
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label for="address">Company Address</label>
                         <div class="form-line">
-                            <input type="text" id="address" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}"  autocomplete="address" rows="3" placeholder="Type your company address...">
+                            <input type="text" id="address" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}"  autocomplete="address" placeholder="Type your company address...">
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label for="reg_no">Company Registration No</label>
                         <div class="form-line">
-                            <input type="text" id="reg_no" class="form-control @error('reg_no') is-invalid @enderror" name="reg_no" value="{{ old('reg_no') }}"  autocomplete="reg_no" rows="3" placeholder="Type your company registration no...">
+                            <input type="text" id="reg_no" class="form-control @error('reg_no') is-invalid @enderror" name="reg_no" value="{{ old('reg_no') }}"  autocomplete="reg_no" placeholder="Type your company registration no...">
                             @error('reg_no')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -56,9 +56,42 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="company_image">Upload Company Image</label>
-                        <input type="file" id="company_image" name="company_image">
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="company_image">Upload Company Image</label>
+                                <input type="file" id="company_image" name="company_image">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="tin_no">TIN Number</label>
+                                <div class="form-line">
+                                    <input type="text" id="tin_no" class="form-control @error('tin_no') is-invalid @enderror" name="tin_no" value="{{ old('tin_no') }}"  autocomplete="tin_no" placeholder="Type your company TIN number...">
+                                    @error('tin_no')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="trade">Upload Trade License</label>
+                                <input type="file" id="trade" name="trade">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vat">Upload Vat Registration Certificate</label>
+                                <input type="file" id="vat" name="vat">
+                            </div>
+                        </div>
                     </div>
 
 
@@ -66,7 +99,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
             <div class="well">
                 <div id="carousel-example-generic_2" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->

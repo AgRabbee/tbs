@@ -12,10 +12,6 @@ class CompanyTableSeeder extends Seeder
      */
     public function run()
     {
-        $company = new Company;
-        $company->company_name = "Ticket Booking System";
-        $company->description = "This is an easy platform for booking tickets.";
-        $company->fees = '21';
-        $company->save();
+        //
     }
 }
