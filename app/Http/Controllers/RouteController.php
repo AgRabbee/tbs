@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+
 use App\Models\Trip;
 use Auth;
 
@@ -17,14 +17,9 @@ class RouteController extends Controller
     public function index()
     {
         $company_id = Auth::user()->companies[0]->id;
-        // $trips = Trip::all()->where('company_id','=',$company_id);
-        $trips = DB::table('trips')
-                ->join('districts as s','s.id','=','trips.start_point')
-                ->join('districts as e','e.id','=','trips.end_point')
-                ->where('company_id','=',$company_id)
-                ->get();
-
-        return view('company_admin.all_trips')->with('trips',$trips);
+        // $trips = Trip::where('company_id','=',$company_id)->get();
+        $trips = new Trip();
+        return view('company_admin.all_trips')->with('trips',$trips->allTrips($company_id));
 
     }
 
@@ -35,9 +30,9 @@ class RouteController extends Controller
      */
     public function create()
     {
-        $locations = DB::table('districts')
-                    ->get();
-        return view('company_admin.add_trips')->with('locations', $locations);
+        $locations = new Trip();
+
+        return view('company_admin.add_trips')->with('locations', $locations->allLocations());
     }
 
     /**

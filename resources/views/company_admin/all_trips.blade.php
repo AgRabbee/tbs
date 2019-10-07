@@ -32,8 +32,8 @@
                   <tr>
                       <td>{{ $trip->date }}</td>
                       <td>{{ $trip->start_time }}</td>
-                      <td>{{ $trip->name }}</td>
-                      <td>{{ $trip->name }}</td>
+                      <td>{{ $trip->start_name }}</td>
+                      <td>{{ $trip->end_name }}</td>
                       <td>{{ $trip->fare }}</td>
                   </tr>
               @endforeach
@@ -82,6 +82,7 @@
       "ordering": true,
       "info": true,
       "autoWidth": false,
+      "responsive": true
     });
 
   });

@@ -16,7 +16,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped display responsive ">
             <thead>
             <tr>
                 <th>Admin</th>
@@ -42,9 +42,6 @@
                         <td>{{ $value->address }}</td>
                         <td>{{ $value->reg_no }}</td>
                         <td>{{ $value->tin_no }}</td>
-                        {{-- <td>
-                            <a href="{{asset('storage/company_image/'.$value->company_image)}}" target="_blank">{{ $value->company_image }}</a>
-                        </td> --}}
                         <td>
                             <a href="{{asset('storage/company_image/'.$value->company_image)}}" target="_blank"><img src="{{asset('storage/company_image/'.$value->company_image)}}" width="75" height="40" alt=""></a>
                         </td>
@@ -54,21 +51,14 @@
                         <td>
                             <a href="{{asset('storage/company_image/'.$value->vat)}}" target="_blank"><img src="{{asset('storage/company_image/'.$value->vat)}}" width="75" height="40" alt=""></a>
                         </td>
-                        {{--
-                        <td>
-                            <a href="{{asset('storage/company_image/'.$value->trade)}}" target="_blank">{{ $value->trade }}</a>
-                        </td>
-                        <td>
-                            <a href="{{asset('storage/company_image/'.$value->vat)}}" target="_blank">{{ $value->vat }}</a>
-                        </td> --}}
                         <td>
                             @if($value->status == '0')
-                             <div class="d-flex justify-content-between">
+                             <div class="d-flex">
                                   <form action="{{ url('/dashboard/new/admins/active') }}" method="POST">
                                       {{ csrf_field() }}
                                       <input type="hidden" name="user_id" value="{{ $value->id }}">
                                       <input type="hidden" name="company_id" value="{{ $value->company_id }}">
-                                        <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
+                                        <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess  mr-2">
                                             <i class="fas fa-check-circle"></i>
                                         </button>
                                   </form>
@@ -82,11 +72,11 @@
                                   </form>
                               </div>
                               @elseif( $value->status == '1')
-                                  <div class="d-flex justify-content-between">
+                                  <div class="d-flex">
                                       <form action="{{ url('/dashboard/new/admins/pause') }}" method="POST" class="mr-1">
                                           {{ csrf_field() }}
                                           <input type="hidden" name="company_id" value="{{ $value->company_id }}">
-                                          <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning">
+                                          <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning mr-2">
                                               <i class="far fa-pause-circle"></i>
                                           </button>
 
@@ -104,12 +94,12 @@
 
 
                               @elseif( $value->status == '2')
-                                  <div class="d-flex justify-content-between">
+                                  <div class="d-flex">
                                       <form action="{{ url('/dashboard/new/admins/active') }}" method="POST"  class="mr-1">
                                           {{ csrf_field() }}
                                           <input type="hidden" name="user_id" value="{{ $value->id }}">
                                           <input type="hidden" name="company_id" value="{{ $value->company_id }}">
-                                            <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess">
+                                            <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess mr-2">
                                                 <i class="fas fa-check-circle"></i>
                                             </button>
                                       </form>
@@ -153,6 +143,8 @@
 
 <!-- DataTables -->
 <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+<link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')}}">
+<link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 
 @endsection
 
@@ -161,6 +153,8 @@
 <!-- DataTables -->
 <script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{ asset('AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.js')}}"></script>
+<script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.js')}}"></script>
 
 
 <!-- page script -->
@@ -174,6 +168,7 @@
       "ordering": true,
       "info": true,
       "autoWidth": false,
+      "responsive": true
     });
 
   });
