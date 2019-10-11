@@ -10,10 +10,10 @@
 
 @section('content')
     <div class="col-12">
-      <div class="card">
-        {{-- <div class="card-header">
-          <h3 class="card-title">DataTable with default features</h3>
-        </div> --}}
+      <div class="card card-info">
+        <div class="card-header">
+          <h3 class="card-title">All users of <strong>Ticket Booking System</strong></h3>
+        </div>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped display responsive">

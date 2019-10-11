@@ -19,6 +19,8 @@ class Controller extends BaseController
                 Alert::success('Success!!', session('success_message'));
             }elseif (session('info_message')) {
                 Alert::info('Information', session('info_message'));
+            }elseif (session('error_message')) {
+                Alert::danger('Error', session('error_message'));
             }
             return $next($request);
         });

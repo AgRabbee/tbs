@@ -41,11 +41,11 @@
                       <td>{{ $value->registration_no }}</td>
                       <td>{{ $value->total_seats }}</td>
                       <td>
-                          <a href="#" data-toggle="modal" data-target="#modal-edit{{ $value->id }}">{{ $value->trip_id }}</a>
+                          <a href="#" data-toggle="modal" data-target="#modal-Details{{ $value->id }}">{{ $value->trip_id }}</a>
 
 
 <!--edit modal-->
-<div class="modal fade" id="modal-edit{{ $value->id }}" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="modal-Details{{ $value->id }}" aria-hidden="true" style="display: none;">
   <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
@@ -87,15 +87,6 @@
 <!-- /.modal-dialog -->
 </div>
 <!--modal-->
-
-
-
-
-
-
-
-
-
 
 
                       </td>

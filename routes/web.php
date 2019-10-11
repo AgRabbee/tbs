@@ -75,8 +75,11 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 
-
-
+    //authenticate user profile
+    //--------------------------------------------
+    Route::get('/profile','DashboardController@userProfile');
+    Route::post('/profile','DashboardController@updateProfile');
+    Route::post('/password','DashboardController@passwordChange');
 
 
 

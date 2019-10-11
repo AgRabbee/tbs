@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 
 @section('page_header')
-<h1 class="m-0 text-dark">All Users</h1>
+<h1 class="m-0 text-dark">Add New Type</h1>
 @endsection
 
 @section('breadcrumb_list')
-<li class="breadcrumb-item active">All users</li>
+<li class="breadcrumb-item active">New transport type</li>
 @endsection
 
 @section('content')
     <div class="col-md-12">
         <!-- general form elements -->
-        <div class="card card-primary">
-            {{-- <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
-            </div> --}}
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Add new transport type for <strong>Ticket Booking System</strong></h3>
+            </div>
             <!-- /.card-header -->
 
             <!-- form start -->

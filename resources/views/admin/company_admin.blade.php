@@ -1,19 +1,19 @@
 @extends('layouts.admin')
 
 @section('page_header')
-<h1 class="m-0 text-dark">All Users</h1>
+<h1 class="m-0 text-dark">All Company Admins</h1>
 @endsection
 
 @section('breadcrumb_list')
-<li class="breadcrumb-item active">All users</li>
+<li class="breadcrumb-item active">Company Admins</li>
 @endsection
 
 @section('content')
     <div class="col-12">
-      <div class="card">
-        {{-- <div class="card-header">
-          <h3 class="card-title">DataTable with default features</h3>
-        </div> --}}
+      <div class="card card-info">
+        <div class="card-header">
+          <h3 class="card-title">All Company Admins of <strong>Ticket Booking System</strong></h3>
+        </div>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="example1" class="table table-bordered table-striped display responsive ">

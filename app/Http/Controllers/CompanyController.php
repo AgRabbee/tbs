@@ -169,23 +169,6 @@ class CompanyController extends Controller
 
     public function company_admin()
     {
-        /*
-            want to get the users who tried to register their own company except super admin..
-            if any user try to register their company on the system a row will be added on 'company_user' table.
-            there will be 4 types of users. 1. super admin, 2. company admin, 3. company driver, 4. customer
-
-            Super Admin has an UI for displaying all the new company admins.
-            company admins has also customer role.
-        */
-
-
-        //
-        // if (session('success_message')) {
-        //     Alert::success('Success!!', session('success_message'));
-        // }
-
-        //$c_admins = User::all()->except(['id' => '1']);
-
         $c_admins = DB::table('company_user')
                     ->join('users','users.id','=','company_user.user_id')
                     ->join('companies','companies.id','=','company_user.company_id')
@@ -261,9 +244,9 @@ class CompanyController extends Controller
         if (Auth::user()->companies[0]->pivot->status == 1) {
             return view('company_admin.home');
         }elseif (Auth::user()->companies[0]->pivot->status == 0) {
-            return redirect('/home')->withSuccessMessage('Your registration request is not accepted yet. Contact with System Admin.');
+            return redirect('/home')->withInfoMessage('Your registration request is not accepted yet. Contact with System Admin.');
         }elseif (Auth::user()->companies[0]->pivot->status == 2) {
-            return redirect('/home')->withSuccessMessage('Your registration request is Denied. Contact with System Admin.');
+            return redirect('/home')->withInfoMessage('Your registration request is Denied. Contact with System Admin.');
         }
 
     }
