@@ -72,7 +72,7 @@
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="#" class="nav-link">
+                 <a href="{{ url('/dashboard/all/trips') }}" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
                    <p>All Trips</p>
                  </a>

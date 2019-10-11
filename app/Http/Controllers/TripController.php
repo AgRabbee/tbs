@@ -116,4 +116,11 @@ class TripController extends Controller
     {
         //
     }
+
+
+    public function allTrips()
+    {
+        $allTrips = new Trip();
+        return view('admin.allTrips')->with('trips',$allTrips->allTripsForSuperAdmin());
+    }
 }

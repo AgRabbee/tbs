@@ -41,6 +41,10 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/dashboard/new/admins/pause','CompanyController@company_admin_pause');
     Route::post('/dashboard/new/admins/deny','CompanyController@company_admin_deny');
 
+
+    Route::get('/dashboard/all/trips','TripController@allTrips');
+
+
     Route::get('/dashboard/all/transport_type','TransportController@index');
     Route::get('/dashboard/add/transport_type','TransportController@create');
     Route::post('/dashboard/add/transport','TransportController@store');

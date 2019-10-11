@@ -8,6 +8,22 @@ use Auth;
 
 class Trip extends Model
 {
+    // super admin
+    // =============================================
+    public function allTripsForSuperAdmin()
+    {
+        $trips = DB::table('trips')
+            ->selectRaw('trips.*,s.name as start_name, e.name as end_name, companies.*, transports.*')
+            ->join('districts as s','s.id','=','trips.start_point')
+            ->join('districts as e','e.id','=','trips.end_point')
+            ->join('companies','companies.id','=','trips.company_id')
+            ->join('transports','transports.id','=','trips.bus_id');
+        return  $trips->get();
+    }
+
+
+    // company admins
+    // =============================================
     public function allTrips($company_id)
     {
         $trips = DB::table('trips')
