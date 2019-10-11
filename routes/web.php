@@ -41,27 +41,25 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/dashboard/new/admins/pause','CompanyController@company_admin_pause');
     Route::post('/dashboard/new/admins/deny','CompanyController@company_admin_deny');
 
-
+    Route::get('/dashboard/all/transport_type','TransportController@index');
+    Route::get('/dashboard/add/transport_type','TransportController@create');
+    Route::post('/dashboard/add/transport','TransportController@store');
+    Route::post('/dashboard/edit/{id}/transport','TransportController@update');
+    Route::post('/dashboard/delete/{id}/transport','TransportController@destroy');
 
 
     // company admin portions
     // -----------------------------------------------------------------------
-    Route::get('/company/dashboard/all/trips','RouteController@index');
-    Route::get('/company/dashboard/add/trip','RouteController@create');
-    Route::post('/company/dashboard/add/trip','RouteController@store');
+    Route::get('/company/dashboard/all/trips','TripController@index');
+    Route::get('/company/dashboard/add/trip','TripController@create');
+    Route::post('/company/dashboard/add/trip','TripController@store');
+
+    Route::get('/company/add/transport','CompanyTransportController@create');
+    Route::post('/company/add/transport','CompanyTransportController@store');
+
+    Route::get('/company/all/buses','CompanyTransportController@allBuses');
 
 
-
-
-
-
-
-
-
-
-    // insert locations sql
-    Route::get('/dashboard/add_divisions','DashboardController@divisions');
-    // Route::get('/dashboard/add_districts','DashboardController@districts');
 
 
 

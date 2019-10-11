@@ -18,7 +18,7 @@ class CreateCompanyTransportTable extends Migration
             $table->integer('company_id');
             $table->integer('transport_id');
             $table->integer('total_seats');
-            $table->string('registration_no');
+            $table->string('registration_no')->unique();
             $table->timestamps();
         });
     }

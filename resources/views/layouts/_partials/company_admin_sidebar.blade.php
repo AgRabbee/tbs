@@ -36,13 +36,13 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item">
+                <li class="nav-item ml-3">
                   <a href="{{ url('/company/dashboard/all/trips') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>All Trips</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item ml-3">
                 <a href="{{ url('/company/dashboard/add/trip') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add New</p>
@@ -50,28 +50,41 @@
                 </li>
             </ul></li>
 
-           <li class="nav-header">Bus</li>
+           <li class="nav-header">Transports</li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-bus"></i>
               <p>
-                Buses
+                Transports
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add New</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>All Buses</p>
-                </a>
-              </li>
+                <li class="nav-item has-treeview ml-3">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Transports<i class="right fas fa-angle-left"></i></p>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item ml-3">
+                          <a href="{{ url('/company/all/buses') }}" class="nav-link">
+                            <i class="fa fa-bus nav-icon"></i>
+                            <p>Buses</p>
+                          </a>
+                      </li>
+                      <li class="nav-item ml-3">
+                          <a href="#" class="nav-link">
+                            <i class="fas fa-ship nav-icon"></i>
+                            <p>Launch</p>
+                          </a>
+                      </li>
+                  </ul></li>
+                <li class="nav-item ml-3">
+                    <a href="{{ url('/company/add/transport') }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Add New Transports</p>
+                    </a>
+                </li>
             </ul></li>
 
 

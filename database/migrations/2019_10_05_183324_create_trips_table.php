@@ -18,6 +18,7 @@ class CreateTripsTable extends Migration
             $table->integer('company_id');
             $table->date('date');
             $table->string('start_time');
+            $table->integer('bus_id');
             $table->integer('start_point');
             $table->integer('end_point');
             $table->integer('fare');

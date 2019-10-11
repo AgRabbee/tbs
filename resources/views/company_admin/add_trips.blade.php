@@ -12,9 +12,9 @@
 
 <div class="col-md-12">
     <!-- general form elements -->
-    <div class="card card-primary">
+    <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Quick Example</h3>
+          <h3 class="card-title">Add new Trips of <strong>{{ Auth::user()->companies[0]->company_name }}</strong></h3>
         </div>
         <!-- /.card-header -->
 
@@ -23,7 +23,7 @@
             @csrf
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="date">Trip Date</label>
                             <div class="form-line">
@@ -37,12 +37,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="time">Trip Time</label>
                             <div class="form-line">
                                 <input type="text" class="form-control @error('time') is-invalid @enderror" name="time"  value="{{ old('time') }}"  autocomplete="time"  id="time" placeholder="time">
                             @error('time')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="time">Assign Bus</label>
+                            <div class="form-line">
+                                <select class="form-control @error('bus_id') is-invalid @enderror"  value="{{ old('bus_id') }}"  autocomplete="bus_id"  name="bus_id">
+                                    <option value="">--Select one--</option>
+                                    @foreach ($buses as $bus)
+                                        <option value="{{ $bus->id }}">{{ $bus->id }}</option>
+                                    @endforeach
+                                </select>
+                            @error('bus_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

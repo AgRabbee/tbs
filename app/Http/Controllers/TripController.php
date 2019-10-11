@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Trip;
 use Auth;
 
-class RouteController extends Controller
+class TripController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,9 +30,13 @@ class RouteController extends Controller
      */
     public function create()
     {
-        $locations = new Trip();
+        $details = new Trip();
+        $data = array(
+            'locations' => $details->allLocations(),
+            'buses' => $details->allBuses()
+        );
 
-        return view('company_admin.add_trips')->with('locations', $locations->allLocations());
+        return view('company_admin.add_trips')->with($data);
     }
 
     /**
@@ -57,6 +61,7 @@ class RouteController extends Controller
         $trip->company_id = Auth::user()->companies[0]->id;
         $trip->date = $request['date'];
         $trip->start_time = $request['time'];
+        $trip->bus_id = $request['bus_id'];
         $trip->start_point = $request['starting_point'];
         $trip->end_point = $request['end_point'];
         $trip->fare = $request['fare'];

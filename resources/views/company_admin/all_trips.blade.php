@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('page_header')
-<h1 class="m-0 text-dark">Add new trip</h1>
+<h1 class="m-0 text-dark">All trips</h1>
 @endsection
 
 @section('breadcrumb_list')
-<li class="breadcrumb-item active">New trip</li>
+<li class="breadcrumb-item active">All trips</li>
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
 <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">DataTable with default features</h3>
+        <h3 class="card-title">All Trips of <strong>{{ Auth::user()->companies[0]->company_name }}</strong></h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -59,17 +59,19 @@
 
 @section('admin_css')
 
-<!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-responsive/css/jquery.dataTables.min.css')}}">
 
 @endsection
 
 @section('admin_scripts')
-
-<!-- DataTables -->
-<script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{ asset('AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
-
+    <!-- DataTables -->
+    <script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
+    <script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.js')}}"></script>
+    <script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.js')}}"></script>
 
 <!-- page script -->
 <script>

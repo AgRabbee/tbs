@@ -61,26 +61,44 @@
               </li>
             </ul></li>
 
-            <li class="nav-header">Locations</li>
+            <li class="nav-header">Trips</li>
             <li class="nav-item has-treeview">
              <a href="#" class="nav-link">
                <i class="nav-icon far fa-location"></i>
                <p>
-                 Locaions
+                 Trips
                  <i class="right fas fa-angle-left"></i>
                </p>
              </a>
              <ul class="nav nav-treeview">
                <li class="nav-item">
-                 <a href="{{ url('/dashboard/add_divisions') }}" class="nav-link">
+                 <a href="#" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Add Divisions</p>
+                   <p>All Trips</p>
+                 </a>
+               </li>
+             </ul></li>
+
+            <li class="nav-header">Transports</li>
+            <li class="nav-item has-treeview">
+             <a href="#" class="nav-link">
+               <i class="nav-icon far fa-location"></i>
+               <p>
+                 Transports
+                 <i class="right fas fa-angle-left"></i>
+               </p>
+             </a>
+             <ul class="nav nav-treeview">
+               <li class="nav-item">
+                 <a href="{{ url('/dashboard/all/transport_type') }}" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>All Transports Type</p>
                  </a>
                </li>
                <li class="nav-item">
-                 <a href="{{ url('/dashboard/add_districts') }}" class="nav-link">
+                 <a href="{{ url('/dashboard/add/transport_type') }}" class="nav-link">
                    <i class="far fa-circle nav-icon"></i>
-                   <p>Add Districts</p>
+                   <p>Add New Type</p>
                  </a>
                </li>
              </ul></li>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransportTable extends Migration
+class CreateTransportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTransportTable extends Migration
      */
     public function up()
     {
-        Schema::create('transport', function (Blueprint $table) {
+        Schema::create('transports', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('transport_type');
-            $table->string('ac/non-ac');
+            $table->string('ac_type')->comment('1->ac; 2->non-ac');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTransportTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transport');
+        Schema::dropIfExists('transports');
     }
 }
