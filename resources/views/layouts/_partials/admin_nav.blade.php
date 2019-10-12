@@ -19,9 +19,17 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name}}</span>
           <div class="dropdown-divider"></div>
-          <a href="{{ url('/profile') }}" class="dropdown-item">
-            <i class="fas fa-address-card mr-2"></i> Profile
-          </a>
+          @if (Auth::user()->roles[0]->name == 'Super Admin')
+              <a href="{{ url('/dashboard/profile') }}" class="dropdown-item">
+                <i class="fas fa-address-card mr-2"></i> Profile
+              </a>
+          @elseif (Auth::user()->roles[0]->name == 'Admin')
+              <a href="{{ url('/company/admin/profile') }}" class="dropdown-item">
+                <i class="fas fa-address-card mr-2"></i> Profile
+              </a>
+          @endif
+
+
           <div class="dropdown-divider"></div>
           <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             <i class="fas fa-sign-out-alt mr-2"></i> Sign Out

@@ -35,7 +35,13 @@ class DashboardController extends Controller
 
     public function userProfile()
     {
-        return view('admin.adminProfile');
+        if (Auth::user()->roles[0]->name == 'Super Admin') {
+            return view('admin.adminProfile');
+        }elseif (Auth::user()->roles[0]->name == 'Admin') {
+            return view('company_admin.adminProfile');
+        }elseif (Auth::user()->roles[0]->name == 'Customer') {
+            return view('customer.customerProfile');
+        }
     }
 
     public function updateProfile(Request $request)
@@ -70,7 +76,7 @@ class DashboardController extends Controller
             $user = User::find(Auth::user()->id);
             $user->password = Hash::make($request['password']);
             $user->save();
-            return redirect('/profile')->withSuccessMessage('Password Changed Successfully.');
+            return redirect()->back()->withSuccessMessage('Password Changed Successfully.');
         }else {
             return redirect()->back()->withErrorMessage('Current Password Not matched.');
         }

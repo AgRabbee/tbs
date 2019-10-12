@@ -1,13 +1,17 @@
 @extends('layouts.public')
-
+@section('page_header')
+    <div class="card card-info">
+        <div class="card-header">
+            <h3>Register your company</h3>
+        </div>
+    </div>
+@endsection
 @section('content')
-<div class="col-md-8 mx-auto my-5">
-
-            <div class="well">
-                <h3>Register your company</h3>
-                <hr>
-                <form class="" action="{{ url('/company/register') }}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+    <div class="row">
+        <div class="col-md-8">
+            <form action="{{ url('/company/register') }}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="card-body">
                     <div class="form-group">
                         <label for="company_name">Company name</label>
                         <div class="form-line">
@@ -83,21 +87,35 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="trade">Upload Trade License</label>
-                                <input type="file" id="trade" name="trade">
+                                <input type="file" id="trade" name="trade" class="form-control  @error('trade') is-invalid @enderror">
+                                @error('trade')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="vat">Upload Vat Registration Certificate</label>
-                                <input type="file" id="vat" name="vat">
+                                <input type="file" id="vat" name="vat" class="form-control  @error('vat') is-invalid @enderror">
+                                @error('vat')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
-
-
+                </div>
+                <div class="card-footer">
                     <input type="submit" class="btn btn-primary btn-sm mx-auto mt-3 d-block" name="submit" value="Register Company">
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+
         </div>
     </div>
 @endsection

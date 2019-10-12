@@ -31,8 +31,8 @@ class CompanyController extends Controller
     {
 
         if (!Auth::user()->companies->count()) {
-            $companies = Company::all();
-            return view('company/index')->with('images',$companies);
+
+            // return view('company.index');
         }else{
             return redirect('/company/dashboard');
         }
@@ -54,8 +54,8 @@ class CompanyController extends Controller
             'reg_no' => 'required|string',
             'tin_no' => 'required|integer',
             'company_image' => 'image|nullable|max:1999',
-            'trade' => 'image|max:1999',
-            'vat' => 'image|max:1999',
+            'trade' => 'required|image|max:1999',
+            'vat' => 'required|image|max:1999',
         ]);
 
         //handle company_image upload
@@ -122,50 +122,6 @@ class CompanyController extends Controller
         return redirect('/home')->withSuccessMessage('Request for Company Registration Submitted Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Company $company)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Company $company)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Company $company)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Company $company)
-    {
-        //
-    }
 
     public function company_admin()
     {

@@ -20,7 +20,7 @@ class Controller extends BaseController
             }elseif (session('info_message')) {
                 Alert::info('Information', session('info_message'));
             }elseif (session('error_message')) {
-                Alert::danger('Error', session('error_message'));
+                Alert::warning('Error', session('error_message'));
             }
             return $next($request);
         });

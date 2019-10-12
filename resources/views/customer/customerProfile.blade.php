@@ -1,18 +1,18 @@
-@extends('layouts.admin')
+@extends('layouts.public')
 
 @section('page_header')
-<h1 class="m-0 text-dark">User Profile</h1>
-@endsection
-
-@section('breadcrumb_list')
-<li class="breadcrumb-item active">Profile</li>
+    <div class="card card-info">
+        <div class="card-header">
+            <h3>User Profile</h3>
+        </div>
+    </div>
 @endsection
 
 @section('content')
+        <div class="row">
           <div class="col-md-3">
-
             <!-- Profile Image -->
-            <div class="card card-primary card-outline">
+            <div class="card card-info card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle" src="{{ asset('AdminLTE/dist/img/user2-160x160.jpg')}}" alt="User profile picture">
@@ -27,8 +27,12 @@
             </div>
             <!-- /.card -->
 
+
+
+
+
             <!-- About Me Box -->
-            <div class="card card-primary">
+            <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">About Me</h3>
               </div>
@@ -36,9 +40,7 @@
               <div class="card-body">
                 <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
-                <p class="text-muted">
-                  Business in Information Technology from the <strong>University of Greenwich</strong>
-                </p>
+                <p class="text-muted"> Business in Information Technology from the <strong>University of Greenwich</strong></p>
 
                 <hr>
 
@@ -122,7 +124,7 @@
                    </div>
                    <!-- /.tab-pane -->
                    <div class="tab-pane" id="passwrd">
-                       <form class="" action="{{ url('/dashboard/profile/changePassword') }}" method="post">
+                       <form class="" action="{{ url('/profile/changePassword') }}" method="post">
                            @csrf
                            <div class="form-group row">
                                <label for="c_password" class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}</label>
@@ -175,7 +177,7 @@
           <!--edit modal-->
           <div class="modal fade" id="modal-edit" aria-hidden="true" style="display: none;">
            <div class="modal-dialog">
-               <form class="" action="{{ url('/dashboard/profile') }}" method="post">
+               <form class="" action="{{ url('/profile') }}" method="post">
                    @csrf
                <div class="modal-content">
                    <div class="modal-header">
@@ -221,52 +223,6 @@
           </div>
           <!--modal-->
 
-
-
-
-
-
-
-
-
-
-
-@endsection
-
-
-
-@section('admin_css')
-
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
-    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/datatables-responsive/css/jquery.dataTables.min.css')}}">
-
-
-@endsection
-
-
-@section('admin_scripts')
-
-    <!-- DataTables -->
-    <script src="{{ asset('AdminLTE/plugins/datatables/jquery.dataTables.js')}}"></script>
-    <script src="{{ asset('AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
-    <script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.js')}}"></script>
-    <script src="{{ asset('AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.js')}}"></script>
-
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
+      </div>
 
 @endsection

@@ -31,9 +31,14 @@ Route::get('/bus','PagesController@bus');
 //Company
 //--------------------------------------------
 
-Route::group(['middleware'=>['auth']],function(){
+Route::group(['middleware'=>['auth','superAdmin']],function(){
     //Super Admin
     //--------------------------------------------
+
+    Route::get('/dashboard/profile','DashboardController@userProfile');
+    Route::post('/dashboard/profile','DashboardController@updateProfile');
+    Route::post('/dashboard/profile/changePassword','DashboardController@passwordChange');
+
     Route::get('/dashboard/allusers','DashboardController@allUser');
 
     Route::get('/dashboard/new/admins','CompanyController@company_admin');
@@ -52,8 +57,19 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('/dashboard/delete/{id}/transport','TransportController@destroy');
 
 
+});
+
+
+
+Route::group(['middleware'=>['auth','admin']],function(){
+
     // company admin portions
     // -----------------------------------------------------------------------
+    Route::get('/company/admin/profile','DashboardController@userProfile');
+    Route::post('/company/admin/profile','DashboardController@updateProfile');
+    Route::post('/company/admin/profile/changePassword','DashboardController@passwordChange');
+
+    Route::get('/company/dashboard','CompanyController@company_admin_panel');
     Route::get('/company/dashboard/all/trips','TripController@index');
     Route::get('/company/dashboard/add/trip','TripController@create');
     Route::post('/company/dashboard/add/trip','TripController@store');
@@ -65,13 +81,13 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 
+});
 
-
+Route::group(['middleware'=>['auth','client']],function(){
     //User
     //--------------------------------------------
-    Route::get('/company/register','CompanyController@create');
+    // Route::get('/company/register','CompanyController@create');
     Route::post('/company/register','CompanyController@store');
-    Route::get('/company/dashboard','CompanyController@company_admin_panel');
 
 
 
@@ -79,14 +95,6 @@ Route::group(['middleware'=>['auth']],function(){
     //--------------------------------------------
     Route::get('/profile','DashboardController@userProfile');
     Route::post('/profile','DashboardController@updateProfile');
-    Route::post('/password','DashboardController@passwordChange');
-
-
-
-
-
-
-
-
+    Route::post('/profile/changePassword','DashboardController@passwordChange');
 
 });
