@@ -33,7 +33,8 @@ class TripController extends Controller
         $details = new Trip();
         $data = array(
             'locations' => $details->allLocations(),
-            'buses' => $details->allBuses()
+            'buses' => $details->allBuses(),
+            'drivers' => $details->allDrivers()
         );
 
         return view('company_admin.add_trips')->with($data);
@@ -55,6 +56,7 @@ class TripController extends Controller
             'starting_point' => 'required|integer',
             'end_point' => 'required|integer',
             'fare' => 'required|integer',
+            'driver_id' => 'required|integer',
         ]);
 
         $trip = new Trip;
@@ -65,6 +67,7 @@ class TripController extends Controller
         $trip->start_point = $request['starting_point'];
         $trip->end_point = $request['end_point'];
         $trip->fare = $request['fare'];
+        $trip->driver_id = $request['driver_id'];
         $trip->save();
 
         return redirect()->back()->withSuccessMessage('Trip Added Successfully');
@@ -103,7 +106,11 @@ class TripController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update_trip = Trip::find($id);
+        $update_trip->fare = $request['update_fare'];
+        $update_trip->save();
+
+        return redirect()->back()->withSuccessMessage('Trips Fare updated Successfully..');
     }
 
     /**

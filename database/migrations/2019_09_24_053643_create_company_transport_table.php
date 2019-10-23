@@ -16,7 +16,7 @@ class CreateCompanyTransportTable extends Migration
         Schema::create('company_transport', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('company_id');
-            $table->integer('transport_id');
+            $table->integer('transport_type_id');
             $table->integer('total_seats');
             $table->string('registration_no')->unique();
             $table->timestamps();

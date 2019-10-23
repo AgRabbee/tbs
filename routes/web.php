@@ -26,6 +26,7 @@ Route::get('/signup','Auth\AuthController@getSignup');
 Route::post('/signup','Auth\AuthController@Signup');
 
 Route::get('/bus','PagesController@bus');
+Route::post('/bus/search','PagesController@search');
 
 
 //Company
@@ -73,11 +74,16 @@ Route::group(['middleware'=>['auth','admin']],function(){
     Route::get('/company/dashboard/all/trips','TripController@index');
     Route::get('/company/dashboard/add/trip','TripController@create');
     Route::post('/company/dashboard/add/trip','TripController@store');
+    Route::post('/company/dashboard/edit/{id}/trip','TripController@update');
 
     Route::get('/company/add/transport','CompanyTransportController@create');
     Route::post('/company/add/transport','CompanyTransportController@store');
 
     Route::get('/company/all/buses','CompanyTransportController@allBuses');
+
+    Route::get('/company/dashboard/all/drivers','CompanyController@allDrivers');
+    Route::get('/company/dashboard/add/driver','CompanyController@addDriverForm');
+    Route::post('/company/dashboard/add/driver','CompanyController@addDriver');
 
 
 

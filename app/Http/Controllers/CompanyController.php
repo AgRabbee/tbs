@@ -206,4 +206,48 @@ class CompanyController extends Controller
         }
 
     }
+
+
+    public function allDrivers()
+    {
+        $company_id = Auth::user()->companies[0]->id;
+        $driver_details = new Company;
+        return view('company_admin.all_drivers')->with('driver_details',$driver_details->allDrivers($company_id));
+    }
+
+    public function addDriverForm()
+    {
+        return view('company_admin.addDriver');
+    }
+
+    public function addDriver(Request $request)
+    {
+        $this->validate($request,[
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|string',
+            'phone' => 'required|string',
+            'password' => 'required|string|min:6|confirmed',
+            'nid' => 'required|integer',
+            'terms' => 'required',
+        ]);
+
+        $driver = new User;
+        $driver->first_name = $request['first_name'];
+        $driver->last_name = $request['last_name'];
+        $driver->email = $request['email'];
+        $driver->phone = $request['phone'];
+        $driver->password = bcrypt($request['password']);
+        $driver->nid = $request['nid'];
+        $driver->save();
+        $driver->roles()->attach(Role::where('name','Driver')->first());
+
+        $driver_id = $driver->id;
+        $company_id = Auth::user()->companies[0]->id;
+        $driver->companies()->attach($company_id,['status' => 1]);
+        // $driver->companies()->sync(['user_id' =>$driver_id],['company_id' =>$company_id],['status' => 1]);
+
+        return redirect()->back()->withSuccessMessage('Driver profile added successfully');
+    }
+
 }

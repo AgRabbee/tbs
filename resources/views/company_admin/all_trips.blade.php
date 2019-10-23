@@ -25,6 +25,8 @@
               <th>Start Point</th>
               <th>End Point</th>
               <th>Fare</th>
+              <th>Driver</th>
+              <th>Action</th>
           </tr>
           </thead>
           <tbody>
@@ -35,7 +37,41 @@
                       <td>{{ $trip->start_name }}</td>
                       <td>{{ $trip->end_name }}</td>
                       <td>{{ $trip->fare }}</td>
+                      <td>{{ $trip->first_name.' '.$trip->last_name}}</td>
+                      <td><a href="#" class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modal-edit{{ $trip->t_id }}"><i class="fas fa-edit"></i></a></td>
                   </tr>
+
+                  <!--edit modal-->
+                      <div class="modal fade" id="modal-edit{{ $trip->t_id }}" aria-hidden="true" style="display: none;">
+                          <div class="modal-dialog">
+                              <form class="" action="{{ url('/company/dashboard/edit/'.$trip->t_id.'/trip') }}" method="post">
+                                  @csrf
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h4 class="modal-title">Edit Transport</h4>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">×</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <div class="form-group">
+                                              <label for="fare">Fare</label>
+                                              <input type="text" class="form-control" name="update_fare" value="{{ $trip->fare }}">
+                                          </div>
+                                      </div>
+                                      <div class="modal-footer justify-content-between">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                          <input type="submit" class="btn btn-primary" name="" value="Update changes">
+                                      </div>
+                                  </div>
+                              <!-- /.modal-content -->
+                              </form>
+                          </div>
+                      <!-- /.modal-dialog -->
+                      </div>
+                  <!--modal-->
+
+
               @endforeach
           </tbody>
           <tfoot>
@@ -45,6 +81,8 @@
               <th>Start Point</th>
               <th>End Point</th>
               <th>Fare</th>
+              <th>Driver</th>
+              <th>Action</th>
           </tr>
           </tfoot>
         </table>
@@ -76,16 +114,19 @@
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true
+    $("#example1").DataTable({
+        // "ordering": false,
+        "order": [],
     });
+    // $('#example2').DataTable({
+    //   "paging": true,
+    //   "lengthChange": false,
+    //   "searching": false,
+    //   "ordering": false,
+    //   "info": true,
+    //   "autoWidth": false,
+    //   "responsive": true
+    // });
 
   });
 </script>

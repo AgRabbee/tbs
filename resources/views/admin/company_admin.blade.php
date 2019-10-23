@@ -56,7 +56,7 @@
                              <div class="d-flex">
                                   <form action="{{ url('/dashboard/new/admins/active') }}" method="POST">
                                       {{ csrf_field() }}
-                                      <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                      <input type="hidden" name="user_id" value="{{ $value->user_id }}">
                                       <input type="hidden" name="company_id" value="{{ $value->company_id }}">
                                         <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess  mr-2">
                                             <i class="fas fa-check-circle"></i>
@@ -64,7 +64,7 @@
                                   </form>
                                   <form action="{{ url('/dashboard/new/admins/deny') }}" method="POST">
                                       {{ csrf_field() }}
-                                      <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                      <input type="hidden" name="user_id" value="{{ $value->user_id }}">
                                         <input type="hidden" name="company_id" value="{{ $value->company_id }}">
                                         <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                             <i class="fas fa-ban"></i>
@@ -84,7 +84,7 @@
                                       </form>
                                       <form action="{{ url('/dashboard/new/admins/deny') }}" method="POST">
                                           {{ csrf_field() }}
-                                          <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                          <input type="hidden" name="user_id" value="{{ $value->user_id }}">
                                             <input type="hidden" name="company_id" value="{{ $value->company_id }}">
                                             <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                                 <i class="fas fa-ban"></i>
@@ -97,7 +97,7 @@
                                   <div class="d-flex">
                                       <form action="{{ url('/dashboard/new/admins/active') }}" method="POST"  class="mr-1">
                                           {{ csrf_field() }}
-                                          <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                          <input type="hidden" name="user_id" value="{{ $value->user_id }}">
                                           <input type="hidden" name="company_id" value="{{ $value->company_id }}">
                                             <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess mr-2">
                                                 <i class="fas fa-check-circle"></i>

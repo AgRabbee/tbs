@@ -87,8 +87,29 @@
                 </li>
             </ul></li>
 
-
-
+            <li class="nav-header">Employees</li>
+            <li class="nav-item has-treeview">
+             <a href="#" class="nav-link">
+               <i class="nav-icon fas fa-user"></i>
+               <p>
+                 Drivers
+                 <i class="right fas fa-angle-left"></i>
+               </p>
+             </a>
+             <ul class="nav nav-treeview">
+                 <li class="nav-item ml-3">
+                   <a href="{{ url('/company/dashboard/all/drivers') }}" class="nav-link">
+                     <i class="far fa-circle nav-icon"></i>
+                     <p>All Drivers</p>
+                   </a>
+                 </li>
+                 <li class="nav-item ml-3">
+                 <a href="{{ url('/company/dashboard/add/driver') }}" class="nav-link">
+                   <i class="far fa-circle nav-icon"></i>
+                   <p>Add New</p>
+                 </a>
+                 </li>
+             </ul></li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

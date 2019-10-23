@@ -17,7 +17,8 @@
 <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- daterangepicker -->
 <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>
-<script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js')}}"></script>
+{{-- <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js')}}"></script>  --}}
+
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- overlayScrollbars -->

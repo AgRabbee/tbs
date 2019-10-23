@@ -23,7 +23,7 @@
             @csrf
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="date">Trip Date</label>
                             <div class="form-line">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="time">Trip Time</label>
                             <div class="form-line">
@@ -50,9 +50,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="time">Assign Bus</label>
+                            <label for="bus_id">Assign Bus</label>
                             <div class="form-line">
                                 <select class="form-control @error('bus_id') is-invalid @enderror"  value="{{ old('bus_id') }}"  autocomplete="bus_id"  name="bus_id">
                                     <option value="">--Select one--</option>
@@ -68,11 +68,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="driver_id">Assign Driver</label>
+                            <div class="form-line">
+                                <select class="form-control @error('driver_id') is-invalid @enderror"  value="{{ old('driver_id') }}"  autocomplete="driver_id"  name="driver_id">
+                                    <option value="">--Select one--</option>
+                                    @foreach ($drivers as $driver)
+                                        <option value="{{ $driver->user_id }}">{{ $driver->first_name.' '.$driver->last_name }}</option>
+                                    @endforeach
+                                </select>
+                            @error('driver_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="time">Starting Point</label>
+                            <label for="starting_point">Starting Point</label>
                             <div class="form-line">
                                 <select class="form-control @error('starting_point') is-invalid @enderror"  value="{{ old('starting_point') }}"  autocomplete="starting_point"  name="starting_point">
                                     <option value="">--Select one--</option>
@@ -90,7 +108,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="time">End Point</label>
+                            <label for="end_point">End Point</label>
                             <div class="form-line">
                                 <select class="form-control @error('end_point') is-invalid @enderror"  value="{{ old('end_point') }}"  autocomplete="end_point"  name="end_point">
                                     <option value="">--Select one--</option>

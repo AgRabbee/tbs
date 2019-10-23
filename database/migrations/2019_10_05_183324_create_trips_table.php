@@ -22,6 +22,7 @@ class CreateTripsTable extends Migration
             $table->integer('start_point');
             $table->integer('end_point');
             $table->integer('fare');
+            $table->integer('driver_id');
             $table->timestamps();
         });
     }
