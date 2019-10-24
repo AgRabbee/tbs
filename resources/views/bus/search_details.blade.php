@@ -43,7 +43,7 @@
                 <!--edit modal-->
                     <div class="modal fade" id="modal-seats{{ $value->id }}" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-xl">
-                            <form class="" action="{{ url('/company/dashboard/edit/'.$value->id.'/trip') }}" method="post">
+                            <form action="{{ url('/bus/booking') }}" method="post">
                                 @csrf
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -63,7 +63,7 @@
                                                     @for ($i='A'; $i < 'J'; $i++)
                                                           <div class="row">
                                                         @for ($y=1; $y < 5; $y++)
-                                                            <input type='checkbox' data-toggle='tooltip' data-placement='bottom' data-original-title="{{$i.$y}}" value="{{$i.$y}}"  id="{{$i.$y}}" class='checkbox'/>
+                                                            <input type='checkbox' data-toggle='tooltip' name="seats[]" data-placement='bottom' data-original-title="{{$i.$y}}" value="{{$i.$y}}"  id="{{$i.$y}}" class='checkbox'/>
                                                         @endfor
                                                           </div>
                                                     @endfor
@@ -72,11 +72,11 @@
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="input-group col-md-4">
-                                                        <input type="checkbox" name="" value="" id="seatsInfo">
+                                                        <input type="checkbox" name="" value="" disabled id="seatsInfo">
                                                         <label for="">Available</label>
                                                     </div>
                                                     <div class="input-group col-md-4">
-                                                        <input type="checkbox" name="" value="" id="seatsInfo" checked>
+                                                        <input type="checkbox" name="" value="" id="seatsInfo" disabled checked>
                                                         <label for="">Selected</label>
                                                     </div>
                                                     <div class="input-group col-md-4">
@@ -85,25 +85,30 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <table class="table table-striped">
+                                                    <table class="table table-striped" >
                                                         <thead>
                                                             <tr>
                                                                 <th>Seats</th>
                                                                 <th>Fare</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td id="seatNumber"></td>
-                                                            </tr>
+                                                        <tbody id="seatsTable">
+                                                            {{-- <tr><td id="seatNumber"></td></tr>
+                                                            <tr><td>{{ $value->fare }}</td></tr> --}}
                                                         </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>Seats</th>
-                                                                <th>Fare</th>
-                                                            </tr>
-                                                        </tfoot>
                                                     </table>
+                                                </div>
+                                                <div class="row">
+                                                    <p><strong>Total:</strong> <span id="totalCost"></span></p>
+                                                    <input type="hidden" name="total" id="total" value="">
+                                                    <input type="hidden" name="trip_id" value="{{ $value->t_id }}">
+                                                </div>
+                                                <div class="row">
+                                                    <label for="">Choose your boarding point <span class="text-danger">*</span></label>
+                                                    <select class="form-control" name="boarding_point">
+                                                        <option value="">--select one--</option>
+                                                        <option value="">{{ $value->company_name.' bus counter, '.$value->start_name }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,7 +116,7 @@
 
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-primary" name="" value="Update changes">
+                                        <input type="submit" class="btn btn-primary" name="" value="Continue">
                                     </div>
                                 </div>
                             <!-- /.modal-content -->
@@ -120,11 +125,6 @@
                     <!-- /.modal-dialog -->
                     </div>
                 <!--modal-->
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -161,6 +161,9 @@
        #info{
            font-size:13px;
        }
+       #seatsTable{
+           min-height: 100px;
+       }
     </style>
 @endsection
 
@@ -180,10 +183,27 @@
         $(function () {
             $("[data-toggle='tooltip']").tooltip();
         });
-
-        $('.checkbox').click(function(){
-            $value = $(this).val();
-            $('#seatNumber').html($value);
+// ====================================================================
+    //seats selections
+// ====================================================================
+        $('.checkbox').on( "click", function() {
+            var count;
+             if($(this).is(":checked")){
+                 var value = $(this).val();
+                $("#seatsTable").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");
+                count = $( "#seatsTable tr" ).length;
+            }
+            else if($(this).is(":not(:checked)")){
+                var value = $(this).val();
+                $("td").filter(function() {
+                    return $(this).text() == value;
+                }).closest("tr").remove();
+                count = $( "#seatsTable tr" ).length ;
+            }
+            var totalCost = {{ $value->fare }}*count;
+            $('#totalCost').text(totalCost);
+            $('#total').val(totalCost);
         });
+
     </script>
 @endsection

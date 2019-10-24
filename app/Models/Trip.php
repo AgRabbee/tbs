@@ -68,14 +68,31 @@ class Trip extends Model
     public function searchTrips($from,$to,$date)
     {
         $details = DB::table('trips')
+                    ->selectRaw('trips.*,trips.id as t_id,s.name as start_name, e.name as end_name,companies.*,company_transport.*')
                     ->join('companies','trips.company_id','companies.id')
                     ->join('company_transport','trips.bus_id','company_transport.id')
+                    ->join('districts as s','s.id','=','trips.start_point')
+                    ->join('districts as e','e.id','=','trips.end_point')
                     ->where('trips.start_point',$from)
                     ->where('trips.end_point',$to)
                     ->where('trips.date',$date)
                     ->get();
 
         return $details;
+    }
+
+    public function tripDetails($trip_id)
+    {
+        $tripDetails = DB::table('trips')
+                    ->selectRaw('trips.*,trips.id as t_id,s.name as start_name, e.name as end_name,companies.*,company_transport.*')
+                    ->join('companies','trips.company_id','companies.id')
+                    ->join('company_transport','trips.bus_id','company_transport.id')
+                    ->join('districts as s','s.id','=','trips.start_point')
+                    ->join('districts as e','e.id','=','trips.end_point')
+                    ->where('trips.id',$trip_id)
+                    ->get();
+
+        return $tripDetails;
     }
 
 }

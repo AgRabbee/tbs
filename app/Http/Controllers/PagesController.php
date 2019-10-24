@@ -103,14 +103,33 @@ class PagesController extends Controller
 
         $search_trips = new Trip();
         $search_details = $search_trips->searchTrips($from,$to,$date);
-        // $search_details = Trip::where('start_point',$from)
-        //                     ->where('end_point',$to)
-        //                     ->where('date',$date)
-        //                     ->get();
+
         if ($search_details->count()>0) {
             return view('bus.search_details')->with('search_details',$search_details);
         }else {
             return redirect()->back()->withInfoMessage('Trips not found. Try another destination.');
         }
+    }
+
+
+    public function prebooking(Request $request)
+    {
+        // $this->validate($request,[
+        //     'seats[]'=>'required',
+        //     'boarding_point'=>'required',
+        // ]);
+        // $seats = $request['seats'];
+        // $total = $request['total'];
+
+
+        $trip = new Trip();
+        $data = array(
+            'seats' => $request['seats'],
+            'total' => $request['total'],
+            'boarding_point' => $request['boarding_point'],
+            'tripDetails' => $trip->tripDetails($request['trip_id']),
+
+        );
+        return view('bus.prebooking')->with($data);
     }
 }

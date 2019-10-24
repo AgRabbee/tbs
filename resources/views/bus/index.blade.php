@@ -77,8 +77,9 @@
                 <img src="http://demo.truebus.co.in/assets/images/bus.png">
             </div>
         </div>
-        
     </div>
+
+
 
 <!--SEARCH-BAR-END-->
 
@@ -99,5 +100,7 @@
             $('#to').val('');
             $('#date1').datepicker('setDate', null);
         });
+
     </script>
+
 @endsection

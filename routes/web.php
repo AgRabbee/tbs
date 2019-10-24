@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('main');
@@ -27,7 +28,7 @@ Route::post('/signup','Auth\AuthController@Signup');
 
 Route::get('/bus','PagesController@bus');
 Route::post('/bus/search','PagesController@search');
-
+Route::post('/bus/booking','PagesController@prebooking');
 
 //Company
 //--------------------------------------------
@@ -89,13 +90,17 @@ Route::group(['middleware'=>['auth','admin']],function(){
 
 });
 
-Route::group(['middleware'=>['auth','client']],function(){
+Route::group(['middleware'=>['client','auth']],function(){
     //User
     //--------------------------------------------
     // Route::get('/company/register','CompanyController@create');
     Route::post('/company/register','CompanyController@store');
 
 
+    //authenticate user seat booking
+    //--------------------------------------------
+    // Route::get('/bus/search','PagesController@search');
+    // Route::post('/bus/booking','PagesController@prebooking');
 
     //authenticate user profile
     //--------------------------------------------
