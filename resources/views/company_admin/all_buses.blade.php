@@ -30,7 +30,7 @@
           <tbody>
               @foreach ($bus_details as $value)
                   <tr>
-                  <td>{{ $value->transport_id }}</td>
+                  <td>{{ $value->ct_id }}</td>
                       <td>
                           @if ($value->ac_type == 1)
                               AC

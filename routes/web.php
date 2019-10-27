@@ -95,6 +95,7 @@ Route::group(['middleware'=>['client','auth']],function(){
     //--------------------------------------------
     // Route::get('/company/register','CompanyController@create');
     Route::post('/company/register','CompanyController@store');
+    // Route::get('/company/dashboard','CompanyController@company_admin_panel');
 
 
     //authenticate user seat booking
