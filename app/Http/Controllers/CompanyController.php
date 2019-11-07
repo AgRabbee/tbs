@@ -119,7 +119,7 @@ class CompanyController extends Controller
         $company->users()->attach($user_id, ['status' => 0]);
 
         //return redirect('/dashboard')->with('success','company created successfully');
-        return redirect('/home')->withSuccessMessage('Request for Company Registration Submitted Successfully');
+        return redirect('/')->withSuccessMessage('Request for Company Registration Submitted Successfully');
     }
 
 

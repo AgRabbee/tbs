@@ -15,11 +15,15 @@ class CreateCompanyTransportTable extends Migration
     {
         Schema::create('company_transport', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('company_id');
-            $table->integer('transport_type_id');
+            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('transport_type_id');
             $table->integer('total_seats');
             $table->string('registration_no')->unique();
             $table->timestamps();
+
+            //foreing keys
+            $table->foreign('transport_type_id')->references('id')->on('transports')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

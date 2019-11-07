@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Trip;
 
+use Stripe\Error\Card;
+use Stripe;
+
 class PagesController extends Controller
 {
     /**
@@ -14,73 +17,22 @@ class PagesController extends Controller
      */
     public function index()
     {
-        //
+        return view('welcome');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function completePayment(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        dd($request->all());
+       //  Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+       //  Stripe\Charge::create ([
+       //         "amount" => ($request['totalAmount']+$request['fee']) * 100,
+       //         "currency" => "usd",
+       //         "source" => $request->stripeToken,
+       //         "description" => "Payment from Ticket Booking System."
+       // ]);
+       //
+       //
+       // return redirect('/')->withSuccessMessage('Payment Successful');
     }
 
     public function bus()
@@ -97,6 +49,23 @@ class PagesController extends Controller
             'date_of_journey' => 'required',
         ]);
 
+        // $request->session()->put('session_data',$request->all());
+        // //$sessionData = $request->session()->get('session_data');
+        // // foreach ($sessionData as $value) {
+        // //     print_r($value['from']);
+        // // }
+        // $data = $request->session()->all();
+        // foreach ($data as $value) {
+        //     foreach ($value as $key) {
+        //         echo $key->session_data['to'];
+        //     }
+        //
+        // }
+
+        // $from = $request->session()->put('from', $request['from']);
+        // $to = $request->session()->put('to', $request['to']);
+        // $date = $request->session()->put('date', $request['date']);
+
         $from = $request['from'];
         $to = $request['to'];
         $date = $request['date_of_journey'];
@@ -104,6 +73,8 @@ class PagesController extends Controller
         $search_trips = new Trip();
         $search_details = $search_trips->searchTrips($from,$to,$date);
 
+        // dd($request->session());
+        //
         if ($search_details->count()>0) {
             return view('bus.search_details')->with('search_details',$search_details);
         }else {

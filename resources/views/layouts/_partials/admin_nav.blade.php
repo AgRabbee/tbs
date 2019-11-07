@@ -23,12 +23,11 @@
               <a href="{{ url('/dashboard/profile') }}" class="dropdown-item">
                 <i class="fas fa-address-card mr-2"></i> Profile
               </a>
-          @elseif (Auth::user()->roles[0]->name == 'Admin')
+          @elseif (Auth::user()->roles[1]->name == 'Admin')
               <a href="{{ url('/company/admin/profile') }}" class="dropdown-item">
                 <i class="fas fa-address-card mr-2"></i> Profile
               </a>
           @endif
-
 
           <div class="dropdown-divider"></div>
           <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

@@ -13,11 +13,11 @@ class Trip extends Model
     public function allTripsForSuperAdmin()
     {
         $trips = DB::table('trips')
-            ->selectRaw('trips.*,s.name as start_name, e.name as end_name, companies.*, transports.*')
+            ->selectRaw('trips.*,s.name as start_name, e.name as end_name, companies.*, company_transport.*')
             ->join('districts as s','s.id','=','trips.start_point')
             ->join('districts as e','e.id','=','trips.end_point')
             ->join('companies','companies.id','=','trips.company_id')
-            ->join('transports','transports.id','=','trips.bus_id');
+            ->join('company_transport','company_transport.id','=','trips.bus_id');
         return  $trips->get();
     }
 

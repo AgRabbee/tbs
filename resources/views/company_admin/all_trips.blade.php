@@ -20,6 +20,7 @@
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
+              <th>Bus ID</th>
               <th>Date</th>
               <th>Time</th>
               <th>Start Point</th>
@@ -32,6 +33,7 @@
           <tbody>
               @foreach ($trips as $trip)
                   <tr>
+                      <td>{{ $trip->bus_id }}</td>
                       <td>{{ $trip->date }}</td>
                       <td>{{ $trip->start_time }}</td>
                       <td>{{ $trip->start_name }}</td>
@@ -76,6 +78,7 @@
           </tbody>
           <tfoot>
           <tr>
+              <th>Bus ID</th>
               <th>Date</th>
               <th>Time</th>
               <th>Start Point</th>

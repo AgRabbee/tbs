@@ -16,11 +16,7 @@
             @guest
             @else
                 @if (Auth::user()->id != 1)
-                    @if (Auth::user()->companies->count())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/company/dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                        </li>
-                    @else
+                    @if (!Auth::user()->companies->count())
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="modal" data-target="#company_register" href="#"><i class="far fa-building"></i> Register your Company</a>
                         </li>
@@ -49,18 +45,18 @@
                         <span class="dropdown-item dropdown-header">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name}}</span>
 
                         <div class="dropdown-divider"></div>
-                        @if (Auth::user()->roles[0]->name == 'Super Admin')
-                            <a href="{{ url('/dashboard') }}" class="dropdown-item">
-                                <i class="fas fa-address-card mr-2"></i> Dashboard
-                            </a>
-                        @elseif (Auth::user()->roles[0]->name == 'Admin')
-                            <a href="{{ url('/profile') }}" class="dropdown-item">
-                                <i class="fas fa-address-card mr-2"></i> Profile
-                            </a>
-                        @else
-                            <a href="{{ url('/profile') }}" class="dropdown-item">
-                                <i class="fas fa-address-card mr-2"></i> Profile
-                            </a>
+
+
+                        @if (Auth::user()->roles[0]->name == 'Customer')
+                            @if (Auth::user()->roles[0]->name == 'Super Admin')
+                                <a href="{{ url('/dashboard') }}" class="dropdown-item">
+                                    <i class="fas fa-address-card mr-2"></i> Dashboard
+                                </a>
+                            @elseif (Auth::user()->roles[1]->name == 'Admin')
+                                <a href="{{ url('/company/dashboard') }}" class="dropdown-item">
+                                    <i class="fas fa-address-card mr-2"></i> Dashboard
+                                </a>
+                            @endif
                         @endif
 
                         <div class="dropdown-divider"></div>

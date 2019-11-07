@@ -23,6 +23,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>NID</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +33,61 @@
                     <td>{{ $value->email }}</td>
                     <td>{{ $value->phone }}</td>
                     <td>{{ $value->nid }}</td>
+                    <td>
+                        @if($value->user_status == '0')
+                         <div class="d-flex">
+                              <form action="{{ url('/dashboard/new/user/active') }}" method="POST">
+                                  {{ csrf_field() }}
+                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                    <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess  mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </button>
+                              </form>
+                              <form action="{{ url('/dashboard/new/user/deny') }}" method="POST">
+                                  {{ csrf_field() }}
+                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                    <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                              </form>
+                          </div>
+                      @elseif( $value->user_status == '1')
+                          <div class="d-flex">
+                              <form action="{{ url('/dashboard/new/user/pause') }}" method="POST" class="mr-1">
+                                  {{ csrf_field() }}
+                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                  <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning mr-2">
+                                      <i class="far fa-pause-circle"></i>
+                                  </button>
+
+
+                              </form>
+                              <form action="{{ url('/dashboard/new/user/deny') }}" method="POST">
+                                  {{ csrf_field() }}
+                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                    <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                              </form>
+                          </div>
+
+
+                      @elseif( $value->user_status == '2')
+                          <div class="d-flex">
+                              <form action="{{ url('/dashboard/new/user/active') }}" method="POST"  class="mr-1">
+                                  {{ csrf_field() }}
+                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                    <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </button>
+                              </form>
+
+                              <button type="button" disabled class="btn btn-danger btn-sm">
+                                  <i class="fas fa-times-circle"></i>
+                              </button>
+                          </div>
+                  @endif
+                    </td>
                 </tr>
 
                 @endforeach
@@ -42,6 +98,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>NID</th>
+                <th>Action</th>
             </tr>
             </tfoot>
           </table>

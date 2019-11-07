@@ -1,41 +1,30 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('main');
-Route::get('/home', 'DashboardController@home');
-Route::get('/signin','Auth\AuthController@getSignin');
-Route::post('/signin','Auth\AuthController@Signin');
+    Route::get('/', 'PagesController@index');
+    Route::get('/signin','Auth\AuthController@getSignin');
+    Route::post('/signin','Auth\AuthController@Signin');
+    Route::get('/signup','Auth\AuthController@getSignup');
+    Route::post('/signup','Auth\AuthController@Signup');
 
-Route::get('/signup','Auth\AuthController@getSignup');
-Route::post('/signup','Auth\AuthController@Signup');
+    Route::get('/bus','PagesController@bus');
+    Route::post('/bus/search','PagesController@search');
+    Route::post('/bus/booking','PagesController@prebooking');
+    Route::post('/charge','PagesController@completePayment');
 
-Route::get('/bus','PagesController@bus');
-Route::post('/bus/search','PagesController@search');
-Route::post('/bus/booking','PagesController@prebooking');
 
-//Company
-//--------------------------------------------
-
-Route::group(['middleware'=>['auth','superAdmin']],function(){
     //Super Admin
     //--------------------------------------------
+
+Route::group(['middleware'=>['auth','superAdmin']],function(){
+
+    Route::get('/dashboard', 'DashboardController@index');
+
+    Route::post('/dashboard/new/user/active','DashboardController@user_active');
+    Route::post('/dashboard/new/user/pause','DashboardController@user_pause');
+    Route::post('/dashboard/new/user/deny','DashboardController@user_deny');
+
 
     Route::get('/dashboard/profile','DashboardController@userProfile');
     Route::post('/dashboard/profile','DashboardController@updateProfile');
@@ -63,15 +52,13 @@ Route::group(['middleware'=>['auth','superAdmin']],function(){
 
 
 
+    // company admin
+    // -----------------------------------------------------------------------
+
 Route::group(['middleware'=>['auth','admin']],function(){
 
-    // company admin portions
-    // -----------------------------------------------------------------------
-    Route::get('/company/admin/profile','DashboardController@userProfile');
-    Route::post('/company/admin/profile','DashboardController@updateProfile');
-    Route::post('/company/admin/profile/changePassword','DashboardController@passwordChange');
+    Route::get('company/dashboard', 'DashboardController@companyAdmin');
 
-    Route::get('/company/dashboard','CompanyController@company_admin_panel');
     Route::get('/company/dashboard/all/trips','TripController@index');
     Route::get('/company/dashboard/add/trip','TripController@create');
     Route::post('/company/dashboard/add/trip','TripController@store');
@@ -86,6 +73,10 @@ Route::group(['middleware'=>['auth','admin']],function(){
     Route::get('/company/dashboard/add/driver','CompanyController@addDriverForm');
     Route::post('/company/dashboard/add/driver','CompanyController@addDriver');
 
+
+    Route::get('/company/admin/profile','DashboardController@userProfile');
+    Route::post('/company/admin/profile','DashboardController@updateProfile');
+    Route::post('/company/admin/profile/changePassword','DashboardController@passwordChange');
 
 
 });
@@ -102,6 +93,7 @@ Route::group(['middleware'=>['client','auth']],function(){
     //--------------------------------------------
     // Route::get('/bus/search','PagesController@search');
     // Route::post('/bus/booking','PagesController@prebooking');
+    Route::get('/member','PagesController@memberCheck');
 
     //authenticate user profile
     //--------------------------------------------

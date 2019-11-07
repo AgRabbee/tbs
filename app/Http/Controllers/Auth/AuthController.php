@@ -20,13 +20,17 @@ class AuthController extends Controller
 
     public function Signin(Request $request)
     {
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'user_status'=>1])) {
+
             if (Auth::user()->roles[0]->name == 'Super Admin') {
                 return redirect('/dashboard');
-            }elseif (Auth::user()->roles[0]::where('name','Customer')->first()) {
-                return redirect()->intended('/home');
+            }elseif (Auth::user()->roles[0]->name == 'Customer') {
+                return redirect('/');
+            }elseif (Auth::user()->roles[1]->name == 'Admin') {
+                return redirect('/company/dashboard');
             }
         }
+
         return redirect()->back();
     }
 
@@ -57,9 +61,10 @@ class AuthController extends Controller
         $user->password = bcrypt($request['password']);
         $user->phone = $request['phone'];
         $user->nid = $request['nid'];
+        $user->user_status = 0;
         $user->save();
-        $user->roles()->attach(Role::where('name','Customer')->first());
-        Auth::login($user);
-        return redirect('/dashboard');
+        // $user->roles()->attach(Role::where('name','Customer')->first());
+        // Auth::login($user);
+        return redirect('/signin');
     }
 }

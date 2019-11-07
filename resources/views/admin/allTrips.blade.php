@@ -20,7 +20,7 @@
             <thead>
             <tr>
                 <th>Company Name</th>
-                <th>Transport Type</th>
+                <th>Bus ID</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Start Point</th>
@@ -32,7 +32,7 @@
             @foreach ($trips as $value)
                 <tr>
                     <td>{{ $value->company_name }}</td>
-                    <td>{{ $value->transport_type }}</td>
+                    <td>{{ $value->bus_id }}</td>
                     <td>{{ $value->date }}</td>
                     <td>{{ $value->start_time }}</td>
                     <td>{{ $value->start_name }}</td>
@@ -44,7 +44,7 @@
             <tfoot>
             <tr>
                 <th>Company Name</th>
-                <th>Transport Type</th>
+                <th>Bus ID</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Start Point</th>

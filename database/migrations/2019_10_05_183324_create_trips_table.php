@@ -15,15 +15,22 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('company_id');
+            $table->unsignedBigInteger('company_id');
             $table->date('date');
             $table->string('start_time');
-            $table->integer('bus_id');
-            $table->integer('start_point');
-            $table->integer('end_point');
+            $table->unsignedBigInteger('bus_id');
+            $table->unsignedBigInteger('start_point');
+            $table->unsignedBigInteger('end_point');
             $table->integer('fare');
-            $table->integer('driver_id');
+            $table->unsignedBigInteger('driver_id');
             $table->timestamps();
+
+            //foreing keys
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('bus_id')->references('id')->on('company_transport')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('start_point')->references('id')->on('districts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('end_point')->references('id')->on('districts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('driver_id')->references('id')->on('company_user')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

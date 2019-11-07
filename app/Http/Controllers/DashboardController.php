@@ -5,27 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Role;
 use Auth;
 
 class DashboardController extends Controller
 {
+
     public function index()
     {
-        if (Auth::user()->roles[0]->name == 'Super Admin') {
-            return view('layouts.admin');
-        }elseif (Auth::user()->roles[0]::where('name','Customer')->first()) {
-            return redirect('/home');
-        }
+        return view('layouts.admin');
     }
 
-    public function home()
+    public function companyAdmin()
     {
-        if (Auth::user()->roles[0]->name == 'Super Admin') {
-            return redirect('/dashboard');
-        }elseif (Auth::user()->roles[0]::where('name','Customer')->first()) {
-            return view('welcome');
+        if (Auth::user()->companies[0]->pivot->status == 1) {
+            return view('company_admin.home');
+        }elseif (Auth::user()->companies[0]->pivot->status == 0) {
+            return redirect('/')->withInfoMessage('Your registration request is not accepted yet. Contact with System Admin.');
+        }elseif (Auth::user()->companies[0]->pivot->status == 2) {
+            return redirect('/')->withInfoMessage('Your registration request is Denied. Contact with System Admin.');
         }
-
     }
 
     public function allUser(){
@@ -37,10 +36,10 @@ class DashboardController extends Controller
     {
         if (Auth::user()->roles[0]->name == 'Super Admin') {
             return view('admin.adminProfile');
-        }elseif (Auth::user()->roles[0]->name == 'Admin') {
-            return view('company_admin.adminProfile');
         }elseif (Auth::user()->roles[0]->name == 'Customer') {
             return view('customer.customerProfile');
+        }elseif (Auth::user()->roles[0]->name == 'Admin') {
+            return view('company_admin.adminProfile');
         }
     }
 
@@ -80,6 +79,49 @@ class DashboardController extends Controller
         }else {
             return redirect()->back()->withErrorMessage('Current Password Not matched.');
         }
+    }
+
+
+    public function user_active(Request $request)
+    {
+        $user_id = $request['user_id'];
+        $user = User::find($user_id);
+        $user->user_status = 1;
+        $user->save();
+
+        $customerRole = Role::where('name','Customer')->first();
+        $user->roles()->attach($customerRole);
+
+        return redirect()->back()->withSuccessMessage('Successfully Activated');
+    }
+
+    public function user_pause(Request $request)
+    {
+        $user_id = $request['user_id'];
+        $user = User::find($user_id);
+        $user->user_status = 0;
+        $user->save();
+
+        $customerRole = Role::where('name','Customer')->first();
+        $user->roles()->detach($customerRole);
+
+        return redirect()->back()->withSuccessMessage('Successfully Paused');
+    }
+
+    public function user_deny(Request $request)
+    {
+        $user_id = $request['user_id'];
+        $user = User::find($user_id);
+        $user->user_status = 2;
+        $user->save();
+
+        if (count($user->roles)) {
+            $customerRole = Role::where('name','Customer')->first();
+            $user->roles()->detach($customerRole);
+        }
+
+
+        return redirect()->back()->withSuccessMessage('Successfully Denied');
     }
 
 }

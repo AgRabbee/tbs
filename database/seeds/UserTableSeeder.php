@@ -24,6 +24,7 @@ class UserTableSeeder extends Seeder
         $admin->password = bcrypt('123456');
         $admin->phone= '01799872659';
         $admin->nid = '123456789';
+        $admin->user_status = '1';
         $admin->save();
         $admin->roles()->attach($SuperAdminRole);
 
@@ -34,6 +35,7 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('123456');
         $user->phone= '01799872659';
         $user->nid = '123456789';
+        $user->user_status = '1';
         $user->save();
         $user->roles()->attach($customerRole);
 

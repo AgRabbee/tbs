@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Ticket Booking System | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,15 +28,23 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
+
+
+
       <form id="sign_in" method="POST" action="{{ url('signin') }}">
           {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="email" placeholder="Email" required autofocus>
+          <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" required autofocus>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+          @error('email')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="password" placeholder="Password" required>

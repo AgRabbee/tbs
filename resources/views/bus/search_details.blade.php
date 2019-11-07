@@ -16,6 +16,8 @@
                       </tr>
                   </thead>
                   <tbody>
+                      {{-- @foreach ($search_details as $value) --}}
+                      {{-- {{ $search_details = $request->session()->get('search_details')}} --}}
                       @foreach ($search_details as $value)
                       <tr>
                           <td>{{ $value->company_name }}</td>
