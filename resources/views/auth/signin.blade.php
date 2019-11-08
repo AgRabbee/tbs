@@ -28,7 +28,21 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
+      @if (count($errors) > 0)
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
 
+      @if (session()->has('message'))
+          <div class="alert alert-{{ session('type') }}">
+              {{ session('message') }}
+          </div>
+      @endif
 
 
       <form id="sign_in" method="POST" action="{{ url('signin') }}">

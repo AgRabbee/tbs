@@ -30,7 +30,8 @@ class AuthController extends Controller
                 return redirect('/company/dashboard');
             }
         }
-
+        session()->flash('type','danger');
+        session()->flash('message','Invalid email or password');
         return redirect()->back();
     }
 
@@ -65,6 +66,8 @@ class AuthController extends Controller
         $user->save();
         // $user->roles()->attach(Role::where('name','Customer')->first());
         // Auth::login($user);
+        session()->flash('type','success');
+        session()->flash('message','Registration Complete Successfully. Log In now.');
         return redirect('/signin');
     }
 }

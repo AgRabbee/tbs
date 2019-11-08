@@ -28,4 +28,5 @@ class Company extends Model
         return $driver_details;
     }
 
+
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Trip;
+use App\Models\CompanyTransport;
+use App\Models\Reservation;
 use Auth;
 
 class TripController extends Controller
@@ -69,6 +71,24 @@ class TripController extends Controller
         $trip->fare = $request['fare'];
         $trip->driver_id = $request['driver_id'];
         $trip->save();
+        $trip_id = $trip->id;
+        $company_transport = CompanyTransport::find($request['bus_id']);
+
+
+        for ($i='A'; $i <= 'J' ; $i++) {
+            for ($y=1; $y < 5; $y++) {
+                $seats[] = $i.$y;
+            }
+        }
+
+        for ($i=0; $i <= $company_transport->total_seats; $i++) {
+            $data2=array(
+                    'seat_number'=>$seats[$i],
+                    'seat_status'=>0,
+                    'trip_id'=>$trip_id
+                );
+        Reservation::insert($data2);
+        }
 
         return redirect()->back()->withSuccessMessage('Trip Added Successfully');
 

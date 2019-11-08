@@ -30,8 +30,9 @@ class Trip extends Model
             ->selectRaw('trips.*,trips.id as t_id,s.name as start_name, e.name as end_name,users.*')
             ->join('districts as s','s.id','=','trips.start_point')
             ->join('districts as e','e.id','=','trips.end_point')
-            ->join('users','users.id','=','trips.driver_id')
-            ->where('company_id','=',$company_id)
+            ->join('company_user','company_user.id','=','trips.driver_id')
+            ->join('users','users.id','=','company_user.user_id')
+            ->where('trips.company_id','=',$company_id)
             ->orderBy('trips.id','DESC');
         return  $trips->get();
     }
@@ -57,6 +58,7 @@ class Trip extends Model
     {
         $company_id= Auth::user()->companies[0]->id;
         $driver_details = DB::table('users')
+                            ->selectRaw('users.*,company_user.*,company_user.id as cm_id')
                             ->join('role_user','users.id','role_user.user_id')
                             ->join('company_user','users.id','company_user.user_id')
                             ->where('company_user.company_id',$company_id)

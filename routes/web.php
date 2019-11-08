@@ -10,6 +10,10 @@ Auth::routes();
 
     Route::get('/bus','PagesController@bus');
     Route::post('/bus/search','PagesController@search');
+
+    Route::get('/seat_allocations','PagesController@seat_allocations');
+
+
     Route::post('/bus/booking','PagesController@prebooking');
     Route::post('/charge','PagesController@completePayment');
 

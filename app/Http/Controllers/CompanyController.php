@@ -228,7 +228,7 @@ class CompanyController extends Controller
             'email' => 'required|string',
             'phone' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
-            'nid' => 'required|integer',
+            'nid' => 'required|integer|max:99999999999',
             'terms' => 'required',
         ]);
 
@@ -239,13 +239,13 @@ class CompanyController extends Controller
         $driver->phone = $request['phone'];
         $driver->password = bcrypt($request['password']);
         $driver->nid = $request['nid'];
+        $driver->user_status = 1;
         $driver->save();
         $driver->roles()->attach(Role::where('name','Driver')->first());
 
         $driver_id = $driver->id;
         $company_id = Auth::user()->companies[0]->id;
         $driver->companies()->attach($company_id,['status' => 1]);
-        // $driver->companies()->sync(['user_id' =>$driver_id],['company_id' =>$company_id],['status' => 1]);
 
         return redirect()->back()->withSuccessMessage('Driver profile added successfully');
     }

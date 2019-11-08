@@ -26,7 +26,7 @@ class CompanyTransportController extends Controller
 
         $companyTransport = new CompanyTransport;
         $companyTransport->company_id = Auth::user()->companies[0]->id;
-        $companyTransport->transport_id = $request['transport_type'];
+        $companyTransport->transport_type_id = $request['transport_type'];
         $companyTransport->total_seats = $request['total_seats'];
         $companyTransport->registration_no = $request['registration_no'];
         $companyTransport->save();

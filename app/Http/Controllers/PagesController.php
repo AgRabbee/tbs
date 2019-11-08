@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trip;
+use App\Models\Reservation;
 
 use Stripe\Error\Card;
 use Stripe;
@@ -49,23 +50,6 @@ class PagesController extends Controller
             'date_of_journey' => 'required',
         ]);
 
-        // $request->session()->put('session_data',$request->all());
-        // //$sessionData = $request->session()->get('session_data');
-        // // foreach ($sessionData as $value) {
-        // //     print_r($value['from']);
-        // // }
-        // $data = $request->session()->all();
-        // foreach ($data as $value) {
-        //     foreach ($value as $key) {
-        //         echo $key->session_data['to'];
-        //     }
-        //
-        // }
-
-        // $from = $request->session()->put('from', $request['from']);
-        // $to = $request->session()->put('to', $request['to']);
-        // $date = $request->session()->put('date', $request['date']);
-
         $from = $request['from'];
         $to = $request['to'];
         $date = $request['date_of_journey'];
@@ -82,6 +66,17 @@ class PagesController extends Controller
         }
     }
 
+
+    public function seat_allocations(Request $request)
+    {
+        $trip_id = $request['trip_id'];
+
+        // $seats = new Reservation();
+        $seats = Reservation::where('trip_id',$trip_id)->get();
+        // $details = $seats->allocations($trip_id);
+
+        return response()->json(['success'=> $seats]);
+    }
 
     public function prebooking(Request $request)
     {

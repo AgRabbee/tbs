@@ -24,7 +24,7 @@
               <th>Bus Type</th>
               <th>registration no</th>
               <th>Total Seats</th>
-              <th>Trip ID</th>
+              {{-- <th>Trip ID</th> --}}
           </tr>
           </thead>
           <tbody>
@@ -40,7 +40,7 @@
                       </td>
                       <td>{{ $value->registration_no }}</td>
                       <td>{{ $value->total_seats }}</td>
-                      <td>
+                      {{-- <td>
                           <a href="#" data-toggle="modal" data-target="#modal-Details{{ $value->id }}">{{ $value->trip_id }}</a>
 
 
@@ -89,7 +89,7 @@
 <!--modal-->
 
 
-                      </td>
+                      </td> --}}
                   </tr>
               @endforeach
           </tbody>
@@ -99,7 +99,7 @@
               <th>Bus Type</th>
               <th>registration no</th>
               <th>Total Seats</th>
-              <th>Trip ID</th>
+              {{-- <th>Trip ID</th> --}}
           </tr>
           </tfoot>
         </table>
