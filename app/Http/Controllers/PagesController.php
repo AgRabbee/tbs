@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Trip;
 use App\Models\Reservation;
 
+use App\User;
+use App\Models\Role;
+use App\Models\PaymentDetail;
+
 use Stripe\Error\Card;
 use Stripe;
 
@@ -23,17 +27,81 @@ class PagesController extends Controller
 
     public function completePayment(Request $request)
     {
-        dd($request->all());
-       //  Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-       //  Stripe\Charge::create ([
-       //         "amount" => ($request['totalAmount']+$request['fee']) * 100,
-       //         "currency" => "usd",
-       //         "source" => $request->stripeToken,
-       //         "description" => "Payment from Ticket Booking System."
-       // ]);
+        // validation
+        $this->validate($request,[
+            'f_name' => 'required|string',
+            'l_name' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+
+        // create new user area
+
+        $createUser = new User();
+        $createUser->first_name = $request['f_name'];
+        $createUser->last_name = $request['l_name'];
+        $createUser->phone = $request['phone'];
+    if ($request['email'] != '') {
+        $createUser->email = $request['email'];
+    }
+        $createUser->user_status = 0;
+        $createUser->save();
+        $newUserID = $createUser->id;
+
+        //payment details area
+
+         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+         Stripe\Charge::create ([
+                "amount" => ($request['totalAmount']+$request['fee']) * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Payment from Ticket Booking System."
+        ]);
+
+        $stripe_token = $request['stripeToken'];
+        $address = $request['address'];
+
+        if ($stripe_token != '') {
+            $stripePayment = new PaymentDetail();
+            $stripePayment->user_id = $newUserID;
+            $stripePayment->payment_status = 1;
+            $stripePayment->payment_type = 0;
+            $stripePayment->stripe_token = $stripe_token;
+            $stripePayment->save();
+            $newPaymentID = $stripePayment->id;
+        }else {
+            $caseOnDelivery = new PaymentDetail();
+            $caseOnDelivery->user_id = $newUserID;
+            $caseOnDelivery->payment_status = 0;
+            $caseOnDelivery->payment_type = 1;
+            $caseOnDelivery->user_address = $address;
+            $caseOnDelivery->save();
+            $newPaymentID = $caseOnDelivery->id;
+        }
+
+        //reservation area -- seat details update
+        if ($stripe_token != '') {
+            foreach ($request->seats as $seat) {
+                $seatNo = rtrim($seat, ',');
+                $updateReservation = Reservation::where('seat_number',$seatNo)->first();
+                $updateReservation->payment_id = $newPaymentID;
+                $updateReservation->seat_status = 2;
+                $updateReservation->save();
+            }
+        }else {
+            foreach ($request->seats as $seat) {
+                $seatNo = rtrim($seat, ',');
+                $updateReservation = Reservation::where('seat_number',$seatNo)->first();
+                $updateReservation->payment_id = $newPaymentID;
+                $updateReservation->seat_status = 1;
+                $updateReservation->save();
+            }
+        }
+
+
+
        //
        //
-       // return redirect('/')->withSuccessMessage('Payment Successful');
+       return redirect('/')->withSuccessMessage('Payment Successful');
     }
 
     public function bus()

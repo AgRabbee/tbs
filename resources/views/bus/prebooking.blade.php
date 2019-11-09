@@ -15,7 +15,7 @@
                               @csrf
                               <div class="form-group">
                                   <label for="f_name">First Name <span class="text-danger">*</span></label>
-                                  <input type="text" name="f_name" id="f_name" class="form-control @error('f_name') is-invalid @enderror" value="{{ old('f_name') }}">
+                                  <input type="text" name="f_name" id="f_name" class="form-control @error('f_name') is-invalid @enderror" required value="{{ old('f_name') }}">
                                   @error('f_name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -24,7 +24,7 @@
                               </div>
                               <div class="form-group">
                                   <label for="l_name">last Name <span class="text-danger">*</span></label>
-                                  <input type="text" name="l_name" id="l_name" class="form-control @error('l_name') is-invalid @enderror" value="{{ old('l_name') }}">
+                                  <input type="text" name="l_name" id="l_name" class="form-control @error('l_name') is-invalid @enderror" required value="{{ old('l_name') }}">
                                   @error('l_name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -33,17 +33,23 @@
                               </div>
                               <div class="form-group">
                                   <label for="phone">Phone <span class="text-danger">*</span></label>
-                                  <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}">
+                                  <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" required value="{{ old('phone') }}">
                                   @error('phone')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
                                   @enderror
                               </div>
-
-                              <div class="text-center py-2">
-                                  <a href="{{ url('/member') }}">Already a member of this system?? Log IN</a>
+                              <div class="form-group">
+                                  <label for="email">Email <span class="text-muted">(optional)</span></label>
+                                  <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                                  @error('email')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
                               </div>
+
                               <div class="text-center border rounded py-3">
                                   <h5>Total amount to pay: {{ ($total+21).'/-' }}</h5>
                               </div>
@@ -72,7 +78,7 @@
                                             <div id="card-errors" role="alert"></div>
                                           </div>
 
-                                          <button>Submit Payment</button>
+                                          <button class="btn btn-success btn-sm">Submit Payment</button>
 
                                     </div>
                                     <div class="tab-pane fade pt-3" id="custom-content-below-cash-on-delivery" role="tabpanel" aria-labelledby="custom-content-below-cash-on-delivery-tab">

@@ -78,15 +78,15 @@
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="input-group col-md-4">
-                                                        <input type="checkbox" name="" value="" disabled id="seatsInfo">
+                                                        <input type="checkbox" name="" value=""  id="seatsInfo">
                                                         <label for="">Available</label>
                                                     </div>
                                                     <div class="input-group col-md-4">
-                                                        <input type="checkbox" name="" value="" id="seatsInfo" disabled checked>
+                                                        <input type="checkbox" name="" value="" id="seatsInfo" checked >
                                                         <label for="">Selected</label>
                                                     </div>
                                                     <div class="input-group col-md-4">
-                                                        <input type="checkbox" name="" value="" id="seatsInfo" disabled>
+                                                        <input type="checkbox" name="" value="" id="seatsInfo" checked disabled>
                                                         <label for="">Booked</label>
                                                     </div>
                                                 </div>
@@ -188,41 +188,85 @@
         // });
 
 
+$(document).ready(function(){
+
 
 
 // ====================================================================
     //seats manage
 // ====================================================================
 
-$('#trip{{ $value->t_id }}').click(function(){
-    // alert({{ $value->t_id }});
-    var trip_id = {{ $value->t_id }};
+    $('#trip{{ $value->t_id }}').click(function(){
 
+        var trip_id = {{ $value->t_id }};
+        var returnedData;
 
-    $.ajax({
-       type:'GET',
-       url:'/seat_allocations',
-       // dataType: 'json',
-       data:{trip_id:trip_id},
-       success:function(data){
+        $.ajax({
+           type:'GET',
+           url:'/seat_allocations',
+           // dataType: 'json',
+           data:{trip_id:trip_id},
+           success:function(data){
 
-          var returnedData = data.success;
+              returnedData = data.success;
+              doSomething(returnedData);
+              // var output='';
+              // // alert(returnedData.length);
+              //
+              //
+              // for (var i = 0; i < returnedData.length; i++) {
+              //   // output +='<input type="checkbox" data-toggle="tooltip" name='+ returnedData[i].seat_number +' data-placement="bottom" data-original-title='+ returnedData[i].seat_number +' value='+ returnedData[i].seat_number +'  id='+ returnedData[i].seat_number + ' class="checkbox" />';
+              //   if (returnedData[i].seat_status == 2) {
+              //       output +="<input type='checkbox' disabled checked data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ returnedData[i].seat_number +" value= "+ returnedData[i].seat_number +" class='checkbox' />";
+              //   }else{
+              //   output +="<input type='checkbox' data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ returnedData[i].seat_number + " value= " + returnedData[i].seat_number +" class='checkbox' />";
+              //   }
+              //  }
+              //  output += '';
+              //
+              //   $('#seats').html(output).trigger('change');
+           }
+       });
 
-          var output='';
+       function doSomething(param) {
+           var output='';
           // alert(returnedData.length);
-
-
-          for (var i = 0; i < returnedData.length; i++) {
+          for (var i = 0; i < param.length; i++) {
             // output +='<input type="checkbox" data-toggle="tooltip" name='+ returnedData[i].seat_number +' data-placement="bottom" data-original-title='+ returnedData[i].seat_number +' value='+ returnedData[i].seat_number +'  id='+ returnedData[i].seat_number + ' class="checkbox" />';
-            if (returnedData[i].seat_status == 2) {
-                output +="<input type='checkbox' disabled data-toggle='tooltip' name="+ returnedData[i].seat_number +" data-placement='bottom' data-original-title="+ returnedData[i].seat_number +" value="+ returnedData[i].seat_number +"  id="+ returnedData[i].seat_number + " class='checkbox' />";
+            if (param[i].seat_status == 2) {
+                output +="<input type='checkbox' disabled checked data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ param[i].seat_number +" value= "+ param[i].seat_number +" class='checkbox' />";
+            }else{
+            output +="<input type='checkbox' data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ param[i].seat_number + " value= " + param[i].seat_number +" class='checkbox' />";
             }
-            output +="<input type='checkbox' data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ returnedData[i].seat_number +" value="+ returnedData[i].seat_number +"  id="+ returnedData[i].seat_number + " class='checkbox' />";
            }
            output += '';
 
             $('#seats').html(output);
-       }
+
+            $(function () {
+                   $("input[data-toggle='tooltip']").tooltip();
+               });
+
+               $('#seats input.checkbox').click( function() {
+                       var count=0;
+                       //alert('hi');
+                        if($(this).is(":checked")){
+                            var value = $(this).val();
+                           $("#seatsTable").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");
+                           count = $( "#seatsTable tr" ).length;
+                       }else if($(this).is(":not(:checked)")){
+                           var value = $(this).val();
+                           $("td").filter(function() {
+                               return $(this).text() == value;
+                           }).closest("tr").remove();
+                           count = $( "#seatsTable tr" ).length ;
+                       }
+                       var totalCost = {{ $value->fare }}*count;
+                       $('#totalCost').text(totalCost);
+                       $('#total').val(totalCost);
+                   });
+        }
+
     });
 
 });
@@ -230,38 +274,37 @@ $('#trip{{ $value->t_id }}').click(function(){
 
 
 
-
-
-
-
-
-$(function () {
-    $("input[data-toggle='tooltip']").tooltip();
-});
-
-
-// ====================================================================
-    //seats selections
-// ====================================================================
-        $('input#returnedData[i].seat_number.checkbox').on( "click", function() {
-            var count;
-            alert('hi');
-             if($(this).is(":checked")){
-                 var value = $(this).val();
-                $("#seatsTable").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");
-                count = $( "#seatsTable tr" ).length;
-            }
-            else if($(this).is(":not(:checked)")){
-                var value = $(this).val();
-                $("td").filter(function() {
-                    return $(this).text() == value;
-                }).closest("tr").remove();
-                count = $( "#seatsTable tr" ).length ;
-            }
-            var totalCost = {{ $value->fare }}*count;
-            $('#totalCost').text(totalCost);
-            $('#total').val(totalCost);
-        });
-
+// $(document).on('change',function(){
+//
+//
+//     $(function () {
+//         $("input[data-toggle='tooltip']").tooltip();
+//     });
+//
+//
+// // ====================================================================
+//     //seats selections
+// // ====================================================================
+//     $('#seats input.checkbox').click( function() {
+//         var count=0;
+//         //alert('hi');
+//          if($(this).is(":checked")){
+//              var value = $(this).val();
+//             $("#seatsTable").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");
+//             count = $( "#seatsTable tr" ).length;
+//         }else if($(this).is(":not(:checked)")){
+//             var value = $(this).val();
+//             $("td").filter(function() {
+//                 return $(this).text() == value;
+//             }).closest("tr").remove();
+//             count = $( "#seatsTable tr" ).length ;
+//         }
+//         var totalCost = {{ $value->fare }}*count;
+//         $('#totalCost').text(totalCost);
+//         $('#total').val(totalCost);
+//     });
+//
+//
+// });
     </script>
 @endsection
