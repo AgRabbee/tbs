@@ -64,15 +64,7 @@
                                                     <div class="row">
                                                         <i class="far fa-user ml-auto" data-toggle='tooltip' data-placement='bottom' data-original-title="Driver" ></i>
                                                     </div>
-                                                    {{-- @for ($i='A'; $i < 'J'; $i++) --}}
-                                                          {{-- <div class="row" id="seats"> --}}
-                                                        {{-- @for ($y=1; $y < 5; $y++) --}}
-                                                            {{-- <input type='checkbox' data-toggle='tooltip' name="seats[]" data-placement='bottom' data-original-title="{{$i.$y}}" value="{{$i.$y}}"  id="{{$i.$y}}" class='checkbox'/> --}}
-                                                        {{-- @endfor --}}
-                                                          {{-- </div> --}}
-                                                    {{-- @endfor --}}
                                                     <div class="row" id="seats"> </div>
-
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -99,8 +91,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="seatsTable">
-                                                            {{-- <tr><td id="seatNumber"></td></tr>
-                                                            <tr><td>{{ $value->fare }}</td></tr> --}}
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -112,7 +103,7 @@
                                                 <div class="row">
                                                     <label for="">Choose your boarding point <span class="text-danger">*</span></label>
                                                     <select class="form-control" name="boarding_point">
-                                                        <option value="">--select one--</option>
+                                                        {{-- <option value="">--select one--</option> --}}
                                                         <option value="">{{ $value->company_name.' bus counter, '.$value->start_name }}</option>
                                                     </select>
                                                 </div>

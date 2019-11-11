@@ -43,6 +43,16 @@ class Trip extends Model
         return $locations->get();
     }
 
+    public function allRoutes()
+    {
+        $allRoutes = DB::table('trips')
+                    ->selectRaw('s.name as start_name, e.name as end_name, trips.*')
+                    ->join('districts as s','s.id','=','trips.start_point')
+                    ->join('districts as e','e.id','=','trips.end_point')
+                    ->get();
+        return $allRoutes;
+    }
+
     public function allBuses()
     {
         $buses = DB::table('company_transport as ct')

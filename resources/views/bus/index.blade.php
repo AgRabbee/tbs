@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group ">
-                            <label for="date2">Date of Return</label>
+                            <label for="date2">Date of Return</label> <span class="text-muted">(optional)</span>
                                 <input type="text" name="date_of_return" class="form-control" id="date2">
                             </div>
                         </div>
@@ -73,15 +73,33 @@
 
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 px-5">
                 <img src="http://demo.truebus.co.in/assets/images/bus.png">
             </div>
         </div>
     </div>
 
-
-
 <!--SEARCH-BAR-END-->
+
+<!--ALL AVAILABLE ROUTES-->
+    <div class="container">
+        <div class="row border border-secondary rounded pt-2">
+            <div class="col-12">
+                <div class="text-center">
+                    <h4>All Available Routes</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row py-3">
+            <ul>
+                @foreach ($allRoutes as $value)
+                    <li>{{ $value->start_name . ' - ' . $value->end_name}}</li>
+                @endforeach
+
+            </ul>
+        </div>
+    </div>
+<!--ALL AVAILABLE ROUTES ENDS-->
 
 @endsection
 @section('public_scripts')

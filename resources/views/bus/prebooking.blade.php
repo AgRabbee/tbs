@@ -59,9 +59,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="custom-content-below-stripe-tab" data-toggle="pill" href="#custom-content-below-stripe" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Stripe</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-cash-on-delivery" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Cash on delivery</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                                 <div class="tab-content" id="custom-content-below-tabContent">
                                     <div class="tab-pane fade show active pt-3" id="custom-content-below-stripe" role="tabpanel" aria-labelledby="custom-content-below-stripe-tab">
@@ -81,7 +81,7 @@
                                           <button class="btn btn-success btn-sm">Submit Payment</button>
 
                                     </div>
-                                    <div class="tab-pane fade pt-3" id="custom-content-below-cash-on-delivery" role="tabpanel" aria-labelledby="custom-content-below-cash-on-delivery-tab">
+                                    {{-- <div class="tab-pane fade pt-3" id="custom-content-below-cash-on-delivery" role="tabpanel" aria-labelledby="custom-content-below-cash-on-delivery-tab">
                                         <div class="form-group">
                                             <label for="">Your Address</label>
                                             <textarea name="address" class="form-control" rows="3" cols="80"></textarea>
@@ -89,7 +89,7 @@
                                         <div class="text-center">
                                             <input type="submit" class="btn btn-success btn-sm" name="" value="Confirm Reservation">
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                       </div>

@@ -2,13 +2,13 @@
 
 Auth::routes();
 
-    Route::get('/', 'PagesController@index');
+    Route::get('/', 'PagesController@bus');
     Route::get('/signin','Auth\AuthController@getSignin');
     Route::post('/signin','Auth\AuthController@Signin');
     Route::get('/signup','Auth\AuthController@getSignup');
     Route::post('/signup','Auth\AuthController@Signup');
 
-    Route::get('/bus','PagesController@bus');
+    // Route::get('/bus','PagesController@bus');
     Route::post('/bus/search','PagesController@search');
 
     Route::get('/seat_allocations','PagesController@seat_allocations');
@@ -16,6 +16,8 @@ Auth::routes();
 
     Route::post('/bus/booking','PagesController@prebooking');
     Route::post('/charge','PagesController@completePayment');
+    Route::get('/print','PagesController@print');
+    Route::get('/print_invoice','PagesController@print_invoice');
 
 
     //Super Admin

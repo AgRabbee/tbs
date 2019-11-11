@@ -9,6 +9,9 @@ use App\Models\Reservation;
 use App\User;
 use App\Models\Role;
 use App\Models\PaymentDetail;
+use App\Models\District;
+
+use App\Mail\BookingMail;
 
 use Stripe\Error\Card;
 use Stripe;
@@ -46,6 +49,7 @@ class PagesController extends Controller
         $createUser->user_status = 0;
         $createUser->save();
         $newUserID = $createUser->id;
+        // $newUserName = $createUser->first_name . ' ' . $createUser->last_name;
 
         //payment details area
 
@@ -97,17 +101,27 @@ class PagesController extends Controller
             }
         }
 
+        // for printing ticket new payment id saved into the session
+        $request->session()->put('newPaymentID', $newPaymentID);
+
+        // sending an email with all the request data
+        $details = new Reservation();
+        $data = $details->dataForPrint($newPaymentID);
+        \Mail::to($request['email'])->send(new BookingMail($data));
 
 
-       //
-       //
-       return redirect('/')->withSuccessMessage('Payment Successful');
+       return redirect('/print')->withSuccessMessage('Payment Successful');
     }
 
     public function bus()
     {
         $trips_info = new Trip();
-        return view('bus.index')->with('tripsInfo',$trips_info->allLocations());
+
+        $data = array(
+            'tripsInfo' => $trips_info->allLocations(),
+            'allRoutes' => $trips_info->allRoutes()
+         );
+        return view('bus.index')->with($data);
     }
 
     public function search(Request $request)
@@ -166,4 +180,23 @@ class PagesController extends Controller
         );
         return view('bus.prebooking')->with($data);
     }
+
+
+    public function print(Request $request)
+    {
+        $value = $request->session()->get('newPaymentID');
+
+        $data = new Reservation();
+
+        return view('bus.print')->with('printDetails',$data->dataForPrint($value));
+    }
+
+    public function print_invoice(Request $request)
+    {
+        $value = $request->session()->get('newPaymentID');
+
+        $data = new Reservation();
+        return view('bus.print_invoice')->with('printDetails',$data->dataForPrint($value));
+    }
+
 }
