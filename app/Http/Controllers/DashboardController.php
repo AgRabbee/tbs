@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Role;
+use App\Models\Company;
 use Auth;
 
 class DashboardController extends Controller
@@ -19,7 +20,15 @@ class DashboardController extends Controller
     public function companyAdmin()
     {
         if (Auth::user()->companies[0]->pivot->status == 1) {
-            return view('company_admin.home');
+            $dashDetails = new Company();
+            $data = array(
+                'userCount' => $dashDetails->userCount(),
+                'transportCount' => $dashDetails->transportCount(),
+                'tripsCount' => $dashDetails->tripsCount(),
+                'reservationsCount' => $dashDetails->reservationsCount(),
+            );
+            return view('company_admin.home')->with($data);
+
         }elseif (Auth::user()->companies[0]->pivot->status == 0) {
             return redirect('/')->withInfoMessage('Your registration request is not accepted yet. Contact with System Admin.');
         }elseif (Auth::user()->companies[0]->pivot->status == 2) {

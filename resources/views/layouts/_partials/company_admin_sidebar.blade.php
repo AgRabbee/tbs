@@ -26,6 +26,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
+           <li class="nav-item">
+               <a href="{{ url('company/dashboard') }}" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                 <p>Dashboard</p>
+               </a>
+           </li>
+
+
            <li class="nav-header">Routes</li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -72,12 +80,6 @@
                             <p>Buses</p>
                           </a>
                       </li>
-                      <li class="nav-item ml-3">
-                          <a href="#" class="nav-link">
-                            <i class="fas fa-ship nav-icon"></i>
-                            <p>Launch</p>
-                          </a>
-                      </li>
                   </ul></li>
                 <li class="nav-item ml-3">
                     <a href="{{ url('/company/add/transport') }}" class="nav-link">
@@ -110,6 +112,33 @@
                  </a>
                  </li>
              </ul></li>
+
+            <li class="nav-header">Sales</li>
+            <li class="nav-item has-treeview">
+             <a href="#" class="nav-link">
+               <i class="nav-icon fas fa-shopping-cart"></i>
+               <p>
+                 Sales
+                 <i class="right fas fa-angle-left"></i>
+               </p>
+             </a>
+             <ul class="nav nav-treeview">
+                 <li class="nav-item ml-3">
+                   <a href="{{ url('/company/dashboard/all/sales') }}" class="nav-link">
+                     <i class="far fa-circle nav-icon"></i>
+                     <p>All Sales</p>
+                   </a>
+                 </li>
+             </ul></li>
+
+            <li class="nav-header">Reports</li>
+            <li class="nav-item has-treeview">
+             <a href="{{ url('/company/dashboard/sales/reports') }}" class="nav-link">
+             <i class="nav-icon fas fa-chart-pie"></i>
+               <p>
+                 Sales Reports
+               </p>
+             </a></li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

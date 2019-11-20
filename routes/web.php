@@ -84,6 +84,10 @@ Route::group(['middleware'=>['auth','admin']],function(){
     Route::post('/company/admin/profile','DashboardController@updateProfile');
     Route::post('/company/admin/profile/changePassword','DashboardController@passwordChange');
 
+    Route::get('/company/dashboard/all/sales','CompanyController@allSales');
+
+    Route::get('/company/dashboard/sales/reports','CompanyController@salesReports');
+
 
 });
 

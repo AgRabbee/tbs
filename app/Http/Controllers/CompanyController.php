@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Models\Role;
 use App\Models\Company;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -248,6 +249,28 @@ class CompanyController extends Controller
         $driver->companies()->attach($company_id,['status' => 1]);
 
         return redirect()->back()->withSuccessMessage('Driver profile added successfully');
+    }
+
+
+
+    public function allSales()
+    {
+        $company_id = Auth::user()->companies[0]->id;
+        $salesDetails = new Reservation();
+        return view('company_admin.all_sales')->with('salesDetails',$salesDetails->allSales($company_id));
+    }
+
+    public function salesReports()
+    {
+        $reportData = DB::table('reservations')
+                ->selectRaw('count(id) total, MONTHNAME(updated_at) month')
+                ->where('seat_status','2')
+                ->groupBy('month')
+                ->orderBy('month','desc')
+                ->get();
+
+            // dd($reportData[0]->total);
+        return view('company_admin.sales_report')->with('reportData',$reportData);
     }
 
 }
