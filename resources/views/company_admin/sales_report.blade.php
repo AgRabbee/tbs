@@ -87,11 +87,10 @@ chat area
         console.log(n);
 
 
-// console output dekhan save
         var barChartData = {
 
-              // labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-              labels  : [m],
+              labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+              // labels  : [m],
               datasets: [
                 {
                   label               : 'Digital Goods',
@@ -102,8 +101,8 @@ chat area
                   pointStrokeColor    : 'rgba(60,141,188,1)',
                   pointHighlightFill  : '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  // data                : [28, 48, 40, 19, 86, 27, 90]
-                  data                : [n]
+                  data                : [28, 48, 40, 19, 86, 27, 90]
+                  // data                : [n]
                 }
               ]
             }
