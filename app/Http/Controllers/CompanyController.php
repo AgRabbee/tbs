@@ -6,6 +6,7 @@ use App\User;
 use App\Models\Role;
 use App\Models\Company;
 use App\Models\Reservation;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -262,6 +263,29 @@ class CompanyController extends Controller
 
     public function salesReports()
     {
+        $company_id = Auth::user()->companies[0]->id;
+
+        $reportData = DB::table('reservations')
+                ->selectRaw('count(reservations.id) total, MONTHNAME(reservations.updated_at) month')
+                ->join('trips','reservations.trip_id','trips.id')
+                ->where('reservations.seat_status','2')
+                ->where('company_id',$company_id)
+                ->groupBy('month')
+                ->orderBy('month','desc')
+                ->get();
+
+        $trips = new Trip();
+        $allTrips = $trips->allTrips($company_id);
+        $data = array(
+            'reportData' => $reportData,
+            'allTrips' => $allTrips
+        );
+        // return view('company_admin.sales_report')->with('reportData',$reportData);
+        return view('company_admin.sales_report')->with($data);
+    }
+
+    public function allSalesReports()
+    {
         $reportData = DB::table('reservations')
                 ->selectRaw('count(id) total, MONTHNAME(updated_at) month')
                 ->where('seat_status','2')
@@ -269,8 +293,6 @@ class CompanyController extends Controller
                 ->orderBy('month','desc')
                 ->get();
 
-            // dd($reportData[0]->total);
-        return view('company_admin.sales_report')->with('reportData',$reportData);
+        return view('admin.admin_report')->with('reportData',$reportData);
     }
-
 }

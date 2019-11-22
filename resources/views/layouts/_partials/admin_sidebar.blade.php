@@ -102,6 +102,15 @@
                  </a>
                </li>
              </ul></li>
+
+             <li class="nav-header">Reports</li>
+             <li class="nav-item has-treeview">
+              <a href="{{ url('/dashboard/sales/reports') }}" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Sales Reports
+                </p>
+              </a></li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

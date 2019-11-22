@@ -53,6 +53,8 @@ Route::group(['middleware'=>['auth','superAdmin']],function(){
     Route::post('/dashboard/edit/{id}/transport','TransportController@update');
     Route::post('/dashboard/delete/{id}/transport','TransportController@destroy');
 
+    Route::get('/dashboard/sales/reports','CompanyController@allSalesReports');
+
 
 });
 
