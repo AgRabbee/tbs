@@ -52,7 +52,7 @@
                                 <a href="{{ url('/dashboard') }}" class="dropdown-item">
                                     <i class="fas fa-address-card mr-2"></i> Dashboard
                                 </a>
-                            @elseif (Auth::user()->roles[1]->name == 'Admin')
+                            @elseif (Auth::user()->companies->count() && Auth::user()->companies[0]->company_status == 1)
                                 <a href="{{ url('/company/dashboard') }}" class="dropdown-item">
                                     <i class="fas fa-address-card mr-2"></i> Dashboard
                                 </a>

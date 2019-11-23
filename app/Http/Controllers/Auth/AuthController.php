@@ -24,10 +24,10 @@ class AuthController extends Controller
 
             if (Auth::user()->roles[0]->name == 'Super Admin') {
                 return redirect('/dashboard');
-            }elseif (Auth::user()->roles[0]->name == 'Customer') {
-                return redirect('/');
             }elseif (Auth::user()->roles[1]->name == 'Admin') {
                 return redirect('/company/dashboard');
+            }elseif (Auth::user()->roles[0]->name == 'Customer') {
+                return redirect('/');
             }
         }
         session()->flash('type','danger');
