@@ -1,6 +1,8 @@
 @extends('layouts.public')
 @section('content')
 
+
+
 <!--SEARCH-BAR-->
     <div class="container">
         <div class="row my-5">

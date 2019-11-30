@@ -49,6 +49,7 @@ class Trip extends Model
                     ->selectRaw('s.name as start_name, e.name as end_name, trips.*')
                     ->join('districts as s','s.id','=','trips.start_point')
                     ->join('districts as e','e.id','=','trips.end_point')
+                    ->where('date','>',date("Y-m-d"))
                     ->get();
         return $allRoutes;
     }

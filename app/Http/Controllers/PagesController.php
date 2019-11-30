@@ -107,7 +107,10 @@ class PagesController extends Controller
         // sending an email with all the request data
         $details = new Reservation();
         $data = $details->dataForPrint($newPaymentID);
-        \Mail::to($request['email'])->send(new BookingMail($data));
+        if ($request['email'] != '') {
+            \Mail::to($request['email'])->send(new BookingMail($data));
+        }
+
 
 
        return redirect('/print')->withSuccessMessage('Payment Successful');
@@ -169,16 +172,22 @@ class PagesController extends Controller
         // $seats = $request['seats'];
         // $total = $request['total'];
 
+        if ($request['seats']!='') {
+            $trip = new Trip();
+            $data = array(
+                'seats' => $request['seats'],
+                'total' => $request['total'],
+                'boarding_point' => $request['boarding_point'],
+                'tripDetails' => $trip->tripDetails($request['trip_id']),
 
-        $trip = new Trip();
-        $data = array(
-            'seats' => $request['seats'],
-            'total' => $request['total'],
-            'boarding_point' => $request['boarding_point'],
-            'tripDetails' => $trip->tripDetails($request['trip_id']),
+            );
+            return view('bus.prebooking')->with($data);
+        }else {
+            session()->flash('type','danger');
+            session()->flash('message','You did not select any seats. Try again');
+            return redirect('/');
+        }
 
-        );
-        return view('bus.prebooking')->with($data);
     }
 
 

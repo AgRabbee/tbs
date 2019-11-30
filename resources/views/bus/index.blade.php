@@ -1,6 +1,23 @@
 @extends('layouts.public')
 @section('content')
 
+    {{-- @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
+
+    @if (session()->has('message'))
+        <div class="alert alert-{{ session('type') }}">
+            {{ session('message') }}
+        </div>
+    @endif
+
+
 <!--SEARCH-BAR-->
     <div class="container">
         <div class="row my-5">
@@ -46,7 +63,7 @@
                         <div class="col-md-6">
                             <div class="form-group ">
                             <label for="date1" >Date of Journey</label> <span class="text-danger">*</span>
-                                <input type="text" name="date_of_journey" class="form-control @error('date_of_journey') is-invalid @enderror" id="date1" placeholder="Select Date of journey..">
+                                <input type="text" name="date_of_journey" class="form-control @error('date_of_journey') is-invalid @enderror" id="date1" readonly placeholder="Select Date of journey..">
                                 @error('date_of_journey')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -57,7 +74,7 @@
                         <div class="col-md-6">
                             <div class="form-group ">
                             <label for="date2">Date of Return</label> <span class="text-muted">(optional)</span>
-                                <input type="text" name="date_of_return" class="form-control" id="date2">
+                                <input type="text" name="date_of_return" class="form-control" readonly id="date2">
                             </div>
                         </div>
                     </div>
@@ -91,16 +108,45 @@
             </div>
         </div>
         <div class="row py-3">
-            <ul>
-                @foreach ($allRoutes as $value)
-                    <li>{{ $value->start_name . ' - ' . $value->end_name}}</li>
-                @endforeach
+            @if (count($allRoutes)>0)
+                <ul>
+                    @foreach ($allRoutes as $value)
+                        <li>{{ $value->start_name . ' - ' . $value->end_name}}</li>
+                    @endforeach
 
-            </ul>
+                </ul>
+            @else
+                {{-- <p class=""></p> --}}
+                <p class="blink"><span>No available trips found!!</span></p>
+            @endif
+
         </div>
     </div>
 <!--ALL AVAILABLE ROUTES ENDS-->
+@endsection
 
+
+@section('public_css')
+    <style media="screen">
+
+    .blink{
+    		width:200px;
+    		height: 50px;
+    		text-align: center;
+    	}
+    .blink span{
+    		font-size: 18px;
+    		font-family: cursive;
+    		color: #333;
+    		animation: blink 1s linear infinite;
+    	}
+    @keyframes blink{
+    0%{opacity: 0;}
+    50%{opacity: .5;}
+    100%{opacity: 1;}
+    }
+
+</style>
 @endsection
 @section('public_scripts')
     <script type="text/javascript">
