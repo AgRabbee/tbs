@@ -82,7 +82,7 @@ class TripController extends Controller
             }
         }
 
-        for ($i=0; $i <= $company_transport->total_seats; $i++) {
+        for ($i=0; $i < $company_transport->total_seats; $i++) {
             $data2=array(
                     'seat_number'=>$seats[$i],
                     'seat_status'=>0,
