@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="col-md-12">
+<div class="col-md-12 col-xs-12">
 
     <!-- PIE CHART -->
            <div class="card card-success">
@@ -23,7 +23,7 @@
                </div>
              </div>
              <div class="card-body">
-               <div id="piechart" style="width: 900px; height: 500px;"></div>
+               <div id="piechart"></div>
              </div>
              <!-- /.card-body -->
            </div>
@@ -35,18 +35,17 @@
 
 
 @section('admin_css')
-/*
-chat area
+<style media="screen">
 
-
-
-
-*/
+        #piechart {
+        width: 100%;
+        min-height: 450px;
+        }
+</style>
 @endsection
 
 
 @section('admin_scripts')
-
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 @php

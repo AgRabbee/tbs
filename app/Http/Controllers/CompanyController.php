@@ -130,6 +130,8 @@ class CompanyController extends Controller
         $c_admins = DB::table('company_user')
                     ->join('users','users.id','=','company_user.user_id')
                     ->join('companies','companies.id','=','company_user.company_id')
+                    ->join('role_user','users.id','role_user.user_id')
+                    ->where('role_user.role_id', '2')
                     ->get();
 
         return view('admin.company_admin')->with('admin_details', $c_admins);
@@ -227,7 +229,7 @@ class CompanyController extends Controller
         $this->validate($request,[
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'email' => 'required|string',
+            // 'email' => 'required|string',
             'phone' => 'required|string',
             'password' => 'required|string|min:6|confirmed',
             'nid' => 'required|integer|max:99999999999',

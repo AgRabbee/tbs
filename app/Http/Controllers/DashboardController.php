@@ -14,7 +14,14 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('layouts.admin');
+        $dashDetails = new User();
+        $data = array(
+            'userCount' => $dashDetails->count_company_users(),
+            'companyCount' => $dashDetails->companyCount(),
+            'customerCount' => $dashDetails->customers(),
+            'tripsCount' => $dashDetails->tripsCount(),
+        );
+        return view('admin.adminHome')->with($data);
     }
 
     public function companyAdmin()
@@ -37,8 +44,15 @@ class DashboardController extends Controller
     }
 
     public function allUser(){
-        $users = User::all()->except(['id'=>'1']);
-        return view('admin.allUser')->with('users', $users);
+        // $users = User::all()->except(['id'=>'1']);
+        //company employees
+        $users = new User();
+        $data = array(
+            'users' => $users->company_users(),
+            'customers' => $users->customers()
+        );
+        // return view('admin.allUser')->with('users', $users);
+        return view('admin.allUser')->with($data);
     }
 
     public function userProfile()

@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="date">Transport Type</label>
+                            <label for="date">Transport Type</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <select class="form-control @error('transport_type') is-invalid @enderror" name="transport_type" >
                                     <option value="">--Select One--</option>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="time">Total Seats</label>
+                            <label for="time">Total Seats</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <input type="number" class="form-control @error('total_seats') is-invalid @enderror" name="total_seats"  value="{{ old('total_seats') }}"  autocomplete="total_seats"  id="total_seats" placeholder="No of Total seats">
                             @error('total_seats')
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="time">Registration No.</label>
+                            <label for="time">Registration No.</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <input type="text" class="form-control @error('registration_no') is-invalid @enderror" name="registration_no"  value="{{ old('registration_no') }}"  autocomplete="registration_no"  id="registration_no" placeholder="Registration no...">
                             @error('registration_no')

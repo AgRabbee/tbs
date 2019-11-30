@@ -25,9 +25,9 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="date">Trip Date</label>
+                            <label for="date">Trip Date</label> <span class="text-danger">*</span>
                             <div class="form-line">
-                                <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}"  autocomplete="date"  id="date" placeholder="Enter date">
+                                <input type="text" class="form-control @error('date') is-invalid @enderror" readonly name="date" value="{{ old('date') }}"  autocomplete="date"  id="date" placeholder="Enter date">
 
                             @error('date')
                                 <span class="invalid-feedback" role="alert">
@@ -39,9 +39,9 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="time">Trip Time</label>
+                            <label for="time">Trip Time</label> <span class="text-danger">*</span>
                             <div class="form-line">
-                                <input type="text" class="form-control @error('time') is-invalid @enderror" name="time"  value="{{ old('time') }}"  autocomplete="time"  id="time" placeholder="time">
+                                <input type="text" class="form-control @error('time') is-invalid @enderror" readonly name="time"  value="{{ old('time') }}"  autocomplete="time"  id="time" placeholder="time">
                             @error('time')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="bus_id">Assign Bus</label>
+                            <label for="bus_id">Assign Bus</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <select class="form-control @error('bus_id') is-invalid @enderror"  value="{{ old('bus_id') }}"  autocomplete="bus_id"  name="bus_id">
                                     <option value="">--Select one--</option>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="driver_id">Assign Driver</label>
+                            <label for="driver_id">Assign Driver</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <select class="form-control @error('driver_id') is-invalid @enderror"  value="{{ old('driver_id') }}"  autocomplete="driver_id"  name="driver_id">
                                     <option value="">--Select one--</option>
@@ -90,7 +90,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="starting_point">Starting Point</label>
+                            <label for="starting_point">Starting Point</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <select class="form-control @error('starting_point') is-invalid @enderror"  value="{{ old('starting_point') }}"  autocomplete="starting_point"  name="starting_point">
                                     <option value="">--Select one--</option>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="end_point">End Point</label>
+                            <label for="end_point">End Point</label> <span class="text-danger">*</span>
                             <div class="form-line">
                                 <select class="form-control @error('end_point') is-invalid @enderror"  value="{{ old('end_point') }}"  autocomplete="end_point"  name="end_point">
                                     <option value="">--Select one--</option>
@@ -126,9 +126,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group @error('fare') is-invalid @enderror">
-                            <label for="date">Trip Fare</label>
+                            <label for="date">Trip Fare</label> <span class="text-danger">*</span>
                             <div class="form-line">
-                                <input type="number" class="form-control" id="fare" name="fare" value="{{ old('fare') }}"  autocomplete="fare"   placeholder="Enter fare">
+                                <input type="number" class="form-control @error('fare') is-invalid @enderror" id="fare" name="fare" value="{{ old('fare') }}"  autocomplete="fare"   placeholder="Enter fare">
                             @error('fare')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

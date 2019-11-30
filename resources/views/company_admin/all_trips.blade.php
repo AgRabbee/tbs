@@ -117,19 +117,15 @@
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable({
-        // "ordering": false,
-        "order": [],
-    });
-    // $('#example2').DataTable({
-    //   "paging": true,
-    //   "lengthChange": false,
-    //   "searching": false,
-    //   "ordering": false,
-    //   "info": true,
-    //   "autoWidth": false,
-    //   "responsive": true
-    // });
+      $('#example1').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "order": []
+      });
 
   });
 </script>

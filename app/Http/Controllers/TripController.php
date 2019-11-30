@@ -57,8 +57,9 @@ class TripController extends Controller
             'time' => 'required|string',
             'starting_point' => 'required|integer',
             'end_point' => 'required|integer',
-            'fare' => 'required|integer',
-            'driver_id' => 'required|integer',
+            'fare' => 'required|regex:/^[1-9][0-9]+/|not_in:0',
+            'driver_id' => 'required|integer|',
+            'bus_id' => 'required|integer|',
         ]);
 
         $trip = new Trip;
@@ -126,6 +127,9 @@ class TripController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'update_fare' => 'required|regex:/^[1-9][0-9]+/|not_in:0',
+        ]);
         $update_trip = Trip::find($id);
         $update_trip->fare = $request['update_fare'];
         $update_trip->save();

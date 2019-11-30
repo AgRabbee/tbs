@@ -17,11 +17,37 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <style media="screen">
+      .login-box{
+        margin: 6% auto;
+        width: 400px;
+    }
+
+    .blink{
+    		text-align: center;
+    	}
+    .blink a{
+    		font-size: 34px;
+    		animation: blink 2.5s ease-in-out  infinite;
+    	}
+    @keyframes blink{
+    0%{opacity: 0;font-weight: 0;}
+    25%{opacity: .5;font-weight: 400;}
+    50%{opacity: 1; font-weight: 400;}
+    75%{opacity: .5;font-weight: 400;}
+    100%{opacity: 0;font-weight: 0;}
+    /* 0%{opacity: 0;}
+    50%{opacity: .5;}
+    100%{opacity: 1;} */
+    }
+
+  </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="{{url('/')}}">Ticket Booking System</a>
+  <div class="login-logo blink">
+    <a href="{{url('/')}}">Bus Ticket Booking System</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -45,7 +71,7 @@
       @endif
 
 
-      <form id="sign_in" method="POST" action="{{ url('signin') }}">
+      <form id="sign_in" method="POST" action="{{ url('signin') }}" class="col-xs-12">
           {{ csrf_field() }}
         <div class="input-group mb-3">
           <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" required autofocus>
@@ -115,6 +141,7 @@
 <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
 
 </body>
 </html>

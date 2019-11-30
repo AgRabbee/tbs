@@ -62,11 +62,6 @@ class Company extends Model
     {
         $company_id = Auth::user()->companies[0]->id;
 
-        // SELECT COUNT(reservations.id) FROM `reservations`, trips WHERE
-        // reservations.trip_id = trips.id AND
-        // trips.company_id = 2 AND
-        // reservations.seat_status = 2
-
         $details = DB::table('reservations')
                     ->selectRaw('COUNT(reservations.id) as reservationsCount')
                     ->join('trips','reservations.trip_id','trips.id')

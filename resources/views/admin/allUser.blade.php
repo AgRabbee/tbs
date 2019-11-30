@@ -12,7 +12,7 @@
     <div class="col-12">
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title">All users of <strong>Ticket Booking System</strong></h3>
+          <h3 class="card-title">All company's employee of <strong>Ticket Booking System</strong></h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -108,6 +108,54 @@
       <!-- /.card -->
     </div>
     <!-- /.col -->
+
+
+
+
+    <div class="col-12">
+      <div class="card card-info">
+        <div class="card-header">
+          <h3 class="card-title">All customers of <strong>Ticket Booking System</strong></h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped display responsive">
+            <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>NID</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach ($customers as $value)
+                <tr>
+                    <td>{{ $value->first_name. ' '. $value->last_name }}</td>
+                    <td>{{ $value->email }}</td>
+                    <td>{{ $value->phone }}</td>
+                    <td>{{ $value->nid }}</td>
+                </tr>
+
+                @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>NID</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+
+
 @endsection
 
 

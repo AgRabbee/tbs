@@ -73,16 +73,15 @@
 <!-- page script -->
 <script>
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true
-    });
+      $('#example1').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "order": []
+      });
 
   });
 </script>

@@ -80,18 +80,18 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-sm btn-primary" id="reset">Reset Dates</button>
+                        <div class="col-md-6 pb-2">
+                            <button type="button" class="btn btn-sm btn-primary col-sm-12" id="reset">Reset Dates</button>
                         </div>
                         <div class="col-md-6">
-                            <input type="submit" class="btn btn-sm btn-primary" name="" value="Search Buses">
+                            <input type="submit" class="btn btn-sm btn-primary col-sm-12" name="" value="Search Buses">
                         </div>
                     </div>
 
                 </form>
             </div>
             <div class="col-md-6 px-5">
-                <img src="http://demo.truebus.co.in/assets/images/bus.png">
+                <img src="http://demo.truebus.co.in/assets/images/bus.png" class="img-fluid">
             </div>
         </div>
     </div>

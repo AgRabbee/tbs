@@ -20,7 +20,7 @@ class CompanyTransportController extends Controller
     {
         $this->validate($request,[
             'transport_type' => 'required|integer',
-            'total_seats' => 'required|integer',
+            'total_seats' => 'required|regex:/^[1-9][0-9]+/|not_in:0', 
             'registration_no' => 'required|string|unique:company_transport'
         ]);
 
