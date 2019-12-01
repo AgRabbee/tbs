@@ -31,6 +31,7 @@ class PagesController extends Controller
 
     public function completePayment(Request $request)
     {
+        // dd($request->all());
         // validation
         $this->validate($request,[
             'f_name' => 'required|string',
@@ -87,7 +88,7 @@ class PagesController extends Controller
         if ($stripe_token != '') {
             foreach ($request->seats as $seat) {
                 $seatNo = rtrim($seat, ',');
-                $updateReservation = Reservation::where('seat_number',$seatNo)->first();
+                $updateReservation = Reservation::where('seat_number',$seatNo)->where('trip_id',$request['tripId'])->first();
                 $updateReservation->payment_id = $newPaymentID;
                 $updateReservation->seat_status = 2;
                 $updateReservation->save();
@@ -95,7 +96,7 @@ class PagesController extends Controller
         }else {
             foreach ($request->seats as $seat) {
                 $seatNo = rtrim($seat, ',');
-                $updateReservation = Reservation::where('seat_number',$seatNo)->first();
+                $updateReservation = Reservation::where('seat_number',$seatNo)->where('trip_id',$request['tripId'])->first();
                 $updateReservation->payment_id = $newPaymentID;
                 $updateReservation->seat_status = 1;
                 $updateReservation->save();
@@ -169,6 +170,7 @@ class PagesController extends Controller
         if ($request['seats']!='') {
             $trip = new Trip();
             $data = array(
+                'trip_id' => $request['trip_id'],
                 'seats' => $request['seats'],
                 'total' => $request['total'],
                 'boarding_point' => $request['boarding_point'],

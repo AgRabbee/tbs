@@ -103,7 +103,7 @@
                       <!-- /.card-header -->
                       <div class="card-body">
                            @foreach ($tripDetails as $value)
-                               <p><input type="hidden" name="tripId" value="{{ $value->id }}"></p>
+                               <p><input type="hidden" name="tripId" value="{{ $value->t_id }}"></p>
 
                                <p>{{ $value->start_name . ' - ' . $value->end_name}}</p>
                                <p>Company name: {{ $value->company_name }}</p>
