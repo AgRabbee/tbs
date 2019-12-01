@@ -7,11 +7,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class BookingMail extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
-    
+
     /**
      * Create a new message instance.
      *
@@ -29,6 +29,7 @@ class BookingMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.bookingMail');
+        return $this->view('mails.contactMail');
     }
+
 }

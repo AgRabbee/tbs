@@ -12,6 +12,7 @@ use App\Models\PaymentDetail;
 use App\Models\District;
 
 use App\Mail\BookingMail;
+use App\Mail\ContactMail;
 
 use Stripe\Error\Card;
 use Stripe;
@@ -165,13 +166,6 @@ class PagesController extends Controller
 
     public function prebooking(Request $request)
     {
-        // $this->validate($request,[
-        //     'seats[]'=>'required',
-        //     'boarding_point'=>'required',
-        // ]);
-        // $seats = $request['seats'];
-        // $total = $request['total'];
-
         if ($request['seats']!='') {
             $trip = new Trip();
             $data = array(
@@ -208,4 +202,26 @@ class PagesController extends Controller
         return view('bus.print_invoice')->with('printDetails',$data->dataForPrint($value));
     }
 
+    public function contact_form()
+    {
+        return view('bus.contact_admin');
+    }
+    public function contact_admin(Request $request)
+    {
+        $this->validate($request,[
+            'subject' => 'required|string',
+            'email' => 'required|string',
+        ]);
+        // $data = $request->all();
+        $data = array(
+            'subject' => $request['subject'] ,
+            'email' => $request['email'] ,
+            'msg' => $request['msg'] ,
+        );
+
+        if ($request['email'] != '') {
+            \Mail::to($request['email'])->send(new ContactMail($data));
+            return redirect('/contact')->withSuccessMessage('Your Message has been sent!!!');
+        }
+    }
 }

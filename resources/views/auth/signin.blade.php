@@ -130,7 +130,9 @@
           <div class="col-xs-6">
               <a href="forgot-password.html">Forgot Password?</a>
           </div>
+          <span><a href="{{ url('/contact') }}">Contact to System Admin</a></span>  
       </div>
+
     </div>
     <!-- /.login-card-body -->
   </div>

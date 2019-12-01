@@ -18,6 +18,8 @@ Auth::routes();
     Route::post('/charge','PagesController@completePayment');
     Route::get('/print','PagesController@print');
     Route::get('/print_invoice','PagesController@print_invoice');
+    Route::get('/contact','PagesController@contact_form');
+    Route::post('/contact','PagesController@contact_admin');
 
 
     //Super Admin

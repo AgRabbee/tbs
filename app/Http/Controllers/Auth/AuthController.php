@@ -20,14 +20,18 @@ class AuthController extends Controller
 
     public function Signin(Request $request)
     {
-        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'user_status'=>1])) {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'user_status'=>0])) {
+            session()->flash('type','danger');
+            session()->flash('message','User registration is not accepted yet. Contact with System admin');
+            return redirect()->back();
+        }elseif (Auth::attempt(['email' => $request['email'], 'password' => $request['password'],'user_status'=>1])) {
 
             if (Auth::user()->roles[0]->name == 'Super Admin') {
                 return redirect('/dashboard');
-            }elseif (Auth::user()->roles[1]->name == 'Admin') {
-                return redirect('/company/dashboard');
             }elseif (Auth::user()->roles[0]->name == 'Customer') {
                 return redirect('/');
+            }elseif (Auth::user()->roles[1]->name == 'Admin') {
+                return redirect('/company/dashboard');
             }
         }
         session()->flash('type','danger');
@@ -67,7 +71,7 @@ class AuthController extends Controller
         // $user->roles()->attach(Role::where('name','Customer')->first());
         // Auth::login($user);
         session()->flash('type','success');
-        session()->flash('message','Registration Complete Successfully. Log In now.');
+        session()->flash('message','Registration Complete Successfully.');
         return redirect('/signin');
     }
 }

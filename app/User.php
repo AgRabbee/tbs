@@ -81,8 +81,11 @@ class User extends Authenticatable
 
     public function customers()
     {
+
         $allcustomers = DB::table('users')
-                        ->where('users.user_status','=','0')
+                        ->leftJoin('role_user','users.id','role_user.user_id')
+                        ->whereNotIn('role_user.role_id', [1,2,3])
+                        ->orWhere('users.user_status','=','0')
                         ->get();
         return $allcustomers;
     }

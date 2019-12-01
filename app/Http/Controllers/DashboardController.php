@@ -49,7 +49,7 @@ class DashboardController extends Controller
         $users = new User();
         $data = array(
             'users' => $users->company_users(),
-            'customers' => $users->customers()
+            'customers' => $users->customers() 
         );
         // return view('admin.allUser')->with('users', $users);
         return view('admin.allUser')->with($data);

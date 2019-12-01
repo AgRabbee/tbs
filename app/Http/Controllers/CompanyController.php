@@ -132,6 +132,7 @@ class CompanyController extends Controller
                     ->join('companies','companies.id','=','company_user.company_id')
                     ->join('role_user','users.id','role_user.user_id')
                     ->where('role_user.role_id', '2')
+                    ->orWhere('company_user.status', '0')
                     ->get();
 
         return view('admin.company_admin')->with('admin_details', $c_admins);
