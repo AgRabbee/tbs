@@ -81,7 +81,7 @@ class TripController extends Controller
                 $seats[] = $i.$y;
             }
         }
-
+		//dd($company_transport->total_seats);
         for ($i=0; $i < $company_transport->total_seats; $i++) {
             $data2=array(
                     'seat_number'=>$seats[$i],

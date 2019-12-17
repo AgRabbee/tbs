@@ -83,6 +83,7 @@ class User extends Authenticatable
     {
 
         $allcustomers = DB::table('users')
+						->selectRaw('users.*,users.id as u_id,role_user.*')
                         ->leftJoin('role_user','users.id','role_user.user_id')
                         ->whereNotIn('role_user.role_id', [1,2,3])
                         ->orWhere('users.user_status','=','0')

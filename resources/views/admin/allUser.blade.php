@@ -141,14 +141,14 @@
                          <div class="d-flex">
                               <form action="{{ url('/dashboard/new/user/active') }}" method="POST">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                  <input type="hidden" name="user_id" value="{{ $value->u_id }}">
                                     <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess  mr-2">
                                         <i class="fas fa-check-circle"></i>
                                     </button>
                               </form>
                               <form action="{{ url('/dashboard/new/user/deny') }}" method="POST">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                  <input type="hidden" name="user_id" value="{{ $value->u_id }}">
                                     <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                         <i class="fas fa-ban"></i>
                                     </button>
@@ -158,7 +158,7 @@
                           <div class="d-flex">
                               <form action="{{ url('/dashboard/new/user/pause') }}" method="POST" class="mr-1">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                  <input type="hidden" name="user_id" value="{{ $value->u_id }}">
                                   <button type="submit" class="btn btn-warning btn-sm swalDefaultWarning mr-2">
                                       <i class="far fa-pause-circle"></i>
                                   </button>
@@ -167,7 +167,7 @@
                               </form>
                               <form action="{{ url('/dashboard/new/user/deny') }}" method="POST">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                  <input type="hidden" name="user_id" value="{{ $value->u_id }}">
                                     <button type="submit" class="btn btn-danger btn-sm swalDefaultError">
                                         <i class="fas fa-ban"></i>
                                     </button>
@@ -179,7 +179,7 @@
                           <div class="d-flex">
                               <form action="{{ url('/dashboard/new/user/active') }}" method="POST"  class="mr-1">
                                   {{ csrf_field() }}
-                                  <input type="hidden" name="user_id" value="{{ $value->id }}">
+                                  <input type="hidden" name="user_id" value="{{ $value->u_id }}">
                                     <button type="submit" class="btn btn-success btn-sm swalDefaultSuccess mr-2">
                                         <i class="fas fa-check-circle"></i>
                                     </button>
