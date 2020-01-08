@@ -47,6 +47,7 @@
 
 
                 <!--edit modal-->
+                 @foreach ($search_details as $value)
                     <div class="modal fade" id="modal-seats{{ $value->t_id }}" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-xl">
                             <form action="{{ url('/bus/booking') }}" method="post">
@@ -66,7 +67,7 @@
                                                     <div class="row">
                                                         <i class="far fa-user ml-auto" data-toggle='tooltip' data-placement='bottom' data-original-title="Driver" ></i>
                                                     </div>
-                                                    <div class="row" id="seats"> </div>
+                                                    <div class="row" id="seats{{ $value->t_id }}"> </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -92,14 +93,14 @@
                                                                 <th>Fare</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody id="seatsTable">
+                                                        <tbody id="seatsTable{{ $value->t_id }}">
 
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div class="row">
-                                                    <p><strong>Total:</strong> <span id="totalCost"></span></p>
-                                                    <input type="hidden" name="total" id="total" value="">
+                                                    <p><strong>Total:</strong> <span id="totalCost{{ $value->t_id }}"></span></p>
+                                                    <input type="hidden" name="total" id="total{{ $value->t_id }}" value="">
                                                     <input type="hidden" name="trip_id" value="{{ $value->t_id }}">
                                                 </div>
                                                 <div class="row">
@@ -123,6 +124,7 @@
                         </div>
                     <!-- /.modal-dialog -->
                     </div>
+                     @endforeach
                 <!--modal-->
             </div>
         </div>
@@ -171,20 +173,11 @@
 
 @section('public_scripts')
     <script type="text/javascript">
-        // $('#date1').datepicker({
-        //     dateFormat: "yy-m-d",
-        //     minDate: new Date(),
-        // });
-        // $('#date2').datepicker({
-        //     dateFormat: "yy-m-d",
-        //     minDate: new Date(),
-        // });
-
 
 $(document).ready(function(){
 
 
-
+ @foreach ($search_details as $value)
 // ====================================================================
     //seats manage
 // ====================================================================
@@ -217,32 +210,33 @@ $(document).ready(function(){
            }
            output += '';
 
-            $('#seats').html(output);
+            $('#seats{{ $value->t_id }}').html(output);
 
             $(function () {
                    $("input[data-toggle='tooltip']").tooltip();
                });
 
-               $('#seats input.checkbox').click( function() {
+               $('#seats{{ $value->t_id }} input.checkbox').click( function() {
                        var count=0;
                         if($(this).is(":checked")){
                             var value = $(this).val();
-                           $("#seatsTable").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");
-                           count = $( "#seatsTable tr" ).length;
+                           $("#seatsTable{{ $value->t_id }}").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");
+                           count = $( "#seatsTable{{ $value->t_id }} tr" ).length;
                        }else if($(this).is(":not(:checked)")){
                            var value = $(this).val();
                            $("td").filter(function() {
                                return $(this).text() == value;
                            }).closest("tr").remove();
-                           count = $( "#seatsTable tr" ).length ;
+                           count = $( "#seatsTable{{ $value->t_id }} tr" ).length ;
                        }
                        var totalCost = {{ $value->fare }}*count;
-                       $('#totalCost').text(totalCost);
-                       $('#total').val(totalCost);
+                       $('#totalCost{{ $value->t_id }}').text(totalCost);
+                       $('#total{{ $value->t_id }}').val(totalCost);
                    });
         }
 
     });
+    @endforeach
 
 });
 
