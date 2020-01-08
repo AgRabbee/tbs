@@ -28,70 +28,17 @@
           </tr>
           </thead>
           <tbody>
-              @foreach ($bus_details as $value)
+              {{dd($bus_details->companies)}}
+              @foreach ($bus_details as $key => $value)
+
                   <tr>
-                      <td>{{ $value->ct_id }}</td>
-                      <td>
-                          @if ($value->ac_type == 1)
-                              AC
-                          @else
-                              NON-AC
-                          @endif
-                      </td>
+                      <td>{{ $value->id }}</td>
+                      <td>{{ $value->companies->company_name }}</td>
                       <td>{{ $value->registration_no }}</td>
                       <td>{{ $value->total_seats }}</td>
-                      {{-- <td>
-                          <a href="#" data-toggle="modal" data-target="#modal-Details{{ $value->id }}">{{ $value->trip_id }}</a>
-
-
-<!--edit modal-->
-<div class="modal fade" id="modal-Details{{ $value->id }}" aria-hidden="true" style="display: none;">
-  <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h4 class="modal-title">Trip Details</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <table class="table table-bordered table-striped">
-                      <tr>
-                          <td>Date:</td>
-                          <td>{{ $value->date }}</td>
-                      </tr>
-                      <tr>
-                          <td>Time:</td>
-                          <td>{{ $value->start_time }}</td>
-                      </tr>
-                      <tr>
-                          <td>Start Point:</td>
-                          <td>{{ $value->start_name }}</td>
-                      </tr>
-                      <tr>
-                          <td>End Point:</td>
-                          <td>{{ $value->end_name }}</td>
-                      </tr>
-                      <tr>
-                          <td>Fare:</td>
-                          <td>{{ $value->fare }}</td>
-                      </tr>
-                  </table>
-              </div>
-              <div class="modal-footer ">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-              </div>
-          </div>
-      <!-- /.modal-content -->
-  </div>
-<!-- /.modal-dialog -->
-</div>
-<!--modal-->
-
-
-                      </td> --}}
                   </tr>
-              @endforeach
+
+                @endforeach
           </tbody>
           <tfoot>
           <tr>

@@ -8,6 +8,11 @@ class Transport extends Model
 {
     public function companies()
     {
-        return $this->belongsToMany('App\Models\Company','company_transport','company_id','transport_id')->withPivot('total_seats','registration_no');
+        return $this->belongsToMany("App\Models\Company")->withPivot('total_seats','registration_no');
+    }
+
+    public function transport()
+    {
+        return $this->belongsTo("App/Models/CompanyTransport");
     }
 }

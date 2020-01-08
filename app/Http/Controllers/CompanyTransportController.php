@@ -20,7 +20,7 @@ class CompanyTransportController extends Controller
     {
         $this->validate($request,[
             'transport_type' => 'required|integer',
-            'total_seats' => 'required|regex:/^[1-9][0-9]+/|not_in:0', 
+            'total_seats' => 'required|regex:/^[1-9][0-9]+/|not_in:0',
             'registration_no' => 'required|string|unique:company_transport'
         ]);
 
@@ -37,8 +37,10 @@ class CompanyTransportController extends Controller
 
     public function allBuses()
     {
-        $bus_details = new CompanyTransport;
-        return view('company_admin.all_buses')->with('bus_details',$bus_details->busDetails());
+        $bus_details = CompanyTransport::where('company_id',Auth::user()->companies[0]->id)->get();
+        // $bus_details = new CompanyTransport;
+        return view('company_admin.all_buses')->with('bus_details',$bus_details);
+        // return view('company_admin.all_buses')->with('bus_details',$bus_details->busDetails());
     }
 
 }

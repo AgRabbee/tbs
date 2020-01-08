@@ -203,29 +203,12 @@ $(document).ready(function(){
 
               returnedData = data.success;
               doSomething(returnedData);
-              // var output='';
-              // // alert(returnedData.length);
-              //
-              //
-              // for (var i = 0; i < returnedData.length; i++) {
-              //   // output +='<input type="checkbox" data-toggle="tooltip" name='+ returnedData[i].seat_number +' data-placement="bottom" data-original-title='+ returnedData[i].seat_number +' value='+ returnedData[i].seat_number +'  id='+ returnedData[i].seat_number + ' class="checkbox" />';
-              //   if (returnedData[i].seat_status == 2) {
-              //       output +="<input type='checkbox' disabled checked data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ returnedData[i].seat_number +" value= "+ returnedData[i].seat_number +" class='checkbox' />";
-              //   }else{
-              //   output +="<input type='checkbox' data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ returnedData[i].seat_number + " value= " + returnedData[i].seat_number +" class='checkbox' />";
-              //   }
-              //  }
-              //  output += '';
-              //
-              //   $('#seats').html(output).trigger('change');
            }
        });
 
        function doSomething(param) {
            var output='';
-          // alert(returnedData.length);
           for (var i = 0; i < param.length; i++) {
-            // output +='<input type="checkbox" data-toggle="tooltip" name='+ returnedData[i].seat_number +' data-placement="bottom" data-original-title='+ returnedData[i].seat_number +' value='+ returnedData[i].seat_number +'  id='+ returnedData[i].seat_number + ' class="checkbox" />';
             if (param[i].seat_status == 2) {
                 output +="<input type='checkbox' disabled checked data-toggle='tooltip' name=seats[] data-placement='bottom' data-original-title="+ param[i].seat_number +" value= "+ param[i].seat_number +" class='checkbox' />";
             }else{
@@ -242,7 +225,6 @@ $(document).ready(function(){
 
                $('#seats input.checkbox').click( function() {
                        var count=0;
-                       //alert('hi');
                         if($(this).is(":checked")){
                             var value = $(this).val();
                            $("#seatsTable").append("<tr><td id='seatNumber'>"+value+"</td><td>{{ $value->fare }}</td></tr>");

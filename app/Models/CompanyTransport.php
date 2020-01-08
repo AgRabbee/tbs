@@ -31,5 +31,15 @@ class CompanyTransport extends Model
 
     }
 
+    public function transports()
+    {
+        return $this->hasMany('\App\Models\Transport');
+    }
+
+
+    public function companies()
+    {
+        return $this->belongsToMany('App\Models\Company', 'company_transport', 'company_id');
+    }
 
 }
