@@ -91,7 +91,7 @@
                 </form>
             </div>
             <div class="col-md-6 px-5">
-                <img src="http://demo.truebus.co.in/assets/images/bus.png" class="img-fluid">
+                <img src="images/bus.png" class="img-fluid">
             </div>
         </div>
     </div>
