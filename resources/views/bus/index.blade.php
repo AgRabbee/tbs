@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             <label for="from">From</label> <span class="text-danger">*</span>
-                            <select class="form-control @error('from') is-invalid @enderror" id="from" name="from" placeholder="Select Destination">
+                            <select class="form-control select2 @error('from') is-invalid @enderror" id="from" name="from" placeholder="Select Destination">
                                 <option value="">--Select One--</option>
                                 @foreach ($tripsInfo as $value)
                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
@@ -45,7 +45,7 @@
                         <div class="col-md-6">
                             <div class="form-group ">
                             <label for="to">To</label> <span class="text-danger">*</span>
-                            <select class="form-control @error('to') is-invalid @enderror" id="to" name="to" placeholder="Select Destination">
+                            <select class="form-control select2 @error('to') is-invalid @enderror" id="to" name="to" placeholder="Select Destination">
                                 <option value="">--Select One--</option>
                                 @foreach ($tripsInfo as $value)
                                     <option value="{{ $value->id }}">{{ $value->name }}</option>

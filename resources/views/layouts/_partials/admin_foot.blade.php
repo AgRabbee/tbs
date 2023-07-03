@@ -29,6 +29,8 @@
 <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
 <script src="{{ asset('AdminLTE/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- select2 -->
+<script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
@@ -38,5 +40,10 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('AdminLTE/dist/js/demo.js')}}"></script>
 @yield('admin_scripts')
+<script>
+    $(function () {
+        $('.select2').select2()
+    });
+</script>
 </body>
 </html>

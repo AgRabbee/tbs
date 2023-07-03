@@ -18,6 +18,8 @@
 <!-- daterangepicker -->
 <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js')}}"></script>
 {{-- <script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js')}}"></script>  --}}
+<!-- select2 -->
+<script src="{{ asset('AdminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
 
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
@@ -26,5 +28,10 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('AdminLTE/dist/js/adminlte.js')}}"></script>
 @yield('public_scripts')
+<script>
+    $(function () {
+        $('.select2').select2()
+    });
+</script>
 </body>
 </html>

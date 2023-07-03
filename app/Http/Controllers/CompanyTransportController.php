@@ -38,9 +38,7 @@ class CompanyTransportController extends Controller
     public function allBuses()
     {
         $bus_details = CompanyTransport::where('company_id',Auth::user()->companies[0]->id)->get();
-        // $bus_details = new CompanyTransport;
         return view('company_admin.all_buses')->with('bus_details',$bus_details);
-        // return view('company_admin.all_buses')->with('bus_details',$bus_details->busDetails());
     }
 
 }

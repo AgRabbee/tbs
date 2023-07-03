@@ -130,7 +130,7 @@
           <div class="col-xs-6">
               <a href="forgot-password.html">Forgot Password?</a>
           </div>
-          <span><a href="{{ url('/contact') }}">Contact to System Admin</a></span>  
+          <span><a href="{{ url('/contact') }}">Contact to System Admin</a></span>
       </div>
 
     </div>
@@ -143,7 +143,5 @@
 <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-
 </body>
 </html>

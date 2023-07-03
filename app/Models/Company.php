@@ -31,44 +31,26 @@ class Company extends Model
     public function userCount()
     {
         $company_id = Auth::user()->companies[0]->id;
-        $details = DB::table('company_user')
-                    ->selectRaw('COUNT(`id`) as userCount')
-                    ->where('company_id',$company_id)
-                    ->get();
-        return $details;
+        return CompanyUser::where('company_id',$company_id)->count();
     }
 
     public function transportCount()
     {
         $company_id = Auth::user()->companies[0]->id;
-        $details = DB::table('company_transport')
-                    ->selectRaw('COUNT(`id`) as transportCount')
-                    ->where('company_id',$company_id)
-                    ->get();
-        return $details;
+        return CompanyTransport::where('company_id',$company_id)->count();
     }
 
     public function tripsCount()
     {
         $company_id = Auth::user()->companies[0]->id;
-        $details = DB::table('trips')
-                    ->selectRaw('COUNT(`id`) as tripsCount')
-                    ->where('company_id',$company_id)
-                    ->get();
-        return $details;
+        return Trip::where('company_id',$company_id)->count();
     }
 
     public function reservationsCount()
     {
         $company_id = Auth::user()->companies[0]->id;
-
-        $details = DB::table('reservations')
-                    ->selectRaw('COUNT(reservations.id) as reservationsCount')
-                    ->join('trips','reservations.trip_id','trips.id')
-                    ->where('trips.company_id',$company_id)
-                    ->where('reservations.seat_status','2')
-                    ->get();
-        return $details;
+        return Reservation::leftJoin('trips','reservations.trip_id','=','trips.id')
+                            ->where(['trips.company_id'=>$company_id,'reservations.seat_status'=>'2'])->count();
     }
 
 }

@@ -13,9 +13,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <p>Employees</p>
+                    <p>Company Employees</p>
 
-                    <h3 class="text-center">{{$userCount[0]->userCount}}</h3>
+                    <h3 class="text-center">{{$userCount}}</h3>
                   </div>
                   <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -30,7 +30,7 @@
                   <div class="inner">
                       <p>Company Transports</p>
 
-                      <h3 class="text-center">{{$transportCount[0]->transportCount}}</h3>
+                      <h3 class="text-center">{{$transportCount}}</h3>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -45,7 +45,7 @@
                   <div class="inner">
                       <p>Company Trips</p>
 
-                      <h3 class="text-center">{{$tripsCount[0]->tripsCount}}</h3>
+                      <h3 class="text-center">{{$tripsCount}}</h3>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -60,7 +60,7 @@
                   <div class="inner">
                       <p>Complete Reservations</p>
 
-                      <h3 class="text-center">{{$reservationsCount[0]->reservationsCount}}</h3>
+                      <h3 class="text-center">{{$reservationsCount}}</h3>
                   </div>
                   <div class="icon">
                     <i class="ion ion-pie-graph"></i>
