@@ -88,7 +88,7 @@ class TransportController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Transport $transport
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -105,11 +105,13 @@ class TransportController extends Controller
             ->count();
 
         if ($trans_details) {
-            return redirect()->back()->withSuccess('Requested data have been matched with existing entry.. Make changes on your update data.');
+            Alert::success('Requested data have been matched with existing entry. Make changes on your update data.');
         } else {
             $update_transport->save();
-            return redirect()->back()->withSuccessMessage('Transport Updated Successfully');
+            Alert::success('Transport Updated Successfully');
         }
+
+        return redirect()->back();
     }
 
     /**

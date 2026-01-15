@@ -2,7 +2,7 @@
 @include('layouts._partials.admin_nav')
 @include('layouts._partials.admin_sidebar')
 
-@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+@include('sweetalert::alert')
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

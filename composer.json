@@ -10,7 +10,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "realrashid/sweet-alert": "*",
+        "realrashid/sweet-alert": "^7.3",
         "stripe/stripe-php": "^19.1"
     },
     "require-dev": {
