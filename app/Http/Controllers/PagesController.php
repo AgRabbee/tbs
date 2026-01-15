@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Trip;
-use App\Models\Reservation;
-
-use App\User;
-use App\Models\Role;
-use App\Models\PaymentDetail;
-use App\Models\District;
-
 use App\Mail\BookingMail;
 use App\Mail\ContactMail;
-
-use Stripe\Error\Card;
+use App\Models\PaymentDetail;
+use App\Models\Reservation;
+use App\Models\Trip;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Stripe;
+use Stripe\Error\Card;
 
 class PagesController extends Controller
 {
@@ -33,10 +28,10 @@ class PagesController extends Controller
     {
         // dd($request->all());
         // validation
-        $this->validate($request,[
+        $this->validate($request, [
             'f_name' => 'required|string',
             'l_name' => 'required|string',
-            'phone' => 'required|string',
+            'phone'  => 'required|string',
         ]);
 
         // create new user area
@@ -45,9 +40,9 @@ class PagesController extends Controller
         $createUser->first_name = $request['f_name'];
         $createUser->last_name = $request['l_name'];
         $createUser->phone = $request['phone'];
-    if ($request['email'] != '') {
-        $createUser->email = $request['email'];
-    }
+        if ($request['email'] != '') {
+            $createUser->email = $request['email'];
+        }
         $createUser->user_status = 0;
         $createUser->save();
         $newUserID = $createUser->id;
@@ -55,12 +50,12 @@ class PagesController extends Controller
 
         //payment details area
 
-         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-         Stripe\Charge::create ([
-                "amount" => ($request['totalAmount']+$request['fee']) * 100,
-                "currency" => "usd",
-                "source" => $request->stripeToken,
-                "description" => "Payment from Ticket Booking System."
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create([
+            "amount"      => ($request['totalAmount'] + $request['fee']) * 100,
+            "currency"    => "usd",
+            "source"      => $request->stripeToken,
+            "description" => "Payment from Ticket Booking System."
         ]);
 
         $stripe_token = $request['stripeToken'];
@@ -74,7 +69,7 @@ class PagesController extends Controller
             $stripePayment->stripe_token = $stripe_token;
             $stripePayment->save();
             $newPaymentID = $stripePayment->id;
-        }else {
+        } else {
             $caseOnDelivery = new PaymentDetail();
             $caseOnDelivery->user_id = $newUserID;
             $caseOnDelivery->payment_status = 0;
@@ -88,15 +83,15 @@ class PagesController extends Controller
         if ($stripe_token != '') {
             foreach ($request->seats as $seat) {
                 $seatNo = rtrim($seat, ',');
-                $updateReservation = Reservation::where('seat_number',$seatNo)->where('trip_id',$request['tripId'])->first();
+                $updateReservation = Reservation::where('seat_number', $seatNo)->where('trip_id', $request['tripId'])->first();
                 $updateReservation->payment_id = $newPaymentID;
                 $updateReservation->seat_status = 2;
                 $updateReservation->save();
             }
-        }else {
+        } else {
             foreach ($request->seats as $seat) {
                 $seatNo = rtrim($seat, ',');
-                $updateReservation = Reservation::where('seat_number',$seatNo)->where('trip_id',$request['tripId'])->first();
+                $updateReservation = Reservation::where('seat_number', $seatNo)->where('trip_id', $request['tripId'])->first();
                 $updateReservation->payment_id = $newPaymentID;
                 $updateReservation->seat_status = 1;
                 $updateReservation->save();
@@ -114,8 +109,7 @@ class PagesController extends Controller
         }
 
 
-
-       return redirect('/print')->withSuccessMessage('Payment Successful');
+        return redirect('/print')->withSuccessMessage('Payment Successful');
     }
 
     public function bus()
@@ -125,15 +119,15 @@ class PagesController extends Controller
         $data = array(
             'tripsInfo' => $trips_info->allLocations(),
             'allRoutes' => $trips_info->allRoutes()
-         );
+        );
         return view('bus.index')->with($data);
     }
 
     public function search(Request $request)
     {
-        $this->validate($request,[
-            'from' => 'required',
-            'to' => 'required',
+        $this->validate($request, [
+            'from'            => 'required',
+            'to'              => 'required',
             'date_of_journey' => 'required',
         ]);
 
@@ -142,13 +136,13 @@ class PagesController extends Controller
         $date = $request['date_of_journey'];
 
         $search_trips = new Trip();
-        $search_details = $search_trips->searchTrips($from,$to,$date);
+        $search_details = $search_trips->searchTrips($from, $to, $date);
 
         // dd($request->session());
         //
-        if ($search_details->count()>0) {
-            return view('bus.search_details')->with('search_details',$search_details);
-        }else {
+        if ($search_details->count() > 0) {
+            return view('bus.search_details')->with('search_details', $search_details);
+        } else {
             return redirect()->back()->withInfoMessage('Trips not found. Try another destination.');
         }
     }
@@ -159,28 +153,28 @@ class PagesController extends Controller
         $trip_id = $request['trip_id'];
 
         // $seats = new Reservation();
-        $seats = Reservation::where('trip_id',$trip_id)->get();
+        $seats = Reservation::where('trip_id', $trip_id)->get();
         // $details = $seats->allocations($trip_id);
 
-        return response()->json(['success'=> $seats]);
+        return response()->json(['success' => $seats]);
     }
 
     public function prebooking(Request $request)
     {
-        if ($request['seats']!='') {
+        if ($request['seats'] != '') {
             $trip = new Trip();
             $data = array(
-                'trip_id' => $request['trip_id'],
-                'seats' => $request['seats'],
-                'total' => $request['total'],
+                'trip_id'        => $request['trip_id'],
+                'seats'          => $request['seats'],
+                'total'          => $request['total'],
                 'boarding_point' => $request['boarding_point'],
-                'tripDetails' => $trip->tripDetails($request['trip_id']),
+                'tripDetails'    => $trip->tripDetails($request['trip_id']),
 
             );
             return view('bus.prebooking')->with($data);
-        }else {
-            session()->flash('type','danger');
-            session()->flash('message','You did not select any seats. Try again');
+        } else {
+            session()->flash('type', 'danger');
+            session()->flash('message', 'You did not select any seats. Try again');
             return redirect('/');
         }
 
@@ -193,7 +187,7 @@ class PagesController extends Controller
 
         $data = new Reservation();
 
-        return view('bus.print')->with('printDetails',$data->dataForPrint($value));
+        return view('bus.print')->with('printDetails', $data->dataForPrint($value));
     }
 
     public function print_invoice(Request $request)
@@ -201,24 +195,25 @@ class PagesController extends Controller
         $value = $request->session()->get('newPaymentID');
 
         $data = new Reservation();
-        return view('bus.print_invoice')->with('printDetails',$data->dataForPrint($value));
+        return view('bus.print_invoice')->with('printDetails', $data->dataForPrint($value));
     }
 
     public function contact_form()
     {
         return view('bus.contact_admin');
     }
+
     public function contact_admin(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'subject' => 'required|string',
-            'email' => 'required|string',
+            'email'   => 'required|string',
         ]);
         // $data = $request->all();
         $data = array(
-            'subject' => $request['subject'] ,
-            'email' => $request['email'] ,
-            'msg' => $request['msg'] ,
+            'subject' => $request['subject'],
+            'email'   => $request['email'],
+            'msg'     => $request['msg'],
         );
 
         if ($request['email'] != '') {

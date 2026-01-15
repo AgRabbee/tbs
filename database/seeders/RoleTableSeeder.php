@@ -7,11 +7,6 @@ use App\Models\Role;
 
 class RoleTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $super_admin = new Role;

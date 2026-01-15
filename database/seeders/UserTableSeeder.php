@@ -5,41 +5,60 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-        $SuperAdminRole = Role::where('name', 'Super Admin')->first();
-        $adminRole = Role::where('name', 'Admin')->first();
-        $customerRole = Role::where('name', 'Customer')->first();
+        // One query for all roles
+        $roles = Role::whereIn('name', ['Super Admin', 'Admin', 'Customer'])
+            ->get()
+            ->keyBy('name');
 
-        $admin = new User;
-        $admin->first_name = 'system';
-        $admin->last_name = 'admin';
-        $admin->email = 'admin@tbs.com';
-        $admin->password = bcrypt('123456');
-        $admin->phone = '01799872659';
-        $admin->nid = '123456789';
-        $admin->user_status = '1';
-        $admin->save();
-        $admin->roles()->attach($SuperAdminRole);
+        // System Admin
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@tbs.com'],
+            [
+                'first_name'  => 'system',
+                'last_name'   => 'admin',
+                'password'    => Hash::make('123456'),
+                'phone'       => '01799872659',
+                'nid'         => '123456789',
+                'user_status' => 1,
+            ]
+        );
+        $admin->roles()->syncWithoutDetaching($roles['Super Admin']->id);
 
-        $user = new User;
-        $user->first_name = 'Ag';
-        $user->last_name = 'Rabbee';
-        $user->email = 'a@b.com';
-        $user->password = bcrypt('123456');
-        $user->phone = '01799872659';
-        $user->nid = '123456789';
-        $user->user_status = '1';
-        $user->save();
-        $user->roles()->attach($customerRole);
+        // Company Admin
+        $companyAdmin = User::firstOrCreate(
+            ['email' => 'companyAdmin@tbs.com'],
+            [
+                'first_name'  => 'company',
+                'last_name'   => 'admin',
+                'password'    => Hash::make('123456'),
+                'phone'       => '01799872659',
+                'nid'         => '123456789',
+                'user_status' => 1,
+            ]
+        );
+        $companyAdmin->roles()->syncWithoutDetaching([
+            $roles['Customer']->id,
+            $roles['Admin']->id,
+        ]);
 
+        // Customer
+        $customer = User::firstOrCreate(
+            ['email' => 'a@b.com'],
+            [
+                'first_name'  => 'Ag',
+                'last_name'   => 'Rabbee',
+                'password'    => Hash::make('123456'),
+                'phone'       => '01799872659',
+                'nid'         => '123456789',
+                'user_status' => 1,
+            ]
+        );
+        $customer->roles()->syncWithoutDetaching($roles['Customer']->id);
     }
 }
